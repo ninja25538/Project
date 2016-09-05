@@ -1,1 +1,1 @@
-
+alert("MONEY!");
