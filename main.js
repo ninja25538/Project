@@ -107,8 +107,8 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
     ctx.fillRect(banditX, banditY + 68, 25, 10);
   }
     
-drawBanditFacingLeft();
- movement = false;
+drawProtagonistFacingRight();
+ movement = true;
 //Adds movement to game.
 document.addEventListener('keydown', function(e){
    if(e.key === 'w' && playerY >= 5 && inFight === false && movement === true){
