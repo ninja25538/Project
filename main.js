@@ -3,7 +3,7 @@ window.onload = function() {
      document.body.style.backgroundColor = "skyblue";
 
   //TODO Draw Bandit
-var c=document.getElementById("myCanvas");
+var c=document.getElementById("canvas");
 var ctx=c.getContext("2d");
   ctx.fillStyle = "#0B0B0B";
   ctx.canvas.width = window.outerWidth;
@@ -23,6 +23,10 @@ var movement = true;
 //bandit's location
 var banditX = outerWidth / 2;
 var banditY = outerHeight / 2;
+
+//shape shifter's location
+var shapeShifterX = outerWidth / 2;
+var shapeShifterY = outerHeight / 2;
 
 
   //Draws the main character
@@ -72,7 +76,7 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
   }
   
   
-  //Draws the Bandit
+  //Draws The Bandit
   function drawBanditFacingRight(){
      //His face
     ctx.fillStyle = "#FFDE7A";
@@ -93,6 +97,7 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
     ctx.fillStyle = "red";
     ctx.fillRect(banditX + 4, banditY + 15, 18, 10);
     
+    //100 LINES!!!!
     //His pant leg
     ctx.fillStyle = "#11226B";
     ctx.fillRect(banditX + 5, banditY + 49, 8, 20);
@@ -191,19 +196,81 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
     ctx.fillRect(banditX + 5, banditY + 49, 8, 20);
     ctx.fillStyle = "black";
     ctx.fillRect(banditX + 11, banditY + 53, 3, 15);
-
     //his shoes
+    //200 LINES!!!!!!
     ctx.fillStyle = "black";
     ctx.fillRect(banditX + 5, banditY + 68, 15, 5);
   }
   
-  //Draws all map scenes
-  
-  
-drawBanditFacingLeft();
- movement = false;
+  //Draws The Shape Shifter
+  function drawShapeShifterFacingRight(){
+    ctx.fillStyle = "#125C00";
+    //his fleshy face
+    ctx.fillRect(shapeShifterX, shapeShifterY, 25, 25);
+    
+    //his blood red eyes
+    ctx.fillStyle = "#ff0000";
+    //his leeeeeftttt eeyeeeeee (your left bro)
+    ctx.fillRect(shapeShifterX + 5, shapeShifterY + 5, 5, 10);
+    //his riiiiiiiggghhhttttt eeeeyyyeeee (YOUR RIGHT MAN!!!!)
+    ctx.fillRect(shapeShifterX + 15, shapeShifterY + 5, 5, 10);
+    
+    //his blood soaked mouth
+    ctx.fillStyle = "#d30000";
+    ctx.fillRect(shapeShifterX + 6, shapeShifterY + 17, 12, 3);
+    
+    //his EEEEVIL SHIRT!!!
+    ctx.fillStyle = "#012b49";
+    ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 17, 25);
+    
+    //the heart on his shirt
+    ctx.fillStyle = "#ff0000";
+    ctx.fillRect(shapeShifterX + 8.5, shapeShifterY + 30, 8, 9);
+    ctx.fillStyle = "#012b49";
+    ctx.fillRect(shapeShifterX + 11.5, shapeShifterY + 27, 2, 5);
+    ctx.fillRect(shapeShifterX + 8, shapeShifterY + 37, 3, 3);
+    ctx.fillRect(shapeShifterX + 14.5, shapeShifterY + 37, 3, 3);
+    
+  }
+
+ drawShapeShifterFacingRight();
  
-//Adds movement to game.
+ //Checks to see if device is mobile
+ var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+    }
+};
+
+
+ //Adds buttons to game IF the device is mobile
+ if (!isMobile.any()) { 
+ document.addEventListener('mousedown',function(e){
+	var result_x = document.getElementById('x_result');
+	var result_y = document.getElementById('y_result');
+	result_x.innerHTML = e.clientX;
+	result_y.innerHTML = e.clientY;
+});
+}
+
+document.cookie = "username=John Doe; expires=Thu, 18 Dec 2018 12:00:00 UTC";
+
+//Adds movement to game if w a s or d  is pressed whether the device is mobile or not
 document.addEventListener('keydown', function(e){
    if(e.key === 'w' && playerY >= 5 && movement === true){
    playerY-= playerSpeed;
@@ -212,7 +279,7 @@ document.addEventListener('keydown', function(e){
    }
   if(e.key == 'd' && playerX < outerWidth - 50 && movement === true){
     playerX+= playerSpeed;
-   ctx.clearRect(0,0,outerWidth, outerHeight);
+   ctx.clearRect(0, 0,outerWidth, outerHeight);
   drawProtagonistFacingRight();
   }
   
