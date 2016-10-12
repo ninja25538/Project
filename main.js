@@ -204,6 +204,74 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
   }
   
   //Draws The Shape Shifter
+  function drawShapeShifterFacingRight(){
+    ctx.fillStyle = "#125C00";
+    //his fleshy face
+    ctx.fillRect(shapeShifterX + 1, shapeShifterY, 20, 25);
+    
+    //his blood red eyes
+    ctx.fillStyle = "#ff0000";
+    //his I (EYE)
+    ctx.fillRect(shapeShifterX + 15, shapeShifterY + 5, 5, 10);
+    
+    //his blood soaked mouth
+    ctx.fillStyle = "#d30000";
+    ctx.fillRect(shapeShifterX + 13, shapeShifterY + 18, 8, 3);
+    
+    //his EEEEVIL SHIRT!!!
+    ctx.fillStyle = "#012b49";
+    ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 10, 25);
+    
+    //his jeans
+    //his PANT LEG
+    ctx.fillStyle = "#840000";
+    ctx.fillRect(shapeShifterX + 4, shapeShifterY + 47, 10, 26);
+    //his murderous arms
+    ctx.fillStyle = "#125C00";
+    //his AAAAARRRMM
+    ctx.fillRect(shapeShifterX + 5, shapeShifterY + 24, 7, 27);
+    
+    //his eeeeeeevil shooooooeeessss
+    ctx.fillStyle = "#000000";
+    //Da shoe 
+    ctx.fillRect(shapeShifterX + 4, shapeShifterY + 71, 15, 5);
+    
+  }
+  
+  function drawShapeShifterFacingLeft(){
+    ctx.fillStyle = "#125C00";
+    //his fleshy face
+    ctx.fillRect(shapeShifterX - 3, shapeShifterY, 20, 25);
+    
+    //his blood red eyes
+    ctx.fillStyle = "#ff0000";
+    //his I (EYE)
+    ctx.fillRect(shapeShifterX + 1, shapeShifterY + 5, 5, 10);
+    
+    //his blood soaked mouth
+    ctx.fillStyle = "#d30000";
+    ctx.fillRect(shapeShifterX - 1, shapeShifterY + 18, 8, 3);
+    
+    //his EEEEVIL SHIRT!!!
+    ctx.fillStyle = "#012b49";
+    ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 10, 25);
+    
+    //his jeans
+    //his PANT LEG
+    ctx.fillStyle = "#840000";
+    ctx.fillRect(shapeShifterX + 4, shapeShifterY + 47, 10, 26);
+    //his murderous arms
+    ctx.fillStyle = "#125C00";
+    //his AAAAARRRMM
+    ctx.fillRect(shapeShifterX + 5, shapeShifterY + 24, 7, 27);
+    
+    //his eeeeeeevil shooooooeeessss
+    ctx.fillStyle = "#000000";
+    //Da shoe (OF EEEEEEVIIL
+    ctx.fillRect(shapeShifterX - 1, shapeShifterY + 71, 15, 5);
+    
+  }
+  
   function drawShapeShifterFacingUp(){
     ctx.fillStyle = "#125C00";
     //his fleshy face
@@ -257,8 +325,40 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
     
   }
   
-
- drawShapeShifterFacingUp();
+  function drawShapeShifterFacingDown(){
+    ctx.fillStyle = "#125C00";
+    //his fleshy face
+    ctx.fillRect(shapeShifterX, shapeShifterY, 25, 25);
+    
+    //his EEEEVIL SHIRT!!!
+    ctx.fillStyle = "#012b49";
+    ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 17, 25);
+    
+    //his jeans
+    //his left pant leg (YOUR LEEEEFFFTTTTTTT)
+    ctx.fillStyle = "#840000";
+    ctx.fillRect(shapeShifterX + 4, shapeShifterY + 47, 10, 26);
+    //his riiiiiight pant leg (Yoooouuuurrrr riiiiggghhtt)
+    ctx.fillRect(shapeShifterX + 11, shapeShifterY + 47, 10, 26);
+    ctx.fillStyle = "black";
+    ctx.fillRect(shapeShifterX + 11.5, shapeShifterY + 52, 2, 18);
+    
+    //his murderous arms
+    ctx.fillStyle = "#125C00";
+    //his lefty army (YOur left man, your left, don't forget again!)
+    ctx.fillRect(shapeShifterX - 3, shapeShifterY + 24, 7, 27);
+    //his righty tighty arm (your right, never forget)
+    ctx.fillRect(shapeShifterX + 21, shapeShifterY + 24, 7, 27);
+    
+    //his eeeeeeevil shooooooeeessss
+    ctx.fillStyle = "#000000";
+    //Da shoe on YOUR left side
+    ctx.fillRect(shapeShifterX + 4, shapeShifterY + 71, 8, 5);
+    //DAAA ShOOEEEE ONNN YOOOUURR RIIIIGGGHTTT SIIIDDEEE
+    ctx.fillRect(shapeShifterX + 13, shapeShifterY + 71, 8, 5);
+    
+  }
+  
  
  //Checks to see if device is mobile
  var isMobile = {
