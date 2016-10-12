@@ -193,6 +193,7 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
     //His right pant leg (ur right)
     ctx.fillStyle = "#11226B";
     ctx.fillRect(banditX + 12, banditY + 49, 8, 20);
+    //his left pant leg
     ctx.fillRect(banditX + 5, banditY + 49, 8, 20);
     ctx.fillStyle = "black";
     ctx.fillRect(banditX + 11, banditY + 53, 3, 15);
@@ -203,7 +204,7 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
   }
   
   //Draws The Shape Shifter
-  function drawShapeShifterFacingRight(){
+  function drawShapeShifterFacingUp(){
     ctx.fillStyle = "#125C00";
     //his fleshy face
     ctx.fillRect(shapeShifterX, shapeShifterY, 25, 25);
@@ -231,9 +232,33 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
     ctx.fillRect(shapeShifterX + 8, shapeShifterY + 37, 3, 3);
     ctx.fillRect(shapeShifterX + 14.5, shapeShifterY + 37, 3, 3);
     
+    //his jeans
+    //his left pant leg (YOUR LEEEEFFFTTTTTTT)
+    ctx.fillStyle = "#840000";
+    ctx.fillRect(shapeShifterX + 4, shapeShifterY + 47, 10, 26);
+    //his riiiiiight pant leg (Yoooouuuurrrr riiiiggghhtt)
+    ctx.fillRect(shapeShifterX + 11, shapeShifterY + 47, 10, 26);
+    ctx.fillStyle = "black";
+    ctx.fillRect(shapeShifterX + 11.5, shapeShifterY + 52, 2, 18);
+    
+    //his murderous arms
+    ctx.fillStyle = "#125C00";
+    //his lefty army (YOur left man, your left, don't forget again!)
+    ctx.fillRect(shapeShifterX - 3, shapeShifterY + 24, 7, 27);
+    //his righty tighty arm (your right, never forget)
+    ctx.fillRect(shapeShifterX + 21, shapeShifterY + 24, 7, 27);
+    
+    //his eeeeeeevil shooooooeeessss
+    ctx.fillStyle = "#000000";
+    //Da shoe on YOUR left side
+    ctx.fillRect(shapeShifterX + 4, shapeShifterY + 71, 8, 5);
+    //DAAA ShOOEEEE ONNN YOOOUURR RIIIIGGGHTTT SIIIDDEEE
+    ctx.fillRect(shapeShifterX + 13, shapeShifterY + 71, 8, 5);
+    
   }
+  
 
- drawShapeShifterFacingRight();
+ drawShapeShifterFacingUp();
  
  //Checks to see if device is mobile
  var isMobile = {
@@ -268,7 +293,7 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
 });
 }
 
-document.cookie = "username=John Doe; expires=Thu, 18 Dec 2018 12:00:00 UTC";
+var cookie = document.cookie = "cookie; expires=Thu, 18 Dec 2018 12:00:00 UTC";
 
 //Adds movement to game if w a s or d  is pressed whether the device is mobile or not
 document.addEventListener('keydown', function(e){
@@ -294,7 +319,7 @@ document.addEventListener('keydown', function(e){
    ctx.clearRect(0, 0,outerWidth, outerHeight);
   drawProtagonistFacingLeft();
   }
-});
+}); 
 
 
 
