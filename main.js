@@ -358,7 +358,6 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
     ctx.fillRect(shapeShifterX + 13, shapeShifterY + 71, 8, 5);
     
   }
-  
  
  //Checks to see if device is mobile
  var isMobile = {
@@ -384,14 +383,14 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
 
 
  //Adds buttons to game IF the device is mobile
- if (!isMobile.any()) { 
- document.addEventListener('mousedown',function(e){
-	var result_x = document.getElementById('x_result');
-	var result_y = document.getElementById('y_result');
-	result_x.innerHTML = e.clientX;
-	result_y.innerHTML = e.clientY;
-});
-}
+// if (!isMobile.any()) { 
+ //document.addEventListener('mousedown',function(e){
+ 	//var result_x = document.getElementById('x_result');
+	//var result_y = document.getElementById('y_result');
+//	result_x.innerHTML = e.clientX;
+	//result_y.innerHTML = e.clientY;
+//});
+//}
 
 var cookie = document.cookie = "cookie; expires=Thu, 18 Dec 2018 12:00:00 UTC";
 
