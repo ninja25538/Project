@@ -1,17 +1,29 @@
 window.onload = function() {
   //makes the sky blue
-     document.body.style.backgroundColor = "skyblue";
+     document.body.style.backgroundColor = "black";
 
-  //TODO Draw Bandit
+  //TODO Draw Map1 TODO
 var c=document.getElementById("canvas");
 var ctx=c.getContext("2d");
-  ctx.fillStyle = "#0B0B0B";
-  ctx.canvas.width = window.outerWidth;
-  ctx.canvas.height = window.outerHeight;
+  ctx.canvas.width = 1000;
+  ctx.canvas.height = 1000;
+  
+//A random number
+var nonsense =  Math.floor((Math.random() * 25) + 1);  
   
 //player's location
-var playerX = outerWidth / 2;
-var playerY = outerHeight / 2;
+var playerX = 250;
+var playerY = 230;
+
+//bandit's location
+var banditX = 200;
+var banditY = 200;
+
+//shape shifter's location
+var shapeShifterrX = 200;
+var shapeShifterY = 200;
+
+
 //player's speed
 var playerSpeed = 5;
 //is player in fight?
@@ -19,27 +31,23 @@ var inFight = false;
 //Whether the Protagonist can move or not
 var movement = true;
 
-
-//bandit's location
-var banditX = outerWidth / 2;
-var banditY = outerHeight / 2;
-
-//shape shifter's location
-var shapeShifterX = outerWidth / 2;
-var shapeShifterY = outerHeight / 2;
+//If scene (map drawn) = 1, it'll draw map 1. if scene is = 2, it'll draw map 2, etc.
+var scene = 1;
 
 
   //Draws the main character
   function drawProtagonistFacingRight(){
 //Draws his hood
-ctx.fillRect(playerX, playerY, 20, 5);
+  ctx.fillStyle = "red";
+ctx.fillRect(playerX, playerY, 23, 5);
 ctx.fillRect(playerX, playerY, 13, 20);
-  //Draws the shadow that hides the protagonist's face 
-ctx.fillStyle = "black";
-ctx.fillRect(playerX + 13, playerY + 5, 7, 15);
+ctx.fillRect(playerX, playerY + 20, 23, 5);
 //Draws the protagonist's cloak
-ctx.fillStyle = "#0B0B0B";
-ctx.fillRect(playerX, playerY + 15, 15, 25);
+ctx.fillStyle = "red";
+ctx.fillRect(playerX, playerY + 15, 18, 30);
+//Draws the shadow that hides the protagonist's face 
+ctx.fillStyle = "black";
+ctx.fillRect(playerX + 13, playerY + 3, 10, 20);
 }
 
   function drawProtagonistFacingLeft(){
@@ -358,6 +366,51 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
     ctx.fillRect(shapeShifterX + 13, shapeShifterY + 71, 8, 5);
     
   }
+  
+  
+  //All in-game objects
+  
+  //makes a function called tree that places a tree wherever I want
+  function tree(treeX, treeY){
+    //The color of grass (And leaves in my opinion)
+    ctx.fillStyle = "#00a51b";
+    //Draws the leaves on the trees
+    ctx.fillRect(treeX, treeY, 30, 5);
+    ctx.fillRect(treeX, treeY, 30, 5);
+    ctx.fillRect(treeX - 5, treeY + 5, 40, 5);
+     ctx.fillRect(treeX - 10, treeY + 10, 50, 20);
+     ctx.fillRect(treeX - 5, treeY + 15, 40, 20);
+     //Draws the tree's trunk
+     ctx.fillStyle = "#916118";
+     ctx.fillRect(treeX + 6, treeY + 35, 15, 20);
+  }
+  
+  function moon(moonX, moonY){
+    ctx.fillStyle = "#e5e5e5";
+    ctx.fillRect(moonX, moonY, 75, 75);
+    ctx.fillStyle = "#8e8e8e";
+    ctx.fillRect(moonX, moonY, 5, 5);
+    
+    
+  }
+  
+  //All in-game tiles WARNING: Put tiles before sand
+  
+  //ceates a function called sand that places a tile of sand
+  function grass(grassX, grassY){
+    ctx.fillStyle = "#00a51b";
+    ctx.fillRect(grassX, grassY, 25, 25);
+  }
+  
+  //Draws map scene 1
+  function drawMap1(){
+   document.body.style.backgroundColor = "black"; 
+   moon(200, 200);
+  }
+  //If the scene number is equal to a specific number, draw a specific map.
+  if(scene == 1){
+    drawMap1();
+  }
  
  //Checks to see if device is mobile
  var isMobile = {
@@ -383,16 +436,16 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
 
 
  //Adds buttons to game IF the device is mobile
-// if (!isMobile.any()) { 
- //document.addEventListener('mousedown',function(e){
- 	//var result_x = document.getElementById('x_result');
-	//var result_y = document.getElementById('y_result');
-//	result_x.innerHTML = e.clientX;
-	//result_y.innerHTML = e.clientY;
-//});
-//}
+ if (!isMobile.any()) { 
+ document.addEventListener('mousedown',function(e){
+	var result_x = document.getElementById('x_result');
+	var result_y = document.getElementById('y_result');
+	result_x.innerHTML = e.clientX;
+	result_y.innerHTML = e.clientY;
+});
+}
 
-var cookie = document.cookie = "cookie; expires=Thu, 18 Dec 2018 12:00:00 UTC";
+var sampleCookiez = document.cookie = "cookie; expires=Thu, 18 Dec 2018 12:00:00 UTC";
 
 //Adds movement to game if w a s or d  is pressed whether the device is mobile or not
 document.addEventListener('keydown', function(e){
