@@ -494,3 +494,44 @@ document.addEventListener('keydown', function(e){
   drawProtagonistFacingLeft();
   }
 }); 
+
+
+
+
+
+}
+
+ctx.strokeStyle="#FF0000";
+ctx.strokeRect(20,20,ctx.canvas.width,ctx.canvas.height);
+
+//Start the startscreen
+function startScreen(){
+  onStartScreen = true;
+  
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  document.body.style.backgroundColor = "black"; 
+var theNecromancer = new Image();
+theNecromancer.onload = function () {
+     ctx.drawImage(theNecromancer, 0, 0);
+};
+theNecromancer.src = "Logos/TheNecromancerLogo2.png";
+
+var startButton = new Image();
+startButton.onload = function(){
+  ctx.drawImage(startButton, 20, 300);
+};
+startButton.src = "Buttons/StartButton.png";
+ document.addEventListener('mousedown',function(e){
+	var mouseX = e.clientX;
+	var mouseY = e.clientY;
+	if(mouseX <= 270 && mouseX > 25 && mouseY > 320 && mouseY < 380){
+	 game();
+	} 
+});
+}
+
+startScreen();
+
+
+
+};
