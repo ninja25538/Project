@@ -1,19 +1,36 @@
+/*
+I'm just going to say now, if your looking at this, your free to change any of the code below
+
+HOWEVER, IT IS ENTIRELY YOUR FAULT IF THE GAME BREAKS, not mine
+*/
+
 window.onload = function() {
   //makes the sky blue
-     document.body.style.backgroundColor = "black";
+  var mouseX = event.clientX;   
+  var mouseY = event.clientY;     
 
   //TODO Draw Map1 TODO
 var c=document.getElementById("canvas");
 var ctx=c.getContext("2d");
   ctx.canvas.width = 1000;
-  ctx.canvas.height = 1000;
+  ctx.canvas.height = 800;
   
-//A random number
-var nonsense =  Math.floor((Math.random() * 25) + 1);  
+  var onStartScreen = true;
+  
+//Start the game  
+function game(){
+    document.body.style.backgroundColor = "black"; 
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  onStartScreen = false;
+//The borders that the player can walk. DO NOT CHANGE, IT 
+var borderW = 5;
+var borderA = 1;
+var borderS = ctx.canvas.height - 10;
+var borderD = ctx.canvas.width - 25;
   
 //player's location
 var playerX = 250;
-var playerY = 230;
+var playerY = 630;
 
 //bandit's location
 var banditX = 200;
@@ -23,7 +40,10 @@ var banditY = 200;
 var shapeShifterrX = 200;
 var shapeShifterY = 200;
 
+//Player stats
 
+//player health
+var playerHealth = 50;
 //player's speed
 var playerSpeed = 5;
 //is player in fight?
@@ -31,7 +51,7 @@ var inFight = false;
 //Whether the Protagonist can move or not
 var movement = true;
 
-//If scene (map drawn) = 1, it'll draw map 1. if scene is = 2, it'll draw map 2, etc.
+//Which map to draw
 var scene = 1;
 
 
@@ -289,7 +309,7 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
     ctx.fillStyle = "#ff0000";
     //his leeeeeftttt eeyeeeeee (your left bro)
     ctx.fillRect(shapeShifterX + 5, shapeShifterY + 5, 5, 10);
-    //his riiiiiiiggghhhttttt eeeeyyyeeee (YOUR RIGHT MAN!!!!)
+    //his RIGHT EYE (YOUR RIGHT MAN!!!!)
     ctx.fillRect(shapeShifterX + 15, shapeShifterY + 5, 5, 10);
     
     //his blood soaked mouth
@@ -385,6 +405,7 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
      ctx.fillRect(treeX + 6, treeY + 35, 15, 20);
   }
   
+  //Creates a function called moon that places a moon
   function moon(moonX, moonY){
     ctx.fillStyle = "#e5e5e5";
     ctx.fillRect(moonX, moonY, 75, 75);
@@ -394,7 +415,7 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
     
   }
   
-  //All in-game tiles WARNING: Put tiles before sand
+  //All in-game tiles WARNING: Put tiles before objects
   
   //ceates a function called sand that places a tile of sand
   function grass(grassX, grassY){
@@ -405,11 +426,12 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
   //Draws map scene 1
   function drawMap1(){
    document.body.style.backgroundColor = "black"; 
-   moon(200, 200);
+   moon(20, 20);
   }
-  //If the scene number is equal to a specific number, draw a specific map.
+  //If the scene number is equal to a specific number, draw a specific map. 
   if(scene == 1){
     drawMap1();
+    drawProtagonistFacingRight();
   }
  
  //Checks to see if device is mobile
@@ -449,32 +471,26 @@ var sampleCookiez = document.cookie = "cookie; expires=Thu, 18 Dec 2018 12:00:00
 
 //Adds movement to game if w a s or d  is pressed whether the device is mobile or not
 document.addEventListener('keydown', function(e){
-   if(e.key === 'w' && playerY >= 5 && movement === true){
+   if(e.key === 'w' && playerY >= borderW && movement === true){
    playerY-= playerSpeed;
-   ctx.clearRect(0, 0, outerWidth, outerHeight);
+   ctx.clearRect(playerX, playerY, 200, 200);
   drawProtagonistFacingUp();
    }
-  if(e.key == 'd' && playerX < outerWidth - 50 && movement === true){
+  if(e.key == 'd' && playerX < borderD && movement === true){
     playerX+= playerSpeed;
-   ctx.clearRect(0, 0,outerWidth, outerHeight);
+   ctx.clearRect(playerX, playerY, -200, 200);
   drawProtagonistFacingRight();
   }
   
-  if(e.key == 's' && playerY < outerHeight - 100 && movement === true){
+  if(e.key == 's' && playerY < borderS && movement === true){
     playerY+= playerSpeed;
-   ctx.clearRect(0,0,outerWidth, outerHeight);
+  ctx.clearRect(playerX, playerY, 200, -200);
   drawProtagonistFacingDown();
   }
   
   if(e.key == 'a' && playerX > 5 && movement === true){
     playerX-= playerSpeed;
-   ctx.clearRect(0, 0,outerWidth, outerHeight);
+   ctx.clearRect(playerX, playerY, 200, 200);
   drawProtagonistFacingLeft();
   }
 }); 
-
-
-
-
-
-};
