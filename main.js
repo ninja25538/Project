@@ -47,7 +47,7 @@ var shapeShifterY = 400;
 //player health
 var playerHealth = 50;
 //player's speed
-var playerSpeed = 2;
+var playerSpeed = 5;
 //is player in fight?
 var inFight = false;
 //Whether the Protagonist can move or not
@@ -482,7 +482,7 @@ document.addEventListener('keydown', function(e){
    }
   if(e.key == 'd' && playerX < borderD && movement === true){
     playerX+= playerSpeed;
-   ctx.clearRect(playerX, playerY, -75, 75);
+   ctx.clearRect(playerX, playerY - 1, -75, 75);
   drawProtagonistFacingRight();
   }
   
@@ -494,7 +494,7 @@ document.addEventListener('keydown', function(e){
   
   if(e.key == 'a' && playerX > borderA && movement === true){
     playerX-= playerSpeed;
-  ctx.clearRect(playerX, playerY, 75, 75);
+  ctx.clearRect(playerX, playerY - 1, 75, 75);
   drawProtagonistFacingLeft();
   }
 }); 
