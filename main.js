@@ -1,7 +1,5 @@
-/*
-I'm just going to say now, if your looking at this, your free to change any of the code below
-
-HOWEVER, IT IS ENTIRELY YOUR FAULT IF THE GAME BREAKS, not mine
+/* 
+Hey! I'm really glad you got the game and I hope you like it!
 */
 
 window.onload = function() {
@@ -12,40 +10,44 @@ window.onload = function() {
   //TODO Draw Map1 TODO
 var c=document.getElementById("canvas");
 var ctx=c.getContext("2d");
-  ctx.canvas.width = 1000;
-  ctx.canvas.height = 800;
+  ctx.canvas.width =  700;
+  ctx.canvas.height = 700;
   
   var onStartScreen = true;
+
+var mysteriousSound = document.getElementById("MysteriousSound");
+
   
 //Start the game  
 function game(){
     document.body.style.backgroundColor = "black"; 
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  onStartScreen = false;
-//The borders that the player can walk. DO NOT CHANGE, IT 
-var borderW = 5;
-var borderA = 1;
-var borderS = ctx.canvas.height - 10;
-var borderD = ctx.canvas.width - 25;
+   onStartScreen = false;
+
+//The borders that the player can walk
+var borderW = 300;
+var borderA = 10;
+var borderS = ctx.canvas.height - 50;
+var borderD = ctx.canvas.width - 30;
   
 //player's location
 var playerX = 250;
-var playerY = 630;
+var playerY = 325;
 
 //bandit's location
 var banditX = 200;
 var banditY = 200;
 
 //shape shifter's location
-var shapeShifterrX = 200;
-var shapeShifterY = 200;
+var shapeShifterX = 200;
+var shapeShifterY = 400;
 
 //Player stats
 
 //player health
 var playerHealth = 50;
 //player's speed
-var playerSpeed = 5;
+var playerSpeed = 2;
 //is player in fight?
 var inFight = false;
 //Whether the Protagonist can move or not
@@ -57,7 +59,7 @@ var scene = 1;
 
   //Draws the main character
   function drawProtagonistFacingRight(){
-//Draws his hood
+//Draws the protagonist's hood
   ctx.fillStyle = "red";
 ctx.fillRect(playerX, playerY, 23, 5);
 ctx.fillRect(playerX, playerY, 13, 20);
@@ -71,36 +73,41 @@ ctx.fillRect(playerX + 13, playerY + 3, 10, 20);
 }
 
   function drawProtagonistFacingLeft(){
-    //Draws his hood
-ctx.fillRect(playerX, playerY, 20, 5);
-ctx.fillRect(playerX + 7, playerY, 13, 20);
+    //Draws the protagonist's hood
+    ctx.fillStyle = "red";
+ctx.fillRect(playerX, playerY, 23, 5);
+ctx.fillRect(playerX + 10, playerY, 13, 20);
+ctx.fillRect(playerX, playerY + 20, 23, 5);
+//Draws the protagonist's cloak
+ctx.fillStyle = "red";
+ctx.fillRect(playerX + 5, playerY + 15, 18, 30);
 //Draws the shadow that hides the protagonist's face 
 ctx.fillStyle = "black";
-ctx.fillRect(playerX, playerY + 5, 7, 15);
-//Draws the protagonist's cloak
-ctx.fillStyle = "#0B0B0B";
-ctx.fillRect(playerX + 5, playerY + 15, 15, 25);
+ctx.fillRect(playerX, playerY + 3, 10, 20);
   }
   
   function drawProtagonistFacingUp(){
-    //Draws his hood
-    ctx.fillStyle = "#0B0B0B";
-ctx.fillRect(playerX + 2.5, playerY, 20, 20);
+    //Draws the protagonist's hood
+    ctx.fillStyle = "red";
+ctx.fillRect(playerX + 2.5, playerY + 2.5, 20, 20);
 //Draws the protagonist's cloak
-ctx.fillStyle = "#0B0B0B";
-ctx.fillRect(playerX + 5, playerY + 15, 15, 25);
+ctx.fillStyle = "red";
+ctx.fillRect(playerX + 5, playerY + 17.5, 15, 25);
   }
   
   function drawProtagonistFacingDown(){
-    //Draws his hood
-    ctx.fillStyle = "#0B0B0B";
-ctx.fillRect(playerX - 2.5 , playerY, 20, 20);
-  //Draws the shadow that hides the protagonist's face 
-ctx.fillStyle = "black";
-ctx.fillRect(playerX + 7, playerY + 5, 8, 15);
+    //Draws the protagonist's hood
+    ctx.fillStyle = "red";
+ctx.fillRect(playerX + 2, playerY, 20, 20);
+
 //Draws the protagonist's cloak
-ctx.fillStyle = "#0B0B0B";
-ctx.fillRect(playerX, playerY + 15, 15, 25);
+ctx.fillStyle = "red";
+ctx.fillRect(playerX + 4.5, playerY + 15, 15, 25);
+
+//Draws the shadow that hides the protagonist's face
+ctx.fillStyle = "black";
+ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
+
   }
   
   
@@ -320,22 +327,22 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
     ctx.fillStyle = "#012b49";
     ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 17, 25);
     
-    //the heart on his shirt
-    ctx.fillStyle = "#ff0000";
+    //the skull on his shirt
+    ctx.fillStyle = "white";
     ctx.fillRect(shapeShifterX + 8.5, shapeShifterY + 30, 8, 9);
-    ctx.fillStyle = "#012b49";
+    ctx.fillStyle = "white";
     ctx.fillRect(shapeShifterX + 11.5, shapeShifterY + 27, 2, 5);
     ctx.fillRect(shapeShifterX + 8, shapeShifterY + 37, 3, 3);
     ctx.fillRect(shapeShifterX + 14.5, shapeShifterY + 37, 3, 3);
     
     //his jeans
-    //his left pant leg (YOUR LEEEEFFFTTTTTTT)
+    //his left pant leg (YOUR LEFT)
     ctx.fillStyle = "#840000";
     ctx.fillRect(shapeShifterX + 4, shapeShifterY + 47, 10, 26);
-    //his riiiiiight pant leg (Yoooouuuurrrr riiiiggghhtt)
+    //his riiiiiight pant leg (Ur right)
     ctx.fillRect(shapeShifterX + 11, shapeShifterY + 47, 10, 26);
     ctx.fillStyle = "black";
-    ctx.fillRect(shapeShifterX + 11.5, shapeShifterY + 52, 2, 18);
+    ctx.fillRect(shapeShifterX + 11.5, shapeShifterY + 54, 2, 18);
     
     //his murderous arms
     ctx.fillStyle = "#125C00";
@@ -387,7 +394,6 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
     
   }
   
-  
   //All in-game objects
   
   //makes a function called tree that places a tree wherever I want
@@ -425,15 +431,13 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
   
   //Draws map scene 1
   function drawMap1(){
-   document.body.style.backgroundColor = "black"; 
+   document.body.style.backgroundColor = "yellow"; 
    moon(20, 20);
   }
   //If the scene number is equal to a specific number, draw a specific map. 
   if(scene == 1){
     drawMap1();
-    drawProtagonistFacingRight();
   }
- 
  //Checks to see if device is mobile
  var isMobile = {
     Android: function() {
@@ -467,30 +471,34 @@ ctx.fillRect(playerX, playerY + 15, 15, 25);
 });
 }
 
-var sampleCookiez = document.cookie = "cookie; expires=Thu, 18 Dec 2018 12:00:00 UTC";
+var sampleCookiez = document.cookie = "cookie; expires=Thu, 22 Nov 3016 12:00:00 UTC";
 
 //Adds movement to game if w a s or d  is pressed whether the device is mobile or not
 document.addEventListener('keydown', function(e){
    if(e.key === 'w' && playerY >= borderW && movement === true){
+        playerSpeed++;
    playerY-= playerSpeed;
-   ctx.clearRect(playerX, playerY, 200, 200);
+    ctx.clearRect(playerX, playerY - 15, 75, 75);
   drawProtagonistFacingUp();
    }
   if(e.key == 'd' && playerX < borderD && movement === true){
+       playerSpeed++;
     playerX+= playerSpeed;
-   ctx.clearRect(playerX, playerY, -200, 200);
+   ctx.clearRect(playerX, playerY, -75, 75);
   drawProtagonistFacingRight();
   }
   
   if(e.key == 's' && playerY < borderS && movement === true){
+       playerSpeed++;
     playerY+= playerSpeed;
-  ctx.clearRect(playerX, playerY, 200, -200);
+  ctx.clearRect(playerX, playerY - 15, 75, 75);
   drawProtagonistFacingDown();
   }
   
-  if(e.key == 'a' && playerX > 5 && movement === true){
+  if(e.key == 'a' && playerX > borderA && movement === true){
+       playerSpeed++;
     playerX-= playerSpeed;
-   ctx.clearRect(playerX, playerY, 200, 200);
+  ctx.clearRect(playerX, playerY, 75, 75);
   drawProtagonistFacingLeft();
   }
 }); 
@@ -501,20 +509,18 @@ document.addEventListener('keydown', function(e){
 
 }
 
-ctx.strokeStyle="#FF0000";
-ctx.strokeRect(20,20,ctx.canvas.width,ctx.canvas.height);
-
 //Start the startscreen
 function startScreen(){
   onStartScreen = true;
   
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  document.body.style.backgroundColor = "black"; 
+  document.body.style.backgroundColor = "white"; 
+  
 var theNecromancer = new Image();
-theNecromancer.onload = function () {
-     ctx.drawImage(theNecromancer, 0, 0);
+  theNecromancer.onload = function () {
+     ctx.drawImage(theNecromancer, -100, 0);
 };
-theNecromancer.src = "Logos/TheNecromancerLogo2.png";
+theNecromancer.src = "Logos/TheNecromancerLogo.png";
 
 var startButton = new Image();
 startButton.onload = function(){
