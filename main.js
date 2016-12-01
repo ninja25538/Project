@@ -520,13 +520,13 @@ var theNecromancer = new Image();
   theNecromancer.onload = function () {
      ctx.drawImage(theNecromancer, -100, 0);
 };
-theNecromancer.src = "Logos/TheNecromancerLogo.png";
+theNecromancer.src = "TheNecromancerLogo.png";
 
 var startButton = new Image();
 startButton.onload = function(){
   ctx.drawImage(startButton, 20, 300);
 };
-startButton.src = "Buttons/StartButton.png";
+startButton.src = "StartButton.png";
  document.addEventListener('mousedown',function(e){
 	var mouseX = e.clientX;
 	var mouseY = e.clientY;
