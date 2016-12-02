@@ -447,11 +447,16 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     }
   }
   //If the scene number is equal to a specific number, draw a specific map. 
+	function checkMap(){
   if(scene == 1){
     drawMap1();
+if(playerX > borderD - 20){
+	scene == 2;
+}
   } else if(scene == 2){
     drawMap2();
   }
+	}
  //Checks to see if device is mobile
  var isMobile = {
     Android: function() {
@@ -497,6 +502,9 @@ document.addEventListener('keydown', function(e){
   if(e.key == 'd' && playerX < borderD && movement === true){
     playerX+= playerSpeed;
    ctx.clearRect(playerX, playerY - 1, -75, 75);
+	  if(playerX > borderD - 20){
+	checkMap();	 
+	  }
   drawProtagonistFacingRight();
   }
   
