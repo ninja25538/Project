@@ -10,8 +10,8 @@ window.onload = function() {
   //TODO Draw Map1 TODO
 var c=document.getElementById("canvas");
 var ctx=c.getContext("2d");
-  ctx.canvas.width =  700;
-  ctx.canvas.height = 700;
+  ctx.canvas.width =  750;
+  ctx.canvas.height = 750;
   
   var onStartScreen = true;
 
@@ -47,7 +47,7 @@ var shapeShifterY = 400;
 //player health
 var playerHealth = 50;
 //player's speed
-var playerSpeed = 5;
+var playerSpeed = 4.5;
 //is player in fight?
 var inFight = false;
 //Whether the Protagonist can move or not
@@ -421,6 +421,11 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     
   }
   
+  function star(starX, starY){
+    ctx.fillStyle = "white";
+    ctx.fillRect(starX, starY, 5, 5);
+  }
+  
   //All in-game tiles WARNING: Put tiles before objects
   
   //ceates a function called sand that places a tile of sand
@@ -431,12 +436,21 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
   
   //Draws map scene 1
   function drawMap1(){
-   document.body.style.backgroundColor = "yellow"; 
+   document.body.style.backgroundColor =  "#000714"; 
    moon(20, 20);
+  }
+  
+  function drawMap2(){
+    document.body.style.backgroundColor =  "#000714";
+    for(var x = 0; x < borderD; x+= Math.round(Math.random() * 45)){
+      star(x, 200);
+    }
   }
   //If the scene number is equal to a specific number, draw a specific map. 
   if(scene == 1){
     drawMap1();
+  } else if(scene == 2){
+    drawMap2();
   }
  //Checks to see if device is mobile
  var isMobile = {
