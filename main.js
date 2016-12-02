@@ -20,7 +20,6 @@ var mysteriousSound = document.getElementById("MysteriousSound");
   
 //Start the game  
 function game(){
-    document.body.style.backgroundColor = "black"; 
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
    onStartScreen = false;
 
@@ -418,7 +417,6 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     ctx.fillStyle = "#8e8e8e";
     ctx.fillRect(moonX, moonY, 5, 5);
     
-    
   }
   
   function star(starX, starY){
@@ -436,11 +434,13 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
   
   //Draws map scene 1
   function drawMap1(){
+	  playerX = 50;
    document.body.style.backgroundColor =  "#000714"; 
    moon(20, 20);
   }
   
   function drawMap2(){
+	  playerX = 50;
     document.body.style.backgroundColor =  "#000714";
     for(var x = 0; x < borderD; x+= Math.round(Math.random() * 45)){
       star(x, 200);
@@ -454,6 +454,7 @@ if(playerX > borderD - 20){
 	scene == 2;
 }
   } else if(scene == 2){
+	  playerX = 50;
     drawMap2();
   }
 	}
