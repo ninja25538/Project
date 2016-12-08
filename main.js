@@ -11,8 +11,9 @@ window.onload = function() {
 var c=document.getElementById("canvas");
 var ctx=c.getContext("2d");
   ctx.canvas.width =  750;
-  ctx.canvas.height = 750;
-  
+  ctx.canvas.height = 600;
+  ctx.fillStyle = "yellow";
+
   var onStartScreen = true;
 
 var mysteriousSound = document.getElementById("MysteriousSound");
@@ -20,6 +21,8 @@ var mysteriousSound = document.getElementById("MysteriousSound");
   
 //Start the game  
 function game(){
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    document.body.style.backgroundColor = "black"; 
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
    onStartScreen = false;
 
@@ -417,6 +420,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     ctx.fillStyle = "#8e8e8e";
     ctx.fillRect(moonX, moonY, 5, 5);
     
+    
   }
   
   function star(starX, starY){
@@ -432,32 +436,58 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     ctx.fillRect(grassX, grassY, 25, 25);
   }
   
-  //Draws map scene 1
+  //Draws map scenew
   function drawMap1(){
-	  playerX = 50;
+    if(playerX > borderD - 20){
+      scene++;
+    }
+    playerX = 250;
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
    document.body.style.backgroundColor =  "#000714"; 
    moon(20, 20);
-  }
+   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+   } 
   
   function drawMap2(){
-	  playerX = 50;
+    if(playerX < borderA + 20){
+      scene--;
+    } else if(playerX > borderD - 20){
+      scene++;
+    }
+    playerX = 250;
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     document.body.style.backgroundColor =  "#000714";
     for(var x = 0; x < borderD; x+= Math.round(Math.random() * 45)){
-      star(x, 200);
+      for(var y = 0; y < borderW; y+= Math.round(Math.random() *45)){
+      star(x, y);
+      }
     }
   }
+  
+  function drawMap3(){
+    if(playerX < borderA + 20){
+      scene--;
+    } else if(playerX > borderD - 20){
+      scene++;
+    }
+    playerX = 250;
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillStyle = "red";
+    ctx.fillRect(200, 200, 200, 200);
+  }
+  
   //If the scene number is equal to a specific number, draw a specific map. 
-	function checkMap(){
+  function checkMap(){
   if(scene == 1){
     drawMap1();
-if(playerX > borderD - 20){
-	scene == 2;
-}
   } else if(scene == 2){
-	  playerX = 50;
     drawMap2();
+  } else if(scene == 3){
+    drawMap3();
+  } else {
+    
   }
-	}
+  }
  //Checks to see if device is mobile
  var isMobile = {
     Android: function() {
@@ -501,11 +531,11 @@ document.addEventListener('keydown', function(e){
   drawProtagonistFacingUp();
    }
   if(e.key == 'd' && playerX < borderD && movement === true){
+    if(playerX > borderD -20){
+      checkMap();
+    }
     playerX+= playerSpeed;
    ctx.clearRect(playerX, playerY - 1, -75, 75);
-	  if(playerX > borderD - 20){
-	checkMap();	 
-	  }
   drawProtagonistFacingRight();
   }
   
@@ -516,6 +546,9 @@ document.addEventListener('keydown', function(e){
   }
   
   if(e.key == 'a' && playerX > borderA && movement === true){
+    if(playerX < borderA + 20){
+      checkMap();
+    }
     playerX-= playerSpeed;
   ctx.clearRect(playerX, playerY - 1, 75, 75);
   drawProtagonistFacingLeft();
