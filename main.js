@@ -14,17 +14,15 @@ var ctx=c.getContext("2d");
   ctx.canvas.height = 600;
   ctx.fillStyle = "yellow";
 
-  var onStartScreen = true;
-
 var mysteriousSound = document.getElementById("MysteriousSound");
-
+var mysteriousNoise = document.getElementById("MysteriousNoise");
   
+  //Which map to draw
+var scene = 0;
 //Start the game  
 function game(){
-    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    document.body.style.backgroundColor = "black"; 
+  document.body.style.backgroundColor = "black";
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-   onStartScreen = false;
 
 //The borders that the player can walk
 var borderW = 300;
@@ -49,14 +47,11 @@ var shapeShifterY = 400;
 //player health
 var playerHealth = 50;
 //player's speed
-var playerSpeed = 4.5;
+var playerSpeed = 10;
 //is player in fight?
 var inFight = false;
 //Whether the Protagonist can move or not
 var movement = true;
-
-//Which map to draw
-var scene = 1;
 
 
   //Draws the main character
@@ -397,8 +392,6 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
   }
   
   //All in-game objects
-  
-  //makes a function called tree that places a tree wherever I want
   function tree(treeX, treeY){
     //The color of grass (And leaves in my opinion)
     ctx.fillStyle = "#00a51b";
@@ -413,7 +406,6 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
      ctx.fillRect(treeX + 6, treeY + 35, 15, 20);
   }
   
-  //Creates a function called moon that places a moon
   function moon(moonX, moonY){
     ctx.fillStyle = "#e5e5e5";
     ctx.fillRect(moonX, moonY, 75, 75);
@@ -430,7 +422,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
   
   //All in-game tiles WARNING: Put tiles before objects
   
-  //ceates a function called sand that places a tile of sand
+  //creates a function called sand that places a tile of sand
   function grass(grassX, grassY){
     ctx.fillStyle = "#00a51b";
     ctx.fillRect(grassX, grassY, 25, 25);
@@ -438,23 +430,14 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
   
   //Draws map scenew
   function drawMap1(){
-    if(playerX > borderD - 20){
-      scene++;
-    }
-    playerX = 250;
+    playerX = 200;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
    document.body.style.backgroundColor =  "#000714"; 
    moon(20, 20);
-   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
    } 
   
   function drawMap2(){
-    if(playerX < borderA + 20){
-      scene--;
-    } else if(playerX > borderD - 20){
-      scene++;
-    }
-    playerX = 250;
+    playerX = 200;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     document.body.style.backgroundColor =  "#000714";
     for(var x = 0; x < borderD; x+= Math.round(Math.random() * 45)){
@@ -465,15 +448,18 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
   }
   
   function drawMap3(){
-    if(playerX < borderA + 20){
-      scene--;
-    } else if(playerX > borderD - 20){
-      scene++;
-    }
-    playerX = 250;
+    playerX = 200;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = "red";
-    ctx.fillRect(200, 200, 200, 200);
+    document.body.style.backgroundColor =  "#000714";
+    var campfire = new Image();
+       campfire.onload = function () {
+          ctx.drawImage(campfire, 0, 200);
+     };
+     campfire.src = "Sprites/Campfire.png";
+  }
+  
+  function drawMap4(){
+    
   }
   
   //If the scene number is equal to a specific number, draw a specific map. 
@@ -484,10 +470,12 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     drawMap2();
   } else if(scene == 3){
     drawMap3();
-  } else {
-    
+  } else if(scene == 4){
+    drawMap4();
   }
+  
   }
+  
  //Checks to see if device is mobile
  var isMobile = {
     Android: function() {
@@ -510,7 +498,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     }
 };
 
-
+/*
  //Adds buttons to game IF the device is mobile
  if (!isMobile.any()) { 
  document.addEventListener('mousedown',function(e){
@@ -520,20 +508,25 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
 	result_y.innerHTML = e.clientY;
 });
 }
+**/
 
 var sampleCookiez = document.cookie = "cookie; expires=Thu, 22 Nov 3016 12:00:00 UTC";
 
 //Adds movement to game if w a s or d  is pressed whether the device is mobile or not
 document.addEventListener('keydown', function(e){
-   if(e.key === 'w' && playerY >= borderW && movement === true){
+   if(e.key === 'w' && playerY >=borderW && movement === true){
    playerY-= playerSpeed;
     ctx.clearRect(playerX, playerY - 15, 75, 75);
   drawProtagonistFacingUp();
    }
   if(e.key == 'd' && playerX < borderD && movement === true){
-    if(playerX > borderD -20){
+    if(playerX > borderD - 20){
+      scene++;
       checkMap();
     }
+    if(scene < 0){
+        scene++;
+      }
     playerX+= playerSpeed;
    ctx.clearRect(playerX, playerY - 1, -75, 75);
   drawProtagonistFacingRight();
@@ -544,26 +537,36 @@ document.addEventListener('keydown', function(e){
   ctx.clearRect(playerX, playerY - 15, 75, 75);
   drawProtagonistFacingDown();
   }
-  
+
   if(e.key == 'a' && playerX > borderA && movement === true){
-    if(playerX < borderA + 20){
+    if(playerX < borderA + 20 && scene !== 1){
+      scene--;
       checkMap();
     }
+    if(scene < 0){
+        scene--;
+      }
     playerX-= playerSpeed;
   ctx.clearRect(playerX, playerY - 1, 75, 75);
   drawProtagonistFacingLeft();
   }
 }); 
 
-
-
-
-
 }
 
 //Start the startscreen
 function startScreen(){
-  onStartScreen = true;
+  
+  function startGame(event){
+
+  var mouseX = event.clientX;
+  var mouseY = event.clientY; 
+
+  if(mouseX > 200){
+    game();
+  }
+}
+document.addEventListener("mousedown", startGame);
   
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   document.body.style.backgroundColor = "white"; 
@@ -574,18 +577,13 @@ var theNecromancer = new Image();
 };
 theNecromancer.src = "Logos/TheNecromancerLogo.png";
 
+
 var startButton = new Image();
 startButton.onload = function(){
   ctx.drawImage(startButton, 20, 300);
 };
 startButton.src = "Buttons/StartButton.png";
- document.addEventListener('mousedown',function(e){
-	var mouseX = e.clientX;
-	var mouseY = e.clientY;
-	if(mouseX <= 270 && mouseX > 25 && mouseY > 320 && mouseY < 380){
-	 game();
-	} 
-});
+ 
 }
 
 startScreen();
