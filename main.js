@@ -1,3 +1,4 @@
+
 /* 
 Hey! I'm really glad you got the game and I hope you like it!
 */
@@ -152,7 +153,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     
     ctx.fillStyle = "#FFDE7A";
     //His arm
-    ctx.fillRect(banditX - 3, banditY + 24, 8, 28);
+    ctx.fillRect(banditX + 2, banditY + 24, 8, 28);
     
     //His eye
     ctx.fillStyle = "black";
@@ -235,35 +236,6 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     //200 LINES!!!!!!
     ctx.fillStyle = "black";
     ctx.fillRect(banditX + 5, banditY + 68, 15, 5);
-  }
-  
-  function drawBanditFacingLeftWithArmRaised(){
-        //His face
-    ctx.fillStyle = "#FFDE7A";
-    ctx.fillRect(banditX - 6, banditY, 20, 25);
-    
-    //His shirt
-    ctx.fillStyle = "black";
-    ctx.fillRect(banditX + 2, banditY + 25, 8, 25);
-    
-    ctx.fillStyle = "#FFDE7A";
-    //His arm
-    ctx.fillRect(banditX + 2, banditY + 24, 28, 8);
-    
-    //His eye
-    ctx.fillStyle = "black";
-    ctx.fillRect(banditX - 4, banditY + 5, 5, 8);
-    //His bandit thing on his mouth? I don't know what it's called
-    ctx.fillStyle = "red";
-    ctx.fillRect(banditX - 6, banditY + 15, 15, 10);
-    
-    //His pant leg
-    ctx.fillStyle = "#11226B";
-    ctx.fillRect(banditX + 2, banditY + 49, 8, 20);
-
-    //His shoe
-    ctx.fillStyle = "black";
-    ctx.fillRect(banditX + 2, banditY + 68, 7.5, 5);
   }
   
   //Draws The Shape Shifter
@@ -510,7 +482,6 @@ campfire.src = "Sprites/Campfire.png";
   
   function drawMap3(){
     playerX = 200;
-    playerY = 340;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     document.body.style.backgroundColor =  "#000714";
     Campfire(500, 300);
@@ -538,7 +509,6 @@ campfire.src = "Sprites/Campfire.png";
     Dialogue("A Z-Z-ZOMBIE!!!", 10000, 17000);
     Dialogue("TIME TO RID THIS WORLD OF ANOTHER PEST!!!", 20000, 23500);
     
-    drawBanditFacingLeftWithArmRaised();
     }, 37500);
     
     
@@ -666,7 +636,7 @@ var theNecromancer = new Image();
      ctx.drawImage(theNecromancer, -100, 0);
      
 };
-theNecromancer.src = "Sprites/TheNecromancerLogo.png";
+theNecromancer.src = "Logos/TheNecromancerLogo.png";
 
 
 var startButton = new Image();
@@ -680,7 +650,7 @@ startButton.onload = function(){
   }
   
 };
-startButton.src = "Sprites/StartButton.png";
+startButton.src = "Buttons/StartButton.png";
  
 }
 
