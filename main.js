@@ -510,7 +510,7 @@ campfire.src = "Sprites/Campfire.png";
   
   function drawMap3(){
     playerX = 200;
-    var playerY = 340;
+    playerY = 340;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     document.body.style.backgroundColor =  "#000714";
     Campfire(500, 300);
