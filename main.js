@@ -635,7 +635,7 @@ var theNecromancer = new Image();
      ctx.drawImage(theNecromancer, -100, 0);
      
 };
-theNecromancer.src = "Sprites/TheNecromancerLogo.png";
+theNecromancer.src = "Logos/TheNecromancerLogo.png";
 
 
 var startButton = new Image();
@@ -649,7 +649,7 @@ startButton.onload = function(){
   }
   
 };
-startButton.src = "Sprites/StartButton.png";
+startButton.src = "Buttons/StartButton.png";
  
 }
 
