@@ -3,7 +3,6 @@ Hey! I'm really glad you got the game and I hope you like it!
 */
 
 window.onload = function() {
-  //makes the sky blue
   var mouseX = event.clientX;   
   var mouseY = event.clientY;     
 
@@ -16,11 +15,14 @@ var ctx=c.getContext("2d");
 
 var mysteriousSound = document.getElementById("MysteriousSound");
 var mysteriousNoise = document.getElementById("MysteriousNoise");
+
+var onGame = false;
   
   //Which map to draw
-var scene = 0;
+var scene = 2;
 //Start the game  
 function game(){
+  onGame = true;
   document.body.style.backgroundColor = "black";
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
@@ -32,11 +34,11 @@ var borderD = ctx.canvas.width - 30;
   
 //player's location
 var playerX = 250;
-var playerY = 325;
+var playerY = 340;
 
 //bandit's location
-var banditX = 200;
-var banditY = 200;
+var banditX = 600;
+var banditY = 320;
 
 //shape shifter's location
 var shapeShifterX = 200;
@@ -47,7 +49,7 @@ var shapeShifterY = 400;
 //player health
 var playerHealth = 50;
 //player's speed
-var playerSpeed = 10;
+var playerSpeed = 15;
 //is player in fight?
 var inFight = false;
 //Whether the Protagonist can move or not
@@ -157,7 +159,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     ctx.fillRect(banditX - 4, banditY + 5, 5, 8);
     //His bandit thing on his mouth? I don't know what it's called
     ctx.fillStyle = "red";
-    ctx.fillRect(banditX - 7, banditY + 15, 18, 10);
+    ctx.fillRect(banditX - 6, banditY + 15, 15, 10);
     
     //His pant leg
     ctx.fillStyle = "#11226B";
@@ -420,6 +422,36 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     ctx.fillRect(starX, starY, 5, 5);
   }
   
+  function Campfire(campfireX, campfireY){
+var campfire = new Image();
+campfire.onload = function () {
+    ctx.drawImage(campfire, campfireX, campfireY);
+};
+campfire.src = "Sprites/Campfire.png";
+}
+
+  //Draws a text box
+  function Dialogue(text, timeUntilStart, timeUntilEnd) {
+  var newText = document.createTextNode(text),
+      dialogue = document.getElementById("p1");
+      dialogue.style.color = "white";
+      dialogue.style.backgroundColor = "black";
+      
+      
+      
+      setTimeout(function(){
+          dialogue.appendChild(newText);
+      }, timeUntilStart);
+  
+  
+  setTimeout(function(){
+      dialogue.removeChild(newText);
+  }, timeUntilEnd);
+
+}
+ 
+
+
   //All in-game tiles WARNING: Put tiles before objects
   
   //creates a function called sand that places a tile of sand
@@ -451,11 +483,36 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     playerX = 200;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     document.body.style.backgroundColor =  "#000714";
-    var campfire = new Image();
-       campfire.onload = function () {
-          ctx.drawImage(campfire, 0, 200);
-     };
-     campfire.src = "Sprites/Campfire.png";
+    Campfire(500, 300);
+    
+    drawBanditFacingRight();
+    movement = false;
+      
+    Dialogue("Dear Audio Diary,", 500, 3000);
+    Dialogue("It's been a long time since I've seen anyone", 3000.0001, 6500);
+    Dialogue("Maybe they really did die...", 6500.0001, 10000);
+    Dialogue("...", 10000.0001, 13500);
+    Dialogue("THAT'S AWESOME!!!", 13500.001, 17000);
+    Dialogue("I can see the headlines now...", 17000.0001, 20500);
+    Dialogue("THE BANDIT SURVIVES ZOMBIE APOCALYPSE", 20500.0001, 24000);
+    Dialogue("EVEN THE NECROMANCER CAN'T STOP HIM", 24000.0001, 27500);
+    Dialogue("HE'S BEEN CROWNED KING OF UNIVERSE", 27500.0001, 30000);
+    Dialogue("That would be cool", 30000.0001, 33500);
+    Dialogue("Whatever, I better go check if anyone else survived", 33500.0001, 37000);
+    
+    setTimeout(function(){
+    ctx.clearRect(banditX, banditY, 50, 100);
+    drawBanditFacingLeft();
+    Dialogue("...", 2500, 4000);
+    Dialogue("AHHH", 4000.0001, 7500);
+    Dialogue("A Z-Z-ZOMBIE!!!", 10000, 17000);
+    Dialogue("TIME TO RID THIS WORLD OF ANOTHER PEST!!!", 20000, 23500);
+    
+    }, 37500);
+    
+    
+
+    
   }
   
   function drawMap4(){
@@ -556,33 +613,43 @@ document.addEventListener('keydown', function(e){
 
 //Start the startscreen
 function startScreen(){
-  
+  onGame = false;
   function startGame(event){
-
-  var mouseX = event.clientX;
-  var mouseY = event.clientY; 
-
-  if(mouseX > 200){
+  var mouseX = event.clientX;   
+  var mouseY = event.clientY;     
+  if(mouseX > 0 && onGame === false){
+    onGame = false;
     game();
   }
-}
-document.addEventListener("mousedown", startGame);
   
+}
+
+setTimeout(function(){
+document.addEventListener("mousedown", startGame);
+}, 3000);
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   document.body.style.backgroundColor = "white"; 
   
 var theNecromancer = new Image();
   theNecromancer.onload = function () {
      ctx.drawImage(theNecromancer, -100, 0);
+     
 };
-theNecromancer.src = "Logos/TheNecromancerLogo.png";
+theNecromancer.src = "Sprites/TheNecromancerLogo.png";
 
 
 var startButton = new Image();
 startButton.onload = function(){
-  ctx.drawImage(startButton, 20, 300);
+  ctx.drawImage(startButton, 40, 300);
+  var mouseX = event.clientX;   
+  var mouseY = event.clientY;     
+  if(mouseX > 0 && onGame === false){
+    onGame = false;
+    game();
+  }
+  
 };
-startButton.src = "Buttons/StartButton.png";
+startButton.src = "Sprites/StartButton.png";
  
 }
 
