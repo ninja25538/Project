@@ -294,7 +294,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     //his EEEEVIL SHIRT!!!
     ctx.fillStyle = "#012b49";
     ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 10, 25);
-    
+
     //his jeans
     //his PANT LEG
     ctx.fillStyle = "#840000";
@@ -678,7 +678,7 @@ var theNecromancer = new Image();
      ctx.drawImage(theNecromancer, -100, 0);
      
 };
-theNecromancer.src = "Sprites/TheNecromancerLogo.png";
+theNecromancer.src = "Logos/TheNecromancerLogo.png";
 
 
 var startButton = new Image();
@@ -692,7 +692,7 @@ startButton.onload = function(){
   }
   
 };
-startButton.src = "Sprites/StartButton.png";
+startButton.src = "Buttons/StartButton.png";
  
 }
 
