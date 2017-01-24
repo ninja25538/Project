@@ -1,4 +1,3 @@
-
 /* 
 Hey! I'm really glad you got the game and I hope you like it!
 */
@@ -153,7 +152,12 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     
     ctx.fillStyle = "#FFDE7A";
     //His arm
-    ctx.fillRect(banditX - 3, banditY + 24, 8, 28);
+    
+    ctx.fillRect(banditX + 6, banditY + 24, 7, 25);
+    
+    //The shoulder of his shirt
+    ctx.fillStyle = "black";
+    ctx.fillRect(banditX + 6, banditY + 24, 7, 10);
     
     //His eye
     ctx.fillStyle = "black";
@@ -164,11 +168,11 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     
     //His pant leg
     ctx.fillStyle = "#11226B";
-    ctx.fillRect(banditX + 2, banditY + 49, 8, 20);
+    ctx.fillRect(banditX + 2, banditY + 49, 8, 25);
 
     //His shoe
     ctx.fillStyle = "black";
-    ctx.fillRect(banditX + 2, banditY + 68, 7.5, 5);
+    ctx.fillRect(banditX + 2 , banditY + 68, 8, 7);
   }
   
   function drawBanditFacingUp(){
@@ -239,7 +243,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
   }
   
   function drawBanditFacingLeftWithArmRaised(){
-        //His face
+    //His face
     ctx.fillStyle = "#FFDE7A";
     ctx.fillRect(banditX - 6, banditY, 20, 25);
     
@@ -249,7 +253,12 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     
     ctx.fillStyle = "#FFDE7A";
     //His arm
-    ctx.fillRect(banditX + 2, banditY + 24, 28, 8);
+    
+    ctx.fillRect(banditX, banditY + 24, 25, 7);
+    
+    //The shoulder of his shirt
+    ctx.fillStyle = "black";
+    ctx.fillRect(banditX + 6, banditY + 24, 7, 10);
     
     //His eye
     ctx.fillStyle = "black";
@@ -260,11 +269,11 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     
     //His pant leg
     ctx.fillStyle = "#11226B";
-    ctx.fillRect(banditX + 2, banditY + 49, 8, 20);
+    ctx.fillRect(banditX + 2, banditY + 49, 8, 25);
 
     //His shoe
     ctx.fillStyle = "black";
-    ctx.fillRect(banditX + 2, banditY + 68, 7.5, 5);
+    ctx.fillRect(banditX + 2 , banditY + 68, 8, 7);
   }
   
   //Draws The Shape Shifter
@@ -513,10 +522,10 @@ campfire.src = "Sprites/Campfire.png";
     playerX = 200;
     playerY = 340;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    document.body.style.backgroundColor =  "#000714";
+    document.body.style.backgroundColor =  "#000710";
     Campfire(500, 300);
     
-    drawBanditFacingRight();
+    drawBanditFacingLeftWithArmRaised();
     movement = false;
       
     Dialogue("Dear Audio Diary,", 500, 3000);
@@ -524,7 +533,7 @@ campfire.src = "Sprites/Campfire.png";
     Dialogue("Maybe they really did die...", 6500.0001, 10000);
     Dialogue("...", 10000.0001, 13500);
     Dialogue("THAT'S AWESOME!!!", 13500.001, 17000);
-    Dialogue("I can see the headlines now...", 17000.0001, 20500);
+    Dialogue("I can see the front page of newspapers now...", 17000.0001, 20500);
     Dialogue("THE BANDIT SURVIVES ZOMBIE APOCALYPSE", 20500.0001, 24000);
     Dialogue("EVEN THE NECROMANCER CAN'T STOP HIM", 24000.0001, 27500);
     Dialogue("HE'S BEEN CROWNED KING OF UNIVERSE", 27500.0001, 30000);
@@ -535,11 +544,13 @@ campfire.src = "Sprites/Campfire.png";
     ctx.clearRect(banditX, banditY, 50, 100);
     drawBanditFacingLeft();
     Dialogue("...", 2500, 4000);
-    Dialogue("AHHH", 4000.0001, 7500);
-    Dialogue("A Z-Z-ZOMBIE!!!", 10000, 17000);
-    Dialogue("TIME TO RID THIS WORLD OF ANOTHER PEST!!!", 20000, 23500);
+    Dialogue("AHHH", 4000.0001, 7500.0001);
+    Dialogue("A Z-Z-ZOMBIE!!!", 7500.0001, 10000);
+    Dialogue("NONONONONONONONONONO", 10000, 13500);
     
-    drawBanditFacingLeftWithArmRaised();
+    setTimeout(function(){
+
+    }, 23500);
     }, 37500);
     
     
