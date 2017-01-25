@@ -526,7 +526,7 @@ campfire.src = "Sprites/Campfire.png";
     document.body.style.backgroundColor =  "#000710";
     Campfire(500, 300);
     
-    drawBanditFacingLeftWithArmRaised();
+    drawBanditFacingRight();
     movement = false;
       
     Dialogue("Dear Audio Diary,", 500, 3000);
@@ -542,8 +542,8 @@ campfire.src = "Sprites/Campfire.png";
     Dialogue("Whatever, I better go check if anyone else survived", 33500.0001, 37000);
     
     setTimeout(function(){
-    ctx.clearRect(banditX, banditY, 50, 100);
-    drawBanditFacingLeft();
+    ctx.clearRect(banditX, banditY, 100, 100);
+    drawBanditFacingLeftWithArmRaised();
     Dialogue("...", 2500, 4000);
     Dialogue("AHHH", 4000.0001, 7500.0001);
     Dialogue("A Z-Z-ZOMBIE!!!", 7500.0001, 10000);
