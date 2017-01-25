@@ -260,7 +260,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
 	  
 	  ctx.fillStyle = "#FFDE7A";
 	  //His arm
-    ctx.fillRect(banditX + 6, banditY + 24, 25, 7);
+    ctx.fillRect(banditX, banditY + 24, 25, 7);
     
     
     //His eye
