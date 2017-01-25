@@ -258,7 +258,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     ctx.fillRect(banditX + 6, banditY + 24, 7, 10);
 	  
 	  //His arm
-    ctx.fillRect(banditX + 6, banditY + 24, 25, 7);
+    ctx.fillRect(banditX + 15, banditY + 24, 25, 7);
     
     
     //His eye
