@@ -243,7 +243,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
   }
   
   function drawBanditFacingLeftWithArmRaised(){
-    //His face
+     //His face
     ctx.fillStyle = "#FFDE7A";
     ctx.fillRect(banditX - 6, banditY, 20, 25);
     
@@ -252,13 +252,14 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     ctx.fillRect(banditX + 2, banditY + 25, 8, 25);
     
     ctx.fillStyle = "#FFDE7A";
-    //His arm
-    
-    ctx.fillRect(banditX, banditY + 24, 25, 7);
-    
+	  
     //The shoulder of his shirt
     ctx.fillStyle = "black";
     ctx.fillRect(banditX + 6, banditY + 24, 7, 10);
+	  
+	  //His arm
+    ctx.fillRect(banditX + 6, banditY + 24, 25, 7);
+    
     
     //His eye
     ctx.fillStyle = "black";
@@ -499,7 +500,7 @@ campfire.src = "Sprites/Campfire.png";
     ctx.fillRect(grassX, grassY, 25, 25);
   }
   
-  //Draws map scenew
+  //Draws map scene
   function drawMap1(){
     playerX = 200;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
