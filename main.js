@@ -242,7 +242,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     ctx.fillRect(banditX + 5, banditY + 68, 15, 5);
   }
   
-  function drawBanditFacingLeftWithArmRaised(){
+    function drawBanditFacingLeftWithArmRaised(){
      //His face
     ctx.fillStyle = "#FFDE7A";
     ctx.fillRect(banditX - 6, banditY, 20, 25);
@@ -250,17 +250,15 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     //His shirt
     ctx.fillStyle = "black";
     ctx.fillRect(banditX + 2, banditY + 25, 8, 25);
-    
-    ctx.fillStyle = "#FFDE7A";
-	  
-    //The shoulder of his shirt
-    ctx.fillStyle = "black";
-    ctx.fillRect(banditX + 6, banditY + 24, 7, 10);
 	  
 	  
 	  ctx.fillStyle = "#FFDE7A";
 	  //His arm
-    ctx.fillRect(banditX - 12, banditY + 24, 25, 7);
+    ctx.fillRect(banditX - 15, banditY + 27, 25, 7);
+    
+        //The shoulder of his shirt
+    ctx.fillStyle = "black";
+    ctx.fillRect(banditX + 6, banditY + 24, 7, 10);
     
     
     //His eye
@@ -277,7 +275,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     //His shoe
     ctx.fillStyle = "black";
     ctx.fillRect(banditX + 2 , banditY + 68, 8, 7);
-  }
+  }  
   
   //Draws The Shape Shifter
   function drawShapeShifterFacingRight(){
