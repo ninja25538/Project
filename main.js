@@ -122,7 +122,11 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     
     ctx.fillStyle = "#FFDE7A";
     //His arm
-    ctx.fillRect(banditX + 5, banditY + 24, 8, 28);
+    ctx.fillRect(banditX + 5, banditY + 24, 7, 25);
+	  
+	  //The shoulder of his shirt
+    ctx.fillStyle = "black";
+    ctx.fillRect(banditX + 6, banditY + 24, 7, 10);
     
     //His eye
     ctx.fillStyle = "black";
