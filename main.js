@@ -424,7 +424,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     //his murderous arms
     ctx.fillStyle = "#125C00";
     //his lefty army (YOur left man, your left, don't forget again!)
-    ctx.fillRect(shapeShifterX - 3, shapeShifterY + 24, 7, 27);
+    ctx.fillRect(shapeShifterX - 3, shapeShifterY + 24, 7, 27);d
     //his righty tighty arm (your right, never forget)
     ctx.fillRect(shapeShifterX + 21, shapeShifterY + 24, 7, 27);
     
@@ -554,7 +554,7 @@ campfire.src = "Sprites/Campfire.png";
     Dialogue("NONONONONONONONONONO", 10000.0001, 13500);
     Dialogue("I DON'T WANNA DIE!!!", 13500.0001, 17000);
 	    setTimeout(function(){
-		    for(speeeed = 0; speeeed > ctx.canvas.width; speeeed++){ 
+		    for(speeeed = 0; speeeed > borderD; speeeed++){ 
     banditX += speeeed;
 		    }
 	    ), 17000.0001};
