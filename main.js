@@ -389,7 +389,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     
     //his murderous arms
     ctx.fillStyle = "#125C00";
-    //his lefty army (YOur left man, your left, don't forget again!)
+    //his lefty army (YOur left man, your left, don't get again!)
     ctx.fillRect(shapeShifterX - 3, shapeShifterY + 24, 7, 27);
     //his righty tighty arm (your right, never forget)
     ctx.fillRect(shapeShifterX + 21, shapeShifterY + 24, 7, 27);
@@ -424,7 +424,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     //his murderous arms
     ctx.fillStyle = "#125C00";
     //his lefty army (YOur left man, your left, don't forget again!)
-    ctx.fillRect(shapeShifterX - 3, shapeShifterY + 24, 7, 27);d
+    ctx.fillRect(shapeShifterX - 3, shapeShifterY + 24, 7, 27);
     //his righty tighty arm (your right, never forget)
     ctx.fillRect(shapeShifterX + 21, shapeShifterY + 24, 7, 27);
     
