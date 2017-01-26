@@ -555,7 +555,8 @@ campfire.src = "Sprites/Campfire.png";
     Dialogue("I DON'T WANNA DIE!!!", 13500.0001, 17000);
 	  
 	    while(banditSpeed < ctx.canvas.width){
-		banditX+=banditSpeed;    
+		banditX+=banditSpeed; 
+		    banditSpeed++;
 	    }
     
     setTimeout(function(){
