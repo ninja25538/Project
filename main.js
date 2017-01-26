@@ -547,11 +547,17 @@ campfire.src = "Sprites/Campfire.png";
     
     setTimeout(function(){
     ctx.clearRect(banditX, banditY, 100, 100);
-    drawBanditFacingLeftWithArmRaised();
+    drawBanditFacingLeft();
     Dialogue("...", 2500, 4000);
-    Dialogue("AHHH", 4000.0001, 7500.0001);
+    Dialogue("AHHH!!!", 4000.0001, 7500.0001);
     Dialogue("A Z-Z-ZOMBIE!!!", 7500.0001, 10000);
-    Dialogue("NONONONONONONONONONO", 10000, 13500);
+    Dialogue("NONONONONONONONONONO", 10000.0001, 13500);
+    Dialogue("I DON'T WANNA DIE!!!", 13500.0001, 17000);
+	    setTimeout(function(){
+		    for(speeeed < === 0; speeeed > ctx.canvas.width; speeeed++){ 
+    banditX += speeeed;
+		    }
+	    ), 17000.0001};
     
     setTimeout(function(){
 
