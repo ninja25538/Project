@@ -553,11 +553,10 @@ campfire.src = "Sprites/Campfire.png";
     Dialogue("A Z-Z-ZOMBIE!!!", 7500.0001, 10000);
     Dialogue("NONONONONONONONONONO", 10000.0001, 13500);
     Dialogue("I DON'T WANNA DIE!!!", 13500.0001, 17000);
-	    setTimeout(function(){
-		    for(speeeed = 0; speeeed > borderD; speeeed++){ 
-    banditX += speeeed;
-		    }
-	    ), 17000.0001};
+	  
+	    while(banditSpeed < ctx.canvas.width){
+		banditX+=banditSpeed;    
+	    }
     
     setTimeout(function(){
 
