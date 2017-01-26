@@ -538,7 +538,7 @@ campfire.src = "Sprites/Campfire.png";
     Dialogue("Maybe they really did die...", 6500.0001, 10000);
     Dialogue("...", 10000.0001, 13500);
     Dialogue("THAT'S AWESOME!!!", 13500.001, 17000);
-    Dialogue("I can see the front page of newspapers now...", 17000.0001, 20500);
+    Dialogue("The Death Valley Time's Front Page...", 17000.0001, 20500);
     Dialogue("THE BANDIT SURVIVES ZOMBIE APOCALYPSE", 20500.0001, 24000);
     Dialogue("EVEN THE NECROMANCER CAN'T STOP HIM", 24000.0001, 27500);
     Dialogue("HE'S BEEN CROWNED KING OF UNIVERSE", 27500.0001, 30000);
