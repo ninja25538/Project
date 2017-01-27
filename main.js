@@ -19,7 +19,7 @@ var mysteriousNoise = document.getElementById("MysteriousNoise");
 var onGame = false;
   
   //Which map to draw
-var scene = 0;
+var scene = 2;
 //Start the game  
 function game(){
   onGame = true;
