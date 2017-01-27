@@ -558,7 +558,7 @@ campfire.src = "Sprites/Campfire.png";
 	    
 	    setTimeout(function(){
 	    var banditSpeed = 1;
-	    while(banditSpeed < ctx.canvas.width){
+	    while(banditX < ctx.canvas.width){
 		banditX+=banditSpeed; 
 		    ctx.clearRect(banditX, banditY, 100, 100);
 		    drawBanditFacingRight();
