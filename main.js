@@ -423,7 +423,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     
     //his murderous arms
     ctx.fillStyle = "#125C00";
-    //his lefty army (YOur left man, your left, don't forget again!)
+    //his lefty army (YOur left man, your left, don't forget again!)f
     ctx.fillRect(shapeShifterX - 3, shapeShifterY + 24, 7, 27);
     //his righty tighty arm (your right, never forget)
     ctx.fillRect(shapeShifterX + 21, shapeShifterY + 24, 7, 27);
@@ -537,7 +537,7 @@ campfire.src = "Sprites/Campfire.png";
     Dialogue("It's been a long time since I've seen anyone", 3000.0001, 6500);
     Dialogue("Maybe they really did die...", 6500.0001, 10000);
     Dialogue("...", 10000.0001, 13500);
-    Dialogue("THAT'S AWESOME!!!", 13500.0001, 17000.001);
+    Dialogue("THAT'S AWESOME!!!", 13500.0001, 17000.0001);
     Dialogue("The Death Valley Time's Front Page...", 17000.0001, 20500);
     Dialogue("THE BANDIT SURVIVES ZOMBIE APOCALYPSE", 20500.0001, 24000);
     Dialogue("EVEN THE NECROMANCER CAN'T STOP HIM", 24000.0001, 27500);
