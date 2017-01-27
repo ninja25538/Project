@@ -537,7 +537,7 @@ campfire.src = "Sprites/Campfire.png";
     Dialogue("It's been a long time since I've seen anyone", 3000.0001, 6500);
     Dialogue("Maybe they really did die...", 6500.0001, 10000);
     Dialogue("...", 10000.0001, 13500);
-    Dialogue("THAT'S AWESOME!!!", 13500.001, 17000);
+    Dialogue("THAT'S AWESOME!!!", 13500.0001, 17000.001);
     Dialogue("The Death Valley Time's Front Page...", 17000.0001, 20500);
     Dialogue("THE BANDIT SURVIVES ZOMBIE APOCALYPSE", 20500.0001, 24000);
     Dialogue("EVEN THE NECROMANCER CAN'T STOP HIM", 24000.0001, 27500);
