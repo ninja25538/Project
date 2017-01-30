@@ -543,7 +543,7 @@ campfire.src = "Sprites/Campfire.png";
 		    drawBanditFacingRight();
 		    }, 250);
 	    }
-	    }, 7500.0001);
+	    }, 10000.0001);
 	  
     Dialogue("It's been a long time since I've seen anyone", 3000.0001, 6500);
     Dialogue("Maybe they really did die...", 6500.0001, 10000);
