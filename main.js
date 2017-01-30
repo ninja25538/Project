@@ -533,6 +533,18 @@ campfire.src = "Sprites/Campfire.png";
     drawBanditFacingRight();
     movement = false;
     Dialogue("Dear Audio Diary,", 500, 3000);
+	  
+	  	          		    setTimeout(function(){
+	    var banditSpeed = 1;
+	    while(banditX < ctx.canvas.width){
+		    setTimeout(function(){
+		banditX+=banditSpeed; 
+		    ctx.clearRect(banditX, banditY, 100, 3000.0001);
+		    drawBanditFacingRight();
+		    }, 250);
+	    }
+	    }, 7500.0001);
+	  
     Dialogue("It's been a long time since I've seen anyone", 3000.0001, 6500);
     Dialogue("Maybe they really did die...", 6500.0001, 10000);
     Dialogue("...", 10000.0001, 13500);
@@ -550,16 +562,6 @@ campfire.src = "Sprites/Campfire.png";
     Dialogue("...", 2500, 4000);
     Dialogue("AHHH!!!", 4000.0001, 7500);
     
-	          		    setTimeout(function(){
-	    var banditSpeed = 1;
-	    while(banditX < ctx.canvas.width){
-		    setTimeout(function(){
-		banditX+=banditSpeed; 
-		    ctx.clearRect(banditX, banditY, 100, 100);
-		    drawBanditFacingRight();
-		    }, 250);
-	    }
-	    }, 7500.0001);
 	    
     Dialogue("A Z-Z-ZOMBIE!!!", 7500.0001, 10000);
     Dialogue("NONONONONONONONONONO", 10000.0001, 13500);
