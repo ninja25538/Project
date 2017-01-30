@@ -536,7 +536,7 @@ campfire.src = "Sprites/Campfire.png";
 	  
 	  	          		    setTimeout(function(){
 	    var banditSpeed = 1;
-	    while(banditX < ctx.canvas.width){
+	    for(banditX < ctx.canvas.width; banditX = 620; banditX++){
 		    setTimeout(function(){
 		banditX+=banditSpeed; 
 		    ctx.clearRect(banditX, banditY, 100, 3000.0001);
@@ -549,7 +549,7 @@ campfire.src = "Sprites/Campfire.png";
     Dialogue("Maybe they really did die...", 6500.0001, 10000);
     Dialogue("...", 10000.0001, 13500);
     Dialogue("THAT'S AWESOME!!!", 13500.0001, 17000.0001);
-    Dialogue("The Death Valley Time's Front Page...", 17000.0001, 20500);
+    Dialogue("I'll be on the front page of The Death Valley Times", 17000.0001, 20500);
     Dialogue("THE BANDIT SURVIVES ZOMBIE APOCALYPSE", 20500.0001, 24000);
     Dialogue("EVEN THE NECROMANCER CAN'T STOP HIM", 24000.0001, 27500);
     Dialogue("HE'S BEEN CROWNED KING OF UNIVERSE", 27500.0001, 30000);
