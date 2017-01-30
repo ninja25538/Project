@@ -536,12 +536,11 @@ campfire.src = "Sprites/Campfire.png";
 	  
 	  	          		    setTimeout(function(){
 	    var banditSpeed = 1;
-	    for(banditX < ctx.canvas.width; banditX = 620; banditX++){
-		    setTimeout(function(){
+	    for(banditX < ctx.canvas.width; banditX === 620; banditX++){
+	
 		banditX+=banditSpeed; 
 		    ctx.clearRect(banditX, banditY, 100, 3000.0001);
 		    drawBanditFacingRight();
-		    }, 250);
 	    }
 	    }, 10000.0001);
 	  
