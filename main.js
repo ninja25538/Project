@@ -630,12 +630,12 @@ var sampleCookiez = document.cookie = "cookie; expires=Thu, 22 Nov 3016 12:00:00
 
 //Adds movement to game if w a s or d  is pressed whether the device is mobile or not
 document.addEventListener('keydown', function(e){
-   if(e.key === 'w' && playerY >=borderW && movement === true){
+   if(e.key === 'w' || e.key == "UP" && playerY >=borderW && movement === true){
    playerY-= playerSpeed;
     ctx.clearRect(playerX, playerY - 15, 75, 75);
   drawProtagonistFacingUp();
    }
-  if(e.key == 'd' && playerX < borderD && movement === true){
+  if(e.key == 'd'|| e.key == "RIGHT" && playerX < borderD && movement === true){
     if(playerX > borderD - 20){
       scene++;
       checkMap();
@@ -648,13 +648,13 @@ document.addEventListener('keydown', function(e){
   drawProtagonistFacingRight();
   }
   
-  if(e.key == 's' && playerY < borderS && movement === true){
+  if(e.key == 's' || e.key == "DOWN" && playerY < borderS && movement === true){
     playerY+= playerSpeed;
   ctx.clearRect(playerX, playerY - 15, 75, 75);
   drawProtagonistFacingDown();
   }
 
-  if(e.key == 'a' && playerX > borderA && movement === true){
+  if(e.key == 'a' ||  e.key == "LEFT" && playerX > borderA && movement === true){
     if(playerX < borderA + 20 && scene !== 1){
       scene--;
       checkMap();
