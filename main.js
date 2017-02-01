@@ -533,26 +533,28 @@ campfire.src = "Sprites/Campfire.png";
     
     drawBanditFacingRight();
     movement = false;
-    Dialogue("Dear Audio Diary,", 500, 3000);
+    Dialogue("Bandit: Dear Audio Diary,", 500, 3000);
     setTimeout(function(){
-    while(banditX < 700){
-            banditX += 1;
-      ctx.clearRect(banditX, banditY, 500, 500);
+      
+      
+    for(x = 600; x < 650; x++){
+            
+      ctx.clearRect(x, banditY, 500, 500);
       drawBanditFacingRight();
       
     }
     }, 3000.0001);
     
-    Dialogue("It's been a long time since I've seen anyone", 3000.0001, 6500);
-    Dialogue("Maybe they really did die...", 6500.0001, 10000);
+    Dialogue("It's been a while since I've seen any...living people", 3000.0001, 6500);
+    Dialogue("I guess the rest got eaten...", 6500.0001, 10000);
     Dialogue("...", 10000.0001, 13500);
-    Dialogue("THAT'S AWESOME!!!", 13500.0001, 17000.0001);
+    Dialogue("AWESOME!!!", 13500.0001, 17000.0001);
     Dialogue("I'll be on the front page of The Death Valley Times", 17000.0001, 20500);
     Dialogue("THE BANDIT SURVIVES ZOMBIE APOCALYPSE", 20500.0001, 24000);
     Dialogue("EVEN THE NECROMANCER CAN'T STOP HIM", 24000.0001, 27500);
-    Dialogue("HE'S BEEN CROWNED KING OF UNIVERSE", 27500.0001, 30000);
-    Dialogue("That would be cool", 30000.0001, 33500);
-    Dialogue("Whatever, I better go check if anyone else survived", 33500.0001, 37000);
+    Dialogue("HE'S BEEN CROWNED KING OF THE UNIVERSE", 27500.0001, 30000);
+    Dialogue("That'd be cool", 30000.0001, 33500);
+    Dialogue("Whatever, I better get back on guard duty", 33500.0001, 37000);
     
     setTimeout(function(){
     ctx.clearRect(banditX, banditY, 100, 100);
