@@ -20,6 +20,18 @@ var onGame = false;
   
   //Which map to draw
 var scene = 2;
+
+//Player stats
+
+//player health
+var playerHealth = 50;
+//player's speed
+var playerSpeed = 15;
+//is player in fight?
+var inFight = false;
+//Whether the Protagonist can move or not
+var movement = true;
+
 //Start the game  
 function game(){
   onGame = true;
@@ -43,17 +55,6 @@ var banditY = 320;
 //shape shifter's location
 var shapeShifterX = 200;
 var shapeShifterY = 400;
-
-//Player stats
-
-//player health
-var playerHealth = 50;
-//player's speed
-var playerSpeed = 15;
-//is player in fight?
-var inFight = false;
-//Whether the Protagonist can move or not
-var movement = true;
 
 
   //Draws the main character
@@ -533,17 +534,15 @@ campfire.src = "Sprites/Campfire.png";
     drawBanditFacingRight();
     movement = false;
     Dialogue("Dear Audio Diary,", 500, 3000);
-	  
-	  	          		    setTimeout(function(){
-	    var banditSpeed = 1;
-	    for(banditX < ctx.canvas.width; banditX === 620; banditX++){
-	
-		banditX+=banditSpeed; 
-		    ctx.clearRect(banditX, banditY, 100, 3000.0001);
-		    drawBanditFacingRight();
-	    }
-	    }, 10000.0001);
-	  
+    setTimeout(function(){
+    while(banditX < 700){
+            banditX += 1;
+      ctx.clearRect(banditX, banditY, 500, 500);
+      drawBanditFacingRight();
+      
+    }
+    }, 3000.0001);
+    
     Dialogue("It's been a long time since I've seen anyone", 3000.0001, 6500);
     Dialogue("Maybe they really did die...", 6500.0001, 10000);
     Dialogue("...", 10000.0001, 13500);
@@ -630,12 +629,12 @@ var sampleCookiez = document.cookie = "cookie; expires=Thu, 22 Nov 3016 12:00:00
 
 //Adds movement to game if w a s or d  is pressed whether the device is mobile or not
 document.addEventListener('keydown', function(e){
-   if(e.key === 'w' || e.key == "UP" && playerY >=borderW && movement === true){
+   if(e.key === 'w' && playerY >=borderW && movement === true){
    playerY-= playerSpeed;
     ctx.clearRect(playerX, playerY - 15, 75, 75);
   drawProtagonistFacingUp();
    }
-  if(e.key == 'd'|| e.key == "RIGHT" && playerX < borderD && movement === true){
+  if(e.key == 'd' && playerX < borderD && movement === true){
     if(playerX > borderD - 20){
       scene++;
       checkMap();
@@ -648,19 +647,19 @@ document.addEventListener('keydown', function(e){
   drawProtagonistFacingRight();
   }
   
-  if(e.key == 's' || e.key == "DOWN" && playerY < borderS && movement === true){
+  if(e.key == 's' && playerY < borderS && movement === true){
     playerY+= playerSpeed;
   ctx.clearRect(playerX, playerY - 15, 75, 75);
   drawProtagonistFacingDown();
   }
 
-  if(e.key == 'a' ||  e.key == "LEFT" && playerX > borderA && movement === true){
+  if(e.key == 'a' && playerX > borderA && movement === true){
     if(playerX < borderA + 20 && scene !== 1){
       scene--;
       checkMap();
     }
     if(scene < 0){
-        scene--;
+        scene++;
       }
     playerX-= playerSpeed;
   ctx.clearRect(playerX, playerY - 1, 75, 75);
@@ -694,7 +693,7 @@ var theNecromancer = new Image();
      ctx.drawImage(theNecromancer, -100, 0);
      
 };
-theNecromancer.src = "Logos/TheNecromancerLogo.png";
+theNecromancer.src = "Sprites/TheNecromancerLogo.png";
 
 
 var startButton = new Image();
@@ -708,7 +707,7 @@ startButton.onload = function(){
   }
   
 };
-startButton.src = "Buttons/StartButton.png";
+startButton.src = "Sprites/StartButton.png";
  
 }
 
