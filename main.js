@@ -51,6 +51,7 @@ var playerY = 340;
 //bandit's location
 var banditX = 600;
 var banditY = 320;
+var banditSpeed = 1;
 
 //shape shifter's location
 var shapeShifterX = 200;
@@ -438,6 +439,10 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     
   }
   
+  //Important movemen function
+  function move(){
+    
+  }
   //All in-game objects
   function tree(treeX, treeY){
     //The color of grass (And leaves in my opinion)
@@ -533,17 +538,9 @@ campfire.src = "Sprites/Campfire.png";
     
     drawBanditFacingRight();
     movement = false;
+    
     Dialogue("Bandit: Dear Audio Diary,", 500, 3000);
-    setTimeout(function(){
-      
-      
-    for(x = 600; x < 650; x++){
-            
-      ctx.clearRect(x, banditY, 500, 500);
-      drawBanditFacingRight();
-      
-    }
-    }, 3000.0001);
+    
     
     Dialogue("It's been a while since I've seen any...living people", 3000.0001, 6500);
     Dialogue("I guess the rest got eaten...", 6500.0001, 10000);
@@ -562,13 +559,22 @@ campfire.src = "Sprites/Campfire.png";
     Dialogue("...", 2500, 4000);
     Dialogue("AHHH!!!", 4000.0001, 7500);
     
+    setTimeout(function(){
+    setInterval(function() {
+      banditX++;
+      ctx.clearRect(banditX - 10, banditY, 510, 500);
+      drawBanditFacingRight();
+}, 4000/60);
+}, 7500.0001);
 	    
     Dialogue("A Z-Z-ZOMBIE!!!", 7500.0001, 10000);
-    Dialogue("NONONONONONONONONONO", 10000.0001, 13500);
+    Dialogue("NONONONONONONONONONONONONONO", 10000.0001, 13500);
     Dialogue("I DON'T WANNA DIE!!!", 13500.0001, 17000);
 	  
 	    
     }, 37500);
+    
+    
     
     
 
