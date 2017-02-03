@@ -582,6 +582,7 @@ campfire.src = "Sprites/Campfire.png";
 	  setTimeout(function(){
 	    movement = true;
 	    banditX = banditX + 50;
+	    ctx.clearRect(banditX, banditY, 500, 500);
 	  }, 17000.0001);
 	    
     }, 37500);
@@ -600,6 +601,9 @@ campfire.src = "Sprites/Campfire.png";
     FlowerBush(200, 200);
   }
   
+  function drawMap5(){
+     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  }
   //If the scene number is equal to a specific number, draw a specific map. 
   function checkMap(){
   if(scene == 1){
