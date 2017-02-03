@@ -439,10 +439,6 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     
   }
   
-  //Important movemen function
-  function move(){
-    
-  }
   //All in-game objects
   function tree(treeX, treeY){
     //The color of grass (And leaves in my opinion)
@@ -512,14 +508,12 @@ campfire.src = "Sprites/Campfire.png";
   
   //Draws map scene
   function drawMap1(){
-    playerX = 200;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
    document.body.style.backgroundColor =  "#000714"; 
    moon(20, 20);
    } 
   
   function drawMap2(){
-    playerX = 200;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     document.body.style.backgroundColor =  "#000714";
     for(var x = 0; x < borderD; x+= Math.round(Math.random() * 45)){
@@ -530,7 +524,6 @@ campfire.src = "Sprites/Campfire.png";
   }
   
   function drawMap3(){
-    playerX = 200;
     playerY = 340;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     document.body.style.backgroundColor =  "#000710";
@@ -542,14 +535,14 @@ campfire.src = "Sprites/Campfire.png";
     Dialogue("Bandit: Dear Audio Diary,", 500, 3000);
     
     
-    Dialogue("It's been a while since I've seen any...living people", 3000.0001, 6500);
-    Dialogue("I guess the rest got eaten...", 6500.0001, 10000);
+    Dialogue("It's been a long time since I've seen any...living people...", 3000.0001, 6500);
+    Dialogue("Maybe the rest were eaten...", 6500.0001, 10000);
     Dialogue("...", 10000.0001, 13500);
     Dialogue("AWESOME!!!", 13500.0001, 17000.0001);
     Dialogue("I'll be on the front page of The Death Valley Times", 17000.0001, 20500);
     Dialogue("THE BANDIT SURVIVES ZOMBIE APOCALYPSE", 20500.0001, 24000);
     Dialogue("EVEN THE NECROMANCER CAN'T STOP HIM", 24000.0001, 27500);
-    Dialogue("HE'S BEEN CROWNED KING OF THE UNIVERSE", 27500.0001, 30000);
+    Dialogue("HE'S BEEN CROWNED KING OF UNIVERSE", 27500.0001, 30000);
     Dialogue("That'd be cool", 30000.0001, 33500);
     Dialogue("Whatever, I better get back on guard duty", 33500.0001, 37000);
     
@@ -561,9 +554,13 @@ campfire.src = "Sprites/Campfire.png";
     
     setTimeout(function(){
     setInterval(function() {
+      if(banditX < borderD){
       banditX++;
       ctx.clearRect(banditX - 10, banditY, 510, 500);
       drawBanditFacingRight();
+      } else if(banditX >= borderD){
+        ctx.clearRect(banditX, banditY, 200, 200);
+      }
 }, 4000/60);
 }, 7500.0001);
 	    
@@ -571,6 +568,10 @@ campfire.src = "Sprites/Campfire.png";
     Dialogue("NONONONONONONONONONONONONONO", 10000.0001, 13500);
     Dialogue("I DON'T WANNA DIE!!!", 13500.0001, 17000);
 	  
+	  setTimeout(function(){
+	    movement = true;
+	    banditX = banditX+ 50;
+	  }, 17000.0001);
 	    
     }, 37500);
     
@@ -621,9 +622,9 @@ campfire.src = "Sprites/Campfire.png";
     }
 };
 
-/*
+
  //Adds buttons to game IF the device is mobile
- if (!isMobile.any()) { 
+ if (isMobile.any()) { 
  document.addEventListener('mousedown',function(e){
 	var result_x = document.getElementById('x_result');
 	var result_y = document.getElementById('y_result');
@@ -631,7 +632,7 @@ campfire.src = "Sprites/Campfire.png";
 	result_y.innerHTML = e.clientY;
 });
 }
-**/
+
 
 var sampleCookiez = document.cookie = "cookie; expires=Thu, 22 Nov 3016 12:00:00 UTC";
 
@@ -640,16 +641,25 @@ document.addEventListener('keydown', function(e){
    if(e.key === 'w' && playerY >=borderW && movement === true){
    playerY-= playerSpeed;
     ctx.clearRect(playerX, playerY - 15, 75, 75);
+     if(scene == 3){
+      Campfire(500, 300);
+    }
   drawProtagonistFacingUp();
    }
+   
+   
   if(e.key == 'd' && playerX < borderD && movement === true){
     if(playerX > borderD - 20){
       scene++;
       checkMap();
+      playerX = 200;
     }
     if(scene < 0){
         scene++;
       }
+       if(scene == 3){
+      Campfire(500, 300);
+    }
     playerX+= playerSpeed;
    ctx.clearRect(playerX, playerY - 1, -75, 75);
   drawProtagonistFacingRight();
@@ -658,6 +668,9 @@ document.addEventListener('keydown', function(e){
   if(e.key == 's' && playerY < borderS && movement === true){
     playerY+= playerSpeed;
   ctx.clearRect(playerX, playerY - 15, 75, 75);
+   if(scene == 3){
+      Campfire(500, 300);
+    }
   drawProtagonistFacingDown();
   }
 
@@ -665,6 +678,10 @@ document.addEventListener('keydown', function(e){
     if(playerX < borderA + 20 && scene !== 1){
       scene--;
       checkMap();
+      playerX = 300;
+    }
+    if(scene == 3){
+      Campfire(500, 300);
     }
     if(scene < 0){
         scene++;
