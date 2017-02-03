@@ -19,7 +19,7 @@ var mysteriousNoise = document.getElementById("MysteriousNoise");
 var onGame = false;
   
   //Which map to draw
-var scene = 2;
+var scene = 0;
 
 //Player stats
 
