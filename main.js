@@ -19,7 +19,7 @@ var mysteriousNoise = document.getElementById("MysteriousNoise");
 var onGame = false;
   
   //Which map to draw
-var scene = 0;
+var scene = 3;
 
 //Player stats
 
@@ -49,9 +49,9 @@ var playerX = 250;
 var playerY = 340;
 
 //bandit's location
-var banditX = 600;
+var banditX = 620;
 var banditY = 320;
-var banditSpeed = 1;
+var banditSpeed = 3;
 
 //shape shifter's location
 var shapeShifterX = 200;
@@ -248,7 +248,7 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     ctx.fillRect(banditX + 5, banditY + 68, 15, 5);
   }
   
-    function drawBanditFacingLeftWithArmRaised(){
+  function drawBanditFacingLeftWithArmRaised(){
      //His face
     ctx.fillStyle = "#FFDE7A";
     ctx.fillRect(banditX - 6, banditY, 20, 25);
@@ -476,6 +476,14 @@ campfire.onload = function () {
 campfire.src = "Sprites/Campfire.png";
 }
 
+  function FlowerBush(flowerBushX, flowerBushY){
+    var flowerBush = new Image();
+    flowerBush.onload = function(){
+      ctx.drawImage(flowerBush, flowerBushX, flowerBushY);
+    };
+    flowerBush.src = "Sprites/FlowerBush.png";
+  }
+
   //Draws a text box
   function Dialogue(text, timeUntilStart, timeUntilEnd) {
   var newText = document.createTextNode(text),
@@ -508,12 +516,14 @@ campfire.src = "Sprites/Campfire.png";
   
   //Draws map scene
   function drawMap1(){
+    playerX = 300;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
    document.body.style.backgroundColor =  "#000714"; 
    moon(20, 20);
    } 
   
   function drawMap2(){
+    playerX = 300;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     document.body.style.backgroundColor =  "#000714";
     for(var x = 0; x < borderD; x+= Math.round(Math.random() * 45)){
@@ -524,6 +534,7 @@ campfire.src = "Sprites/Campfire.png";
   }
   
   function drawMap3(){
+    playerX = 300;
     playerY = 340;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     document.body.style.backgroundColor =  "#000710";
@@ -570,7 +581,7 @@ campfire.src = "Sprites/Campfire.png";
 	  
 	  setTimeout(function(){
 	    movement = true;
-	    banditX = banditX+ 50;
+	    banditX = banditX + 50;
 	  }, 17000.0001);
 	    
     }, 37500);
@@ -583,7 +594,10 @@ campfire.src = "Sprites/Campfire.png";
   }
   
   function drawMap4(){
-    
+        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    document.body.style.backgroundColor =  "#001a3d";
+    playerX = 200;
+    FlowerBush(200, 200);
   }
   
   //If the scene number is equal to a specific number, draw a specific map. 
@@ -643,6 +657,8 @@ document.addEventListener('keydown', function(e){
     ctx.clearRect(playerX, playerY - 15, 75, 75);
      if(scene == 3){
       Campfire(500, 300);
+    } else if(scene == 4){
+      FlowerBush(200, 200);
     }
   drawProtagonistFacingUp();
    }
@@ -652,13 +668,14 @@ document.addEventListener('keydown', function(e){
     if(playerX > borderD - 20){
       scene++;
       checkMap();
-      playerX = 200;
     }
     if(scene < 0){
         scene++;
       }
        if(scene == 3){
       Campfire(500, 300);
+    } else if(scene == 4){
+      FlowerBush(200, 200);
     }
     playerX+= playerSpeed;
    ctx.clearRect(playerX, playerY - 1, -75, 75);
@@ -670,6 +687,8 @@ document.addEventListener('keydown', function(e){
   ctx.clearRect(playerX, playerY - 15, 75, 75);
    if(scene == 3){
       Campfire(500, 300);
+    } else if(scene == 4){
+      FlowerBush(200, 200);
     }
   drawProtagonistFacingDown();
   }
@@ -678,10 +697,11 @@ document.addEventListener('keydown', function(e){
     if(playerX < borderA + 20 && scene !== 1){
       scene--;
       checkMap();
-      playerX = 300;
     }
     if(scene == 3){
       Campfire(500, 300);
+    } else if(scene == 4){
+      FlowerBush(200, 200);
     }
     if(scene < 0){
         scene++;
