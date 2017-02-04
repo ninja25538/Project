@@ -595,14 +595,18 @@ campfire.src = "Sprites/Campfire.png";
   }
   
   function drawMap4(){
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     document.body.style.backgroundColor =  "#001a3d";
     playerX = 200;
-    FlowerBush(200, 200);
+    FlowerBush(350, 100);
   }
   
   function drawMap5(){
-     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        playerX = 300;
+    playerY = 340;
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    document.body.style.backgroundColor =  "#000710";
+    Campfire(500, 300);
   }
   //If the scene number is equal to a specific number, draw a specific map. 
   function checkMap(){
@@ -662,7 +666,7 @@ document.addEventListener('keydown', function(e){
      if(scene == 3){
       Campfire(500, 300);
     } else if(scene == 4){
-      FlowerBush(200, 200);
+      FlowerBush(350, 100);
     }
   drawProtagonistFacingUp();
    }
@@ -679,7 +683,8 @@ document.addEventListener('keydown', function(e){
        if(scene == 3){
       Campfire(500, 300);
     } else if(scene == 4){
-      FlowerBush(200, 200);
+      
+      FlowerBush(350, 100);
     }
     playerX+= playerSpeed;
    ctx.clearRect(playerX, playerY - 1, -75, 75);
@@ -692,7 +697,7 @@ document.addEventListener('keydown', function(e){
    if(scene == 3){
       Campfire(500, 300);
     } else if(scene == 4){
-      FlowerBush(200, 200);
+      FlowerBush(350, 100);
     }
   drawProtagonistFacingDown();
   }
@@ -705,7 +710,7 @@ document.addEventListener('keydown', function(e){
     if(scene == 3){
       Campfire(500, 300);
     } else if(scene == 4){
-      FlowerBush(200, 200);
+      FlowerBush(350, 100);
     }
     if(scene < 0){
         scene++;
