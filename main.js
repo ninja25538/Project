@@ -13,9 +13,6 @@ var ctx=c.getContext("2d");
   ctx.canvas.height = 600;
   ctx.fillStyle = "yellow";
 
-var mysteriousSound = document.getElementById("MysteriousSound");
-var mysteriousNoise = document.getElementById("MysteriousNoise");
-
 var onGame = false;
   
   //Which map to draw
@@ -57,7 +54,8 @@ var banditSpeed = 3;
 var shapeShifterX = 200;
 var shapeShifterY = 400;
 
-
+//have you met the bandit?
+var metTheBandit = false;
   //Draws the main character
   function drawProtagonistFacingRight(){
 //Draws the protagonist's hood
@@ -281,6 +279,11 @@ ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
     //His shoe
     ctx.fillStyle = "black";
     ctx.fillRect(banditX + 2 , banditY + 68, 8, 7);
+    
+    //The Gun
+    ctx.fillStyle = "#606060";
+    ctx.fillRect(banditX - 30, banditY + 25, 10, 5);
+    ctx.fillRect(banditX - 20, banditY + 25, 5, 10);
   }  
   
   //Draws The Shape Shifter
@@ -508,7 +511,6 @@ campfire.src = "Sprites/Campfire.png";
 
   //All in-game tiles WARNING: Put tiles before objects
   
-  //creates a function called sand that places a tile of sand
   function grass(grassX, grassY){
     ctx.fillStyle = "#00a51b";
     ctx.fillRect(grassX, grassY, 25, 25);
@@ -581,6 +583,7 @@ campfire.src = "Sprites/Campfire.png";
 	  
 	  setTimeout(function(){
 	    movement = true;
+	    	    ctx.clearRect(banditX, banditY, 500, 500);
 	    banditX = banditX + 50;
 	    ctx.clearRect(banditX, banditY, 500, 500);
 	  }, 17000.0001);
@@ -599,15 +602,20 @@ campfire.src = "Sprites/Campfire.png";
     document.body.style.backgroundColor =  "#001a3d";
     playerX = 200;
     FlowerBush(350, 100);
+    banditx = 630;
+    banditY = 300;
+    drawBanditFacingLeftWithArmRaised();
+    if(playerX > 250){
+      movemnt = false;
+    }
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    document.body.style.backgroundColor =  "#001a3d";
+    playerX = 200;
+    banditx = 630;
+    banditY = 300;
+    drawBanditFacingLeftWithArmRaised();
   }
   
-  function drawMap5(){
-        playerX = 300;
-    playerY = 340;
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    document.body.style.backgroundColor =  "#000710";
-    Campfire(500, 300);
-  }
   //If the scene number is equal to a specific number, draw a specific map. 
   function checkMap(){
   if(scene == 1){
@@ -683,7 +691,6 @@ document.addEventListener('keydown', function(e){
        if(scene == 3){
       Campfire(500, 300);
     } else if(scene == 4){
-      
       FlowerBush(350, 100);
     }
     playerX+= playerSpeed;
@@ -703,7 +710,8 @@ document.addEventListener('keydown', function(e){
   }
 
   if(e.key == 'a' && playerX > borderA && movement === true){
-    if(playerX < borderA + 20 && scene !== 1 && scene !== 3 && scene !== 4){
+    
+    if(playerX < borderA + 20 && scene !== 1 && scene !== 4){
       scene--;
       checkMap();
     }
