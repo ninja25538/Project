@@ -693,7 +693,8 @@ document.addEventListener('keydown', function(e){
     } else if(scene == 4){
       FlowerBush(350, 100);
       if(playerX > banditX - 35){
-        
+        movement = false;
+	Dialogue("DIE SERVANT OF THE DEMON", 0, 1000);
       }
     }
     playerX+= playerSpeed;
