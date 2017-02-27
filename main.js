@@ -692,9 +692,13 @@ document.addEventListener('keydown', function(e){
       Campfire(500, 300);
     } else if(scene == 4){
       FlowerBush(350, 100);
-      if(playerX > banditX - 35){
+      if(playerX > banditX - 135){
         movement = false;
-	Dialogue("DIE SERVANT OF THE DEMON", 0, 1000);
+	      
+	Dialogue("I WON'T LET YOU END THE WORLD", 0, 1000);
+	Dialogue("YOU EVIL DEAD SCUM!!!", 1000.0001, 2000);
+	Dialogue("FIGHT MEEEEEEEEEEEE!!!", 2000.0001, 3000);
+	
       }
     }
     playerX+= playerSpeed;
