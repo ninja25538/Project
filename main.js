@@ -16,7 +16,7 @@ var ctx=c.getContext("2d");
 var onGame = false;
   
   //Which map to draw
-var scene = 0;
+var scene = 3;
 
 //Player stats
 
@@ -611,7 +611,7 @@ campfire.src = "Sprites/Campfire.png";
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     document.body.style.backgroundColor =  "#001a3d";
     playerX = 200;
-    banditx = 630;
+    banditx = 430;
     banditY = 300;
     drawBanditFacingLeftWithArmRaised();
   }
@@ -692,6 +692,9 @@ document.addEventListener('keydown', function(e){
       Campfire(500, 300);
     } else if(scene == 4){
       FlowerBush(350, 100);
+      if(playerX > banditX - 35){
+        
+      }
     }
     playerX+= playerSpeed;
    ctx.clearRect(playerX, playerY - 1, -75, 75);
