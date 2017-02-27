@@ -11,13 +11,15 @@
    <canvas id="canvas"></canvas>
     <h1 id="dialogue"> </h1>
   
-   <body onload="myFunction()" style="margin:0;">
+
   <script src="main.js"></script>
   
   
     
 
-<div id="loader"></div>
+<div id="loader">
+     <body onload="myFunction()">
+</div>
 
 <script>
 var loadingCircle;
@@ -26,7 +28,6 @@ function myFunction() {
 }
 function showPage() {
   document.getElementById("loader").style.display = "none";
-  document.getElementById("myDiv").style.display = "block";
 }
 
 </script>
