@@ -714,7 +714,7 @@ document.addEventListener('keydown', function(e){
   drawProtagonistFacingDown();
   }
 
-  if(e.key == 'a' && playerX > borderA && movement === true || e.keyCode === 37 && scene !== 1 && scene !== 4){
+  if(e.key == 'a' && playerX > borderA && movement === true || e.keyCode === 37 && playerX > borderA && movement === true){
     
     if(playerX < borderA + 20 && scene !== 1 && scene !== 4){
       scene--;
