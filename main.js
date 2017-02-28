@@ -16,14 +16,14 @@ var ctx=c.getContext("2d");
 var onGame = false;
   
   //Which map to draw
-var scene = 3;
+var scene = 0;
 
 //Player stats
 
 //player health
 var playerHealth = 50;
 //player's speed
-var playerSpeed = 15;
+var playerSpeed = 7;
 //is player in fight?
 var inFight = false;
 //Whether the Protagonist can move or not
@@ -605,14 +605,11 @@ campfire.src = "Sprites/Campfire.png";
     banditx = 630;
     banditY = 300;
     drawBanditFacingLeftWithArmRaised();
-    if(playerX > 250){
-      movemnt = false;
-    }
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     document.body.style.backgroundColor =  "#001a3d";
     playerX = 200;
     banditx = 430;
-    banditY = 300;
+    playerY = 340;
     drawBanditFacingLeftWithArmRaised();
   }
   
@@ -668,7 +665,7 @@ var sampleCookiez = document.cookie = "cookie; expires=Thu, 22 Nov 3016 12:00:00
 
 //Adds movement to game if w a s or d  is pressed whether the device is mobile or not
 document.addEventListener('keydown', function(e){
-   if(e.key === 'w' && playerY >= borderW && movement === true){
+   if(e.key === 'w' && playerY >= borderW && movement === true && scene !== 4 || e.keyCode === 38  && playerY >= borderW && movement === true && scene !== 4){
    playerY-= playerSpeed;
     ctx.clearRect(playerX, playerY - 15, 75, 75);
      if(scene == 3){
@@ -679,8 +676,8 @@ document.addEventListener('keydown', function(e){
   drawProtagonistFacingUp();
    }
    
-   
-  if(e.key == 'd' && playerX < borderD && movement === true){
+    
+  if(e.key == 'd' && playerX < borderD && movement === true || e.keyCode === 39 && playerX < borderD && movement === true ){
     if(playerX > borderD - 20){
       scene++;
       checkMap();
@@ -690,7 +687,7 @@ document.addEventListener('keydown', function(e){
       }
        if(scene == 3){
       Campfire(500, 300);
-    } else if(scene == 4){
+    } else if(scene == 4 && movement === true){
       FlowerBush(350, 100);
       if(playerX > banditX - 135){
         movement = false;
@@ -706,7 +703,7 @@ document.addEventListener('keydown', function(e){
   drawProtagonistFacingRight();
   }
   
-  if(e.key == 's' && playerY < borderS && movement === true ){
+  if(e.key == 's' && playerY < borderS && movement === true && scene !== 4 || e.keyCode === 40 && playerY < borderS && movement === true && scene !== 4){
     playerY+= playerSpeed;
   ctx.clearRect(playerX, playerY - 15, 75, 75);
    if(scene == 3){
@@ -717,7 +714,7 @@ document.addEventListener('keydown', function(e){
   drawProtagonistFacingDown();
   }
 
-  if(e.key == 'a' && playerX > borderA && movement === true){
+  if(e.key == 'a' && playerX > borderA && movement === true || e.keyCode === 37 && scene !== 1 && scene !== 4){
     
     if(playerX < borderA + 20 && scene !== 1 && scene !== 4){
       scene--;
