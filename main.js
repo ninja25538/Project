@@ -694,10 +694,10 @@ document.addEventListener('keydown', function(e){
       FlowerBush(350, 100);
       if(playerX > banditX - 135){
         movement = false;
-	      
-	Dialogue("I WON'T LET YOU END THE WORLD", 0, 1000);
-	Dialogue("YOU EVIL DEAD SCUM!!!", 1000.0001, 2000);
-	Dialogue("FIGHT MEEEEEEEEEEEE!!!", 2000.0001, 3000);
+	Dialogue("Oh no it's YOU!!!", 0, 2000);
+	Dialogue("I WON'T LET YOU END THE WORLD", 2000.0001, 4670);
+	Dialogue("YOU EVIL DEAD SCUM!!!", 4670.0001, 5670);
+	Dialogue("FIGHT MEEEEEEEEEEEE!!!", 6670.0001, 10670);
 	
       }
     }
