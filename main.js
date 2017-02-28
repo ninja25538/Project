@@ -696,7 +696,7 @@ document.addEventListener('keydown', function(e){
         movement = false;
 	Dialogue("Oh no it's YOU!!!", 0, 2000);
 	Dialogue("I WON'T LET YOU END THE WORLD", 2000.0001, 4670);
-	Dialogue("YOU EVIL DEAD SCUM!!!", 4670.0001, 5670);
+	Dialogue("YOU EVIL DEAD SCUM!!!", 4670.0001, 6670);
 	Dialogue("FIGHT MEEEEEEEEEEEE!!!", 6670.0001, 10670);
 	
       }
