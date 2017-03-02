@@ -1,10 +1,7 @@
  
 //Hey! I'm really glad you got the game and I hope you like it!
 
-/*
-REMEMBER To WORK ON MOMENT WHERE BATTLE SCENE WILL START!!!!
--March 1, 2017
-*/
+
 
 
 
@@ -23,7 +20,7 @@ var ctx=c.getContext("2d");
 var onGame = false;
   
   //Which map to draw
-var scene = 3;
+var scene = 0;
 
 //Player stats
 
