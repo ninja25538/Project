@@ -1,6 +1,13 @@
-/* 
-Hey! I'm really glad you got the game and I hope you like it!
+ 
+//Hey! I'm really glad you got the game and I hope you like it!
+
+/*
+REMEMBER To WORK ON MOMENT WHERE BATTLE SCENE WILL START!!!!
+-March 1, 2017
 */
+
+
+
 
 window.onload = function() {
   var mouseX = event.clientX;   
@@ -16,24 +23,41 @@ var ctx=c.getContext("2d");
 var onGame = false;
   
   //Which map to draw
-var scene = 0;
+var scene = 3;
 
 //Player stats
 
 //player health
-var playerHealth = 50;
+var playerHealth = 15;
 //player's speed
-var playerSpeed = 7;
-//is player in fight?
-var inFight = false;
+var playerSpeed = 20;
+//player's damage
+function attack(){ 
+  var playerDamage = Math.floor(Math.random() * 5 + 1);
+}
+//is player in a fight?
+var fighting = false;
 //Whether the Protagonist can move or not
 var movement = true;
+
+//Bandit's stats
+
+//bandit's health
+var banditHealth =  45;
+//bandit's attack chance
+var banditAttackChance = Math.floor((Math.random() * 2) + 1);
+//how much damage bandit's attacks do
+var banditAttackDamage = Math.floor((Math.random() * 3));
+
 
 //Start the game  
 function game(){
   onGame = true;
   document.body.style.backgroundColor = "black";
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+var cRight = document.getElementById("Copyright");
+cRight.innerHTML = "";
 
 //The borders that the player can walk
 var borderW = 300;
@@ -48,14 +72,11 @@ var playerY = 340;
 //bandit's location
 var banditX = 620;
 var banditY = 320;
-var banditSpeed = 3;
 
 //shape shifter's location
 var shapeShifterX = 200;
 var shapeShifterY = 400;
 
-//have you met the bandit?
-var metTheBandit = false;
   //Draws the main character
   function drawProtagonistFacingRight(){
 //Draws the protagonist's hood
@@ -516,7 +537,7 @@ campfire.src = "Sprites/Campfire.png";
     ctx.fillRect(grassX, grassY, 25, 25);
   }
   
-  //Draws map scene
+  //Draws scene
   function drawMap1(){
     playerX = 300;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -602,17 +623,32 @@ campfire.src = "Sprites/Campfire.png";
     document.body.style.backgroundColor =  "#001a3d";
     playerX = 200;
     FlowerBush(350, 100);
-    banditx = 630;
+    banditX = 630;
     banditY = 300;
     drawBanditFacingLeftWithArmRaised();
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     document.body.style.backgroundColor =  "#001a3d";
     playerX = 200;
-    banditx = 430;
     playerY = 340;
     drawBanditFacingLeftWithArmRaised();
+    
+    	setTimeout(function(){
+	  scene = "BATTLE!";
+	  drawBattleMap("black");
+	}, 10670.0001);
   }
   
+  function drawBattleMap(backgroundColor){
+   movement = false;
+   fighting = true;
+   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); 
+   document.body.style.backgroundColor = backgroundColor;
+   
+   
+  }
+  
+
+
   //If the scene number is equal to a specific number, draw a specific map. 
   function checkMap(){
   if(scene == 1){
@@ -623,6 +659,8 @@ campfire.src = "Sprites/Campfire.png";
     drawMap3();
   } else if(scene == 4){
     drawMap4();
+  } else if(scene === "BATTLE!"){
+    drawBattleMap();
   }
   
   }
@@ -650,20 +688,7 @@ campfire.src = "Sprites/Campfire.png";
 };
 
 
- //Adds buttons to game IF the device is mobile
- if (isMobile.any()) { 
- document.addEventListener('mousedown',function(e){
-	var result_x = document.getElementById('x_result');
-	var result_y = document.getElementById('y_result');
-	result_x.innerHTML = e.clientX;
-	result_y.innerHTML = e.clientY;
-});
-}
-
-
-var sampleCookiez = document.cookie = "cookie; expires=Thu, 22 Nov 3016 12:00:00 UTC";
-
-//Adds movement to game if w a s or d  is pressed whether the device is mobile or not
+//Adds movement to game if movement buttons are pressed whether the device is mobile or not
 document.addEventListener('keydown', function(e){
    if(e.key === 'w' && playerY >= borderW && movement === true && scene !== 4 || e.keyCode === 38  && playerY >= borderW && movement === true && scene !== 4){
    playerY-= playerSpeed;
@@ -683,18 +708,24 @@ document.addEventListener('keydown', function(e){
       checkMap();
     }
     if(scene < 0){
-        scene++;
+      scene++;
       }
        if(scene == 3){
-      Campfire(500, 300);
-    } else if(scene == 4 && movement === true){
+        Campfire(500, 300);
+       } else if(scene == 4){
       FlowerBush(350, 100);
       if(playerX > banditX - 135){
         movement = false;
-	Dialogue("Oh no it's YOU!!!", 0, 2000);
-	Dialogue("I WON'T LET YOU END THE WORLD", 2000.0001, 4670);
-	Dialogue("YOU EVIL DEAD SCUM!!!", 4670.0001, 6670);
-	Dialogue("FIGHT MEEEEEEEEEEEE!!!", 6670.0001, 10670);
+        if(playerX > banditX -135){
+        	setTimeout(function(){
+	     drawBattleMap();
+       }, 10370.0001);
+        }
+       Dialogue("Oh no it's YOU!!!", 0, 2000);
+	     Dialogue("I WON'T LET YOU END THE WORLD", 2000.0001, 4670);
+       Dialogue("YOU EVIL DEAD SCUM!!!", 4670.0001, 6670);
+	     Dialogue("FIGHT MEEEEEEEEEEEE!!!", 6670.0001, 10370);
+	
 	
       }
     }
@@ -774,6 +805,7 @@ startButton.onload = function(){
   }
   
 };
+
 startButton.src = "Sprites/StartButton.png";
  
 }
