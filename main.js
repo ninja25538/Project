@@ -23,7 +23,7 @@ var ctx=c.getContext("2d");
 var onGame = false;
   
   //Which map to draw
-var scene = 3;
+var scene = 0;
 
 //Player stats
 
