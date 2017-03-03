@@ -1,7 +1,10 @@
  
 //Hey! I'm really glad you got the game and I hope you like it!
 
-
+/*
+REMEMBER To WORK ON MOMENT WHERE BATTLE SCENE WILL START!!!!
+-March 1, 2017
+*/
 
 
 
@@ -20,7 +23,7 @@ var ctx=c.getContext("2d");
 var onGame = false;
   
   //Which map to draw
-var scene = 0;
+var scene = 3;
 
 //Player stats
 
@@ -689,7 +692,7 @@ campfire.src = "Sprites/Campfire.png";
 document.addEventListener('keydown', function(e){
    if(e.key === 'w' && playerY >= borderW && movement === true && scene !== 4 || e.keyCode === 38  && playerY >= borderW && movement === true && scene !== 4){
    playerY-= playerSpeed;
-    ctx.clearRect(playerX, playerY - 15, 75, 75);
+    ctx.clearRect(playerX, playerY - 15, 90, 90);
      if(scene == 3){
       Campfire(500, 300);
     } else if(scene == 4){
@@ -727,13 +730,13 @@ document.addEventListener('keydown', function(e){
       }
     }
     playerX+= playerSpeed;
-   ctx.clearRect(playerX, playerY - 1, -75, 75);
+   ctx.clearRect(playerX, playerY - 1, -90, 90);
   drawProtagonistFacingRight();
   }
   
   if(e.key == 's' && playerY < borderS && movement === true && scene !== 4 || e.keyCode === 40 && playerY < borderS && movement === true && scene !== 4){
     playerY+= playerSpeed;
-  ctx.clearRect(playerX, playerY - 15, 75, 75);
+  ctx.clearRect(playerX, playerY - 20, 90, 90);
    if(scene == 3){
       Campfire(500, 300);
     } else if(scene == 4){
