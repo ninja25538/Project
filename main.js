@@ -1,4 +1,4 @@
- 
+  
 //Hey! I'm really glad you got the game and I hope you like it!
 
 /*
@@ -23,7 +23,7 @@ var ctx=c.getContext("2d");
 var onGame = false;
   
   //Which map to draw
-var scene = 0;
+var scene = 3;
 
 //Player stats
 
@@ -46,6 +46,7 @@ var movement = true;
 var banditHealth =  45;
 //bandit's attack chance
 var banditAttackChance = Math.floor((Math.random() * 2) + 1);
+
 //how much damage bandit's attacks do
 var banditAttackDamage = Math.floor((Math.random() * 3));
 
@@ -527,7 +528,27 @@ campfire.src = "Sprites/Campfire.png";
   }, timeUntilEnd);
 
 }
- 
+
+  function battleDialogue(text, timeUntilStart, timeUntilEnd){
+    var newText = document.createTextNode(text),
+      dialogue = document.getElementById("p1");
+      dialogue.style.color = "white";
+      dialogue.style.backgroundColor = "black";
+      
+      
+      
+      setTimeout(function(){
+          dialogue.appendChild(newText);
+      }, timeUntilStart);
+  
+  
+  setTimeout(function(){
+      dialogue.removeChild(newText);
+      scene = "BATTLE!";
+      checkMap();
+  }, timeUntilEnd);
+}
+
 
 
   //All in-game tiles WARNING: Put tiles before objects
@@ -634,13 +655,13 @@ campfire.src = "Sprites/Campfire.png";
     
     	setTimeout(function(){
 	  scene = "BATTLE!";
-	  drawBattleMap("black");
+	  drawBattleMap("black", banditHealth);
 	}, 10670.0001);
   }
   
-  function drawBattleMap(backgroundColor){
+  //Draws the map for fighting enemies
+  function drawBattleMap(backgroundColor, enemyHealth, currentDialogue){
    movement = false;
-   fighting = true;
    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); 
    document.body.style.backgroundColor = backgroundColor;
    
@@ -660,6 +681,7 @@ campfire.src = "Sprites/Campfire.png";
   } else if(scene == 4){
     drawMap4();
   } else if(scene === "BATTLE!"){
+    
     drawBattleMap();
   }
   
@@ -714,17 +736,16 @@ document.addEventListener('keydown', function(e){
         Campfire(500, 300);
        } else if(scene == 4){
       FlowerBush(350, 100);
+      
+      
       if(playerX > banditX - 135){
         movement = false;
         if(playerX > banditX -135){
-        	setTimeout(function(){
-	     drawBattleMap();
-       }, 10370.0001);
-        }
        Dialogue("Oh no it's YOU!!!", 0, 2000);
 	     Dialogue("I WON'T LET YOU END THE WORLD", 2000.0001, 4670);
        Dialogue("YOU EVIL DEAD SCUM!!!", 4670.0001, 6670);
-	     Dialogue("FIGHT MEEEEEEEEEEEE!!!", 6670.0001, 10370);
+	     battleDialogue("FIGHT MEEEEEEEEEEEE!!!", 6670.0001, 10370);
+        }
 	
 	
       }
