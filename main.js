@@ -1,4 +1,4 @@
-  
+ 
 //Hey! I'm really glad you got the game and I hope you like it!
 
 /*
@@ -28,17 +28,19 @@ var scene = 3;
 //Player stats
 
 //player health
-var playerHealth = 15;
+var playerHealth = 20;
 //player's speed
 var playerSpeed = 20;
 //player's damage
 function attack(){ 
   var playerDamage = Math.floor(Math.random() * 5 + 1);
 }
-//is player in a fight?
-var fighting = false;
+//who is the player fighting
+var fighting;
 //Whether the Protagonist can move or not
 var movement = true;
+
+
 
 //Bandit's stats
 
@@ -77,6 +79,7 @@ var banditY = 320;
 //shape shifter's location
 var shapeShifterX = 200;
 var shapeShifterY = 400;
+
 
   //Draws the main character
   function drawProtagonistFacingRight(){
@@ -544,6 +547,7 @@ campfire.src = "Sprites/Campfire.png";
   
   setTimeout(function(){
       dialogue.removeChild(newText);
+      drawBattleMap();
       scene = "BATTLE!";
       checkMap();
   }, timeUntilEnd);
@@ -652,20 +656,25 @@ campfire.src = "Sprites/Campfire.png";
     playerX = 200;
     playerY = 340;
     drawBanditFacingLeftWithArmRaised();
-    
-    	setTimeout(function(){
-	  scene = "BATTLE!";
-	  drawBattleMap("black", banditHealth);
-	}, 10670.0001);
+
   }
   
   //Draws the map for fighting enemies
-  function drawBattleMap(backgroundColor, enemyHealth, currentDialogue){
-   movement = false;
-   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); 
-   document.body.style.backgroundColor = backgroundColor;
-   
-   
+  function drawBattleMap(){
+  function showBattleScreen(text, x, y, color, font, playerHealth, enemyHealth){
+    ctx.fillStyle = color;
+    ctx.font = font;
+ctx.fillText(text, x, y);
+
+  } 
+  
+  
+    if(fighting == "Bandit"){
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+      document.body.style.backgroundColor = "black";
+      drawBattleText("The Bandit Attacks!", 100, 600, "white", "40px Arial", playerHealth, banditHealth);
+      
+    }
   }
   
 
@@ -745,6 +754,7 @@ document.addEventListener('keydown', function(e){
 	     Dialogue("I WON'T LET YOU END THE WORLD", 2000.0001, 4670);
        Dialogue("YOU EVIL DEAD SCUM!!!", 4670.0001, 6670);
 	     battleDialogue("FIGHT MEEEEEEEEEEEE!!!", 6670.0001, 10370);
+	     fighting = "Bandit";
         }
 	
 	
