@@ -23,34 +23,7 @@ var ctx=c.getContext("2d");
 var onGame = false;
   
   //Which map to draw
-var scene = 3;
-
-//Player stats
-
-//player health
-var playerHealth = 20;
-//player's speed
-var playerSpeed = 20;
-//player's damage
-function attack(){ 
-  var playerDamage = Math.floor(Math.random() * 5 + 1);
-}
-//who is the player fighting
-var fighting;
-//Whether the Protagonist can move or not
-var movement = true;
-
-
-
-//Bandit's stats
-
-//bandit's health
-var banditHealth =  45;
-//bandit's attack chance
-var banditAttackChance = Math.floor((Math.random() * 2) + 1);
-
-//how much damage bandit's attacks do
-var banditAttackDamage = Math.floor((Math.random() * 3));
+var scene = 0;
 
 
 //Start the game  
@@ -81,56 +54,86 @@ var shapeShifterX = 200;
 var shapeShifterY = 400;
 
 
+//Player stats
+
+//player health
+var playerHealth = 20;
+//player's speed
+var playerSpeed = 5;
+//player's damage
+function attack(){ 
+  var playerDamage = Math.floor(Math.random() * 5 + 1);
+}
+//who is the player fighting
+var fighting;
+//Whether the Protagonist can move or not
+var movement = true;
+
+
+
+//Bandit's stats
+
+//bandit's health
+var banditHealth =  45;
+//bandit's attack chance
+var banditAttackChance = Math.floor((Math.random() * 2) + 1);
+
+//how much damage bandit's attacks do
+var banditAttackDamage = Math.floor((Math.random() * 3));
+
+
   //Draws the main character
   function drawProtagonistFacingRight(){
 //Draws the protagonist's hood
-  ctx.fillStyle = "red";
+  ctx.fillStyle = "#270042";
 ctx.fillRect(playerX, playerY, 23, 5);
-ctx.fillRect(playerX, playerY, 13, 20);
+ctx.fillRect(playerX - 3, playerY, 15, 25);
 ctx.fillRect(playerX, playerY + 20, 23, 5);
+ctx.fillRect(playerX + 22, playerY, 2, 25);
 //Draws the protagonist's cloak
-ctx.fillStyle = "red";
-ctx.fillRect(playerX, playerY + 15, 18, 30);
+ctx.fillStyle = "#270042";
+ctx.fillRect(playerX, playerY + 15, 18, 35);
 //Draws the shadow that hides the protagonist's face 
-ctx.fillStyle = "black";
-ctx.fillRect(playerX + 13, playerY + 3, 10, 20);
+ctx.fillStyle = "#0a0a0a";
+ctx.fillRect(playerX + 11, playerY + 3, 12, 20);
 }
 
   function drawProtagonistFacingLeft(){
     //Draws the protagonist's hood
-    ctx.fillStyle = "red";
+    ctx.fillStyle = "#270042";
 ctx.fillRect(playerX, playerY, 23, 5);
-ctx.fillRect(playerX + 10, playerY, 13, 20);
+ctx.fillRect(playerX + 10, playerY, 15, 25);
 ctx.fillRect(playerX, playerY + 20, 23, 5);
+ctx.fillRect(playerX - 2, playerY, 2, 25);
 //Draws the protagonist's cloak
-ctx.fillStyle = "red";
-ctx.fillRect(playerX + 5, playerY + 15, 18, 30);
+ctx.fillStyle = "#270042";
+ctx.fillRect(playerX + 5, playerY + 15, 18, 35);
 //Draws the shadow that hides the protagonist's face 
-ctx.fillStyle = "black";
-ctx.fillRect(playerX, playerY + 3, 10, 20);
+ctx.fillStyle = "#0a0a0a";
+ctx.fillRect(playerX, playerY + 3, 12, 20);
   }
   
   function drawProtagonistFacingUp(){
     //Draws the protagonist's hood
-    ctx.fillStyle = "red";
-ctx.fillRect(playerX + 2.5, playerY + 2.5, 20, 20);
+    ctx.fillStyle = "#270042";
+ctx.fillRect(playerX, playerY + 2.5, 25, 25);
 //Draws the protagonist's cloak
-ctx.fillStyle = "red";
-ctx.fillRect(playerX + 5, playerY + 17.5, 15, 25);
+ctx.fillStyle = "#270042";
+ctx.fillRect(playerX + 5, playerY + 17.5, 15, 35);
   }
   
   function drawProtagonistFacingDown(){
     //Draws the protagonist's hood
-    ctx.fillStyle = "red";
-ctx.fillRect(playerX + 2, playerY, 20, 20);
+    ctx.fillStyle = "#270042";
+ctx.fillRect(playerX - 1, playerY - 2, 25, 25);
 
 //Draws the protagonist's cloak
-ctx.fillStyle = "red";
-ctx.fillRect(playerX + 4.5, playerY + 15, 15, 25);
+ctx.fillStyle = "#270042";
+ctx.fillRect(playerX + 4.5, playerY + 15, 15, 35);
 
 //Draws the shadow that hides the protagonist's face
-ctx.fillStyle = "black";
-ctx.fillRect(playerX + 7.5, playerY + 5, 10, 12.5);
+ctx.fillStyle = "#0a0a0a";
+ctx.fillRect(playerX + 6, playerY + 3, 12, 18);
 
   }
   
@@ -661,7 +664,7 @@ campfire.src = "Sprites/Campfire.png";
   
   //Draws the map for fighting enemies
   function drawBattleMap(){
-  function showBattleScreen(text, x, y, color, font, playerHealth, enemyHealth){
+  function showBattleScreen(text, x, y, color, font){
     ctx.fillStyle = color;
     ctx.font = font;
 ctx.fillText(text, x, y);
@@ -672,7 +675,7 @@ ctx.fillText(text, x, y);
     if(fighting == "Bandit"){
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       document.body.style.backgroundColor = "black";
-      drawBattleText("The Bandit Attacks!", 100, 600, "white", "40px Arial", playerHealth, banditHealth);
+      showBattleScreen("The Bandit Attacks!", 100, 600, "white", "40px Arial");
       
     }
   }
@@ -723,7 +726,7 @@ ctx.fillText(text, x, y);
 document.addEventListener('keydown', function(e){
    if(e.key === 'w' && playerY >= borderW && movement === true && scene !== 4 || e.keyCode === 38  && playerY >= borderW && movement === true && scene !== 4){
    playerY-= playerSpeed;
-    ctx.clearRect(playerX, playerY - 15, 90, 90);
+    ctx.clearRect(playerX - 5, playerY - 15, 95, 95);
      if(scene == 3){
       Campfire(500, 300);
     } else if(scene == 4){
@@ -761,13 +764,13 @@ document.addEventListener('keydown', function(e){
       }
     }
     playerX+= playerSpeed;
-   ctx.clearRect(playerX, playerY - 1, -90, 90);
+   ctx.clearRect(playerX - 30, playerY - 15, 100, 100);
   drawProtagonistFacingRight();
   }
   
   if(e.key == 's' && playerY < borderS && movement === true && scene !== 4 || e.keyCode === 40 && playerY < borderS && movement === true && scene !== 4){
     playerY+= playerSpeed;
-  ctx.clearRect(playerX, playerY - 20, 90, 90);
+  ctx.clearRect(playerX - 10, playerY - 30, 100, 100);
    if(scene == 3){
       Campfire(500, 300);
     } else if(scene == 4){
@@ -791,7 +794,7 @@ document.addEventListener('keydown', function(e){
         scene++;
       }
     playerX-= playerSpeed;
-  ctx.clearRect(playerX, playerY - 1, 75, 75);
+  ctx.clearRect(playerX - 10, playerY - 5, 100, 100);
   drawProtagonistFacingLeft();
   }
 }); 
