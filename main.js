@@ -2,8 +2,9 @@
 //Hey! I'm really glad you got the game and I hope you like it!
 
 /*
-REMEMBER To WORK ON MOMENT WHERE BATTLE SCENE WILL START!!!!
--March 1, 2017
+*Try to fix load screen bug
+*Finish basic start of battle screen
+-March 24, 2017
 */
 
 
@@ -23,7 +24,7 @@ var ctx=c.getContext("2d");
 var onGame = false;
   
   //Which map to draw
-var scene = 0;
+var scene = 3;
 
 
 //Start the game  
@@ -59,7 +60,7 @@ var shapeShifterY = 400;
 //player health
 var playerHealth = 20;
 //player's speed
-var playerSpeed = 5;
+var playerSpeed = 20;
 //player's damage
 function attack(){ 
   var playerDamage = Math.floor(Math.random() * 5 + 1);
@@ -667,7 +668,9 @@ campfire.src = "Sprites/Campfire.png";
   function showBattleScreen(text, x, y, color, font){
     ctx.fillStyle = color;
     ctx.font = font;
-ctx.fillText(text, x, y);
+    ctx.fillText(text, x, y);
+    ctx.fillStyle = "white";
+    ctx.strokeRect(20,20,100,150);
 
   } 
   
@@ -676,6 +679,7 @@ ctx.fillText(text, x, y);
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       document.body.style.backgroundColor = "black";
       showBattleScreen("The Bandit Attacks!", 100, 600, "white", "40px Arial");
+      
       
     }
   }
