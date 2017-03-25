@@ -2,8 +2,7 @@
 //Hey! I'm really glad you got the game and I hope you like it!
 
 /*
-*Try to fix load screen bug
-*Finish basic start of battle screen
+Have first show of battle screen
 -March 24, 2017
 */
 
@@ -845,6 +844,12 @@ startButton.onload = function(){
 };
 
 startButton.src = "Sprites/StartButton.png";
+ 
+var loading = document.getElementById("loading");
+loading.innerHTML = "loading";
+ setTimeout(function(){
+   loading.innerHTML = "";
+ }, 3000);
  
 }
 
