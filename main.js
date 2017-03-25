@@ -59,7 +59,7 @@ var shapeShifterY = 400;
 //player health
 var playerHealth = 20;
 //player's speed
-var playerSpeed = 20;
+var playerSpeed = 5;
 //player's damage
 function attack(){ 
   var playerDamage = Math.floor(Math.random() * 5 + 1);
