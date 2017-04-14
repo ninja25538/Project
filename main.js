@@ -7,6 +7,8 @@
  //Eligor
  //Cow head
  //Revenant
+ 
+ 
  //Places
  //Panamint City
  window.onload = function() {
@@ -15,12 +17,12 @@
  	//TODO Draw Map1 TODO
  	var c = document.getElementById("canvas");
  	var ctx = c.getContext("2d");
- 	ctx.canvas.width = window.outerWidth - 105;
- 	ctx.canvas.height = window.outerHeight - 205;
+ 	ctx.canvas.width = window.innerWidth - 55;
+ 	ctx.canvas.height = window.innerHeight - 150;
  	ctx.fillStyle = "yellow";
  	var onGame = false;
  	//Which map to draw
- 	var scene = 0;
+ 	var scene = 3;
  	//Start the game  
  	function game() {
  		drawProtagonistFacingRight();
@@ -53,7 +55,7 @@
  			var playerDamage = Math.floor(Math.random() * 5 + 1);
  		}
  		//who is the player fighting
- 		var fighting;
+ 		var fighting = "Bandit";
  		//Whether the Protagonist can move or not
  		var movement = true;
  		//Bandit's stats
@@ -114,6 +116,8 @@
  			ctx.fillStyle = "#0a0a0a";
  			ctx.fillRect(playerX + 6, playerY + 3, 12, 18);
  		}
+ 		
+ 		
  		//Draws The Bandit
  		function drawBanditFacingRight() {
  			//His face
@@ -260,6 +264,8 @@
  			ctx.fillRect(banditX - 30, banditY + 25, 10, 5);
  			ctx.fillRect(banditX - 20, banditY + 25, 5, 10);
  		}
+ 		
+ 		
  		//Draws The Shape Shifter
  		function drawShapeShifterFacingRight() {
  			ctx.fillStyle = "#125C00";
@@ -561,8 +567,7 @@
  				ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
  				document.body.style.backgroundColor = "black";
  				drawBanditBattleBackground();
- 				var potato = document.getElementById("p1")
- 					.innerHTML;
+ 				var potato = document.getElementById("p1").innerHTML;
  				potato = "loading";
  				setTimeout(function() {
  					showBattleScreen("", 100, 600, "black", "40px Arial");
@@ -575,9 +580,14 @@
  					potato = "";
  					ctx.strokeStyle = "white";
  					ctx.fillStyle = "black";
- 					ctx.strokeRect(1, 100, 100, ctx.canvas.height - 100);
- 					ctx.fillRect(1, 100, 100, ctx.canvas.height - 100);
- 				}, 250);
+ 					ctx.strokeRect(1, 100, 100,462);
+ 					ctx.fillRect(1, 100, 100, 462);
+ 					
+ 					ctx.fillStyle = "white";
+          ctx.font = "30px Arial";
+          ctx.fillText("Attack", 1, 120);
+          
+ 				}, 350);
  			}
  		}
  		//If the scene number is equal to a specific number, draw a specific map. 
