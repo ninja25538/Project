@@ -51,11 +51,16 @@
  		//player's speed
  		var playerSpeed = 15;
  		//player's damage
+ 		var playerDamage = 5;
+ 		
+ 		//Colum and row for fights
+ 		var column = 0;
+ 		var row = 0;
  		function attack() {
- 			var playerDamage = Math.floor(Math.random() * 5 + 1);
+ 			var trueDamage = Math.floor(Math.random() * playerDamage + 1);
  		}
  		//who is the player fighting
- 		var fighting = "Bandit";
+ 		var fighting = "";
  		//Whether the Protagonist can move or not
  		var movement = true;
  		//Bandit's stats
@@ -556,6 +561,14 @@
  			drawBanditFacingLeftWithArmRaised();
  			FlowerBush(349, 100);
  		}
+ 		
+ 		 					function option(){
+ 					ctx.fillStyle = "white";
+          ctx.font = "25px Arial";
+          ctx.fillText("Attack", 1, 175);
+          ctx.fillText("Eat", 1, 275);
+          ctx.fillText("Threaten", 1, 375);
+ 					}
  		//Draws the map for fighting enemies
  		function drawBattleMap() {
  			function showBattleScreen(text, x, y, color, font) {
@@ -569,25 +582,24 @@
  				drawBanditBattleBackground();
  				var potato = document.getElementById("p1").innerHTML;
  				potato = "loading";
- 				setTimeout(function() {
+ 			setTimeout(function() {
+ 			  column = 1;
+ 			  row = 1;
  					showBattleScreen("", 100, 600, "black", "40px Arial");
  					playerX = 200;
- 					playerY = 470;
+ 					playerY = 370;
  					banditX = 600;
- 					banditY = 450;
+ 					banditY = 350;
  					drawProtagonistFacingRight();
  					drawBanditFacingLeftWithArmRaised();
  					potato = "";
+ 					
  					ctx.strokeStyle = "white";
  					ctx.fillStyle = "black";
- 					ctx.strokeRect(1, 100, 100,462);
- 					ctx.fillRect(1, 100, 100, 462);
- 					
- 					ctx.fillStyle = "white";
-          ctx.font = "30px Arial";
-          ctx.fillText("Attack", 1, 120);
-          
- 				}, 350);
+ 					ctx.strokeRect(1, 100, 100,480);
+ 					ctx.fillRect(1, 100, 100, 480);
+ 					option();
+ 				}, 550);
  			}
  		}
  		//If the scene number is equal to a specific number, draw a specific map. 
@@ -603,6 +615,24 @@
  			} else if (scene === "BATTLE!") {
  				drawBattleMap();
  			}
+ 		}
+ 		
+ 		function drawOptionRectangle(){
+ 		   	ctx.strokeStyle = "white";
+ 		  if(column === 1){
+ 		    if(row === 1){
+ 		      ctx.clearRect(1, 150, 100, 315);
+ 		      ctx.strokeRect(1, 155, 100, 35);
+ 		    } else if(row === 2){
+ 		      ctx.clearRect(1, 150, 100, 315);
+ 		      ctx.strokeRect(1, 255, 100, 35);
+ 		    } else if(row === 3){
+ 		      ctx.clearRect(1, 150,100, 315);
+ 		      ctx.strokeRect(1, 355, 100, 35);
+ 		    }
+ 		  } else if(column === 2){
+ 		    
+ 		  }
  		}
  		//Checks to see if device is mobile
  		var isMobile = {
@@ -691,6 +721,24 @@
  				ctx.clearRect(playerX - 10, playerY - 5, 100, 100);
  				drawProtagonistFacingLeft();
  			}
+ 		
+ 		  if(e.keyCode == 38 && scene === "BATTLE!"){
+ 		    row--;
+ 		    if(row <= 0){
+ 		      row = 3;
+ 		    } 
+                drawOptionRectangle();
+ 		            option();
+ 		  } else if(e.keyCode == 40 && scene === "BATTLE!"){
+ 		    row++;
+ 		    if(row >= 4){
+ 		      row = 1;
+ 		    }
+                drawOptionRectangle();
+ 		            option();
+ 		  }
+ 		  
+ 		  
  		});
  	}
  	//Start the startscreen
