@@ -646,6 +646,20 @@
                  drawBattleMap();
              }
          }
+         
+                 //Attacks of all enemies                  
+         function Attack(){
+           
+           if(fighting === "Bandit"){
+            if(attackNumber === 1){
+              while(bulletX > 0){
+                bulletX--;
+                drawBullet(); 
+              }
+            } 
+           }
+           
+         }
 
          //Creates the rectangle on the selected option
          function drawOptionRectangle() {
