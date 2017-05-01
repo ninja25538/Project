@@ -574,8 +574,6 @@
              banditY = 300;
              drawBanditFacingLeftWithArmRaised();
              FlowerBush(349, 100);
-             
-             drawBullet();
          }
 
          function option() {
@@ -652,10 +650,10 @@
            
            if(fighting === "Bandit"){
             if(attackNumber === 1){
-              while(bulletX > 0){
+              setInterval(function(){
+              } 10000 / 60);
                 bulletX--;
                 drawBullet(); 
-              }
             } 
            }
            
