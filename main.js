@@ -617,171 +617,220 @@
  			}
  		}
  		
- 		function drawOptionRectangle(){
- 		   	ctx.strokeStyle = "white";
- 		  if(column === 1){
- 		    if(row === 1){
- 		      ctx.clearRect(1, 150, 100, 315);
- 		      ctx.strokeRect(1, 155, 100, 35);
- 		    } else if(row === 2){
- 		      ctx.clearRect(1, 150, 100, 315);
- 		      ctx.strokeRect(1, 255, 100, 35);
- 		    } else if(row === 3){
- 		      ctx.clearRect(1, 150,100, 315);
- 		      ctx.strokeRect(1, 355, 100, 35);
- 		    }
- 		  } else if(column === 2){
- 		    
- 		  }
- 		}
- 		//Checks to see if device is mobile
- 		var isMobile = {
- 			Android: function() {
- 				return navigator.userAgent.match(/Android/i);
- 			},
- 			BlackBerry: function() {
- 				return navigator.userAgent.match(/BlackBerry/i);
- 			},
- 			iOS: function() {
- 				return navigator.userAgent.match(/iPhone|iPad|iPod/i);
- 			},
- 			Opera: function() {
- 				return navigator.userAgent.match(/Opera Mini/i);
- 			},
- 			Windows: function() {
- 				return navigator.userAgent.match(/IEMobile/i);
- 			},
- 			any: function() {
- 				return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
- 			}
- 		};
- 		//Adds movement to game if movement buttons are pressed whether the device is mobile or not
- 		document.addEventListener('keydown', function(e) {
- 			if (e.key === 'w' && playerY >= borderW && movement === true && scene !== 4 || e.keyCode === 38 && playerY >= borderW && movement === true && scene !== 4) {
- 				playerY -= playerSpeed;
- 				ctx.clearRect(playerX - 5, playerY - 15, 95, 95);
- 				if (scene == 3) {
- 					Campfire(500, 300);
- 				} else if (scene == 4) {
- 					FlowerBush(350, 100);
- 				}
- 				drawProtagonistFacingUp();
- 			}
- 			if (e.key == 'd' && playerX < borderD && movement === true || e.keyCode === 39 && playerX < borderD && movement === true) {
- 				if (playerX > borderD - 20) {
- 					scene++;
- 					checkMap();
- 				}
- 				if (scene < 0) {
- 					scene++;
- 				}
- 				if (scene == 3) {
- 					Campfire(500, 300);
- 				} else if (scene == 4) {
- 					FlowerBush(350, 100);
- 					if (playerX > banditX - 135) {
- 						movement = false;
- 						if (playerX > banditX - 135) {
- 							Dialogue("Bandit: Oh no it's YOU!!!", 0, 2000);
- 							Dialogue("I WON'T LET YOU END THE WORLD", 2000.0001, 4670);
- 							Dialogue("YOU EVIL DEAD SCUM!!!", 4670.0001, 6670);
- 							battleDialogue("FIGHT MEEEEEEE!!", 6670.0001, 10370);
- 							fighting = "Bandit";
- 						}
- 					}
- 				}
- 				playerX += playerSpeed;
- 				ctx.clearRect(playerX - 30, playerY - 15, 100, 100);
- 				drawProtagonistFacingRight();
- 			}
- 			if (e.key == 's' && playerY < borderS && movement === true && scene !== 4 || e.keyCode === 40 && playerY < borderS && movement === true && scene !== 4) {
- 				playerY += playerSpeed;
- 				ctx.clearRect(playerX - 10, playerY - 30, 100, 100);
- 				if (scene == 3) {
- 					Campfire(500, 300);
- 				} else if (scene == 4) {
- 					FlowerBush(350, 100);
- 				}
- 				drawProtagonistFacingDown();
- 			}
- 			if (e.key == 'a' && playerX > borderA && movement === true || e.keyCode === 37 && playerX > borderA && movement === true) {
- 				if (playerX < borderA + 20 && scene !== 1 && scene !== 4) {
- 					scene--;
- 					checkMap();
- 				}
- 				if (scene == 3) {
- 					Campfire(500, 300);
- 				} else if (scene == 4) {
- 					FlowerBush(350, 100);
- 				}
- 				if (scene < 0) {
- 					scene++;
- 				}
- 				playerX -= playerSpeed;
- 				ctx.clearRect(playerX - 10, playerY - 5, 100, 100);
- 				drawProtagonistFacingLeft();
- 			}
- 		
- 		  if(e.keyCode == 38 && scene === "BATTLE!"){
- 		    row--;
- 		    if(row <= 0){
- 		      row = 3;
- 		    } 
-                drawOptionRectangle();
- 		            option();
- 		  } else if(e.keyCode == 40 && scene === "BATTLE!"){
- 		    row++;
- 		    if(row >= 4){
- 		      row = 1;
- 		    }
-                drawOptionRectangle();
- 		            option();
- 		  }
- 		  
- 		  
- 		});
- 	}
- 	//Start the startscreen
- 	function startScreen() {
- 		onGame = false;
+        //Creates the rectangle on the selected option
+         function drawOptionRectangle() {
+             ctx.strokeStyle = "white";
+             if (column === 1) {
+                 if (row === 1) {
+                     ctx.clearRect(1, 150, 100, 315);
+                     ctx.clearRect(1200, 150, 100, 315);
+                     ctx.strokeRect(1, 155, 100, 35);
+                 } else if (row === 2) {
+                     ctx.clearRect(1, 150, 100, 315);
+                     ctx.clearRect(1200, 150, 100, 315);
+                     ctx.strokeRect(1, 255, 100, 35);
+                 } else if (row === 3) {
+                     ctx.clearRect(1, 150, 100, 315);
+                     ctx.clearRect(1200, 150, 100, 315);
+                     ctx.strokeRect(1, 355, 100, 35);
+                 }
 
- 		function startGame(event) {
- 			var mouseX = event.clientX;
- 			var mouseY = event.clientY;
- 			if (mouseX > 50 && onGame === false) {
- 				onGame = false;
- 				game();
- 			}
- 			window.addEventListener('touchstart', function() {
- 				game();
- 			});
- 		}
- 		setTimeout(function() {
- 			document.addEventListener("mousedown", startGame);
- 		}, 3000);
- 		ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
- 		document.body.style.backgroundColor = "white";
- 		var theNecromancer = new Image();
- 		theNecromancer.onload = function() {
- 			ctx.drawImage(theNecromancer, -100, 0);
- 		};
- 		theNecromancer.src = "Sprites/TheNecromancerLogo.png";
- 		var startButton = new Image();
- 		startButton.onload = function() {
- 			ctx.drawImage(startButton, 40, 300);
- 			var mouseX = event.clientX;
- 			var mouseY = event.clientY;
- 			if (mouseX > 0 && onGame === false) {
- 				onGame = false;
- 				game();
- 			}
- 		};
- 		startButton.src = "Sprites/StartButton.png";
- 		var loading = document.getElementById("loading");
- 		loading.innerHTML = "loading";
- 		setTimeout(function() {
- 			loading.innerHTML = "";
- 		}, 3000);
- 	}
- 	startScreen();
+             } else if (column === 2) {
+                 if (row === 1) {
+                     ctx.clearRect(1, 150, 100, 315);
+                     ctx.clearRect(1200, 150, 100, 315);
+                     ctx.strokeRect(1200, 155, 100, 35);
+                 } else if (row === 2) {
+                     ctx.clearRect(1, 150, 100, 315);
+                     ctx.clearRect(1200, 150, 100, 315);
+                     ctx.strokeRect(1200, 255, 100, 35);
+                 } else if (row === 3) {
+                     ctx.clearRect(1, 150, 100, 315);
+                     ctx.clearRect(1200, 150, 100, 315);
+                     ctx.strokeRect(1200, 355, 100, 35);
+                 }
+             }
+         }
+         //Checks to see if device is mobile
+         var isMobile = {
+             Android: function() {
+                 return navigator.userAgent.match(/Android/i);
+             },
+             BlackBerry: function() {
+                 return navigator.userAgent.match(/BlackBerry/i);
+             },
+             iOS: function() {
+                 return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+             },
+             Opera: function() {
+                 return navigator.userAgent.match(/Opera Mini/i);
+             },
+             Windows: function() {
+                 return navigator.userAgent.match(/IEMobile/i);
+             },
+             any: function() {
+                 return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+             }
+         };
+         //Adds movement to game if movement buttons are pressed whether the device is mobile or not
+         document.addEventListener('keydown', function(e) {
+             if (e.key === 'w' && playerY >= borderW && movement === true && scene !== 4 || e.keyCode === 38 && playerY >= borderW && movement === true && scene !== 4) {
+                 playerY -= playerSpeed;
+                 ctx.clearRect(playerX - 5, playerY - 15, 95, 95);
+                 if (scene == 3) {
+                     Campfire(500, 300);
+                 } else if (scene == 4) {
+                     FlowerBush(350, 100);
+                 }
+                 drawProtagonistFacingUp();
+             }
+             if (e.key == 'd' && playerX < borderD && movement === true || e.keyCode === 39 && playerX < borderD && movement === true) {
+                 if (playerX > borderD - 20) {
+                     scene++;
+                     checkMap();
+                 }
+                 if (scene < 0) {
+                     scene++;
+                 }
+                 if (scene == 3) {
+                     Campfire(500, 300);
+                 } else if (scene == 4) {
+                     FlowerBush(350, 100);
+                     if (playerX > banditX - 135) {
+                         movement = false;
+                         if (playerX > banditX - 135) {
+                             Dialogue("Bandit: Oh no it's YOU!!!", 0, 2000);
+                             Dialogue("I WON'T LET YOU END THE WORLD", 2000.0001, 4670);
+                             Dialogue("YOU EVIL DEAD SCUM!!!", 4670.0001, 6670);
+                             battleDialogue("FIGHT MEEEEEEE!!", 6670.0001, 10370);
+                             fighting = "Bandit";
+                         }
+                     }
+                 }
+                 playerX += playerSpeed;
+                 ctx.clearRect(playerX - 30, playerY - 15, 100, 100);
+                 drawProtagonistFacingRight();
+             }
+             if (e.key == 's' && playerY < borderS && movement === true && scene !== 4 || e.keyCode === 40 && playerY < borderS && movement === true && scene !== 4) {
+                 playerY += playerSpeed;
+                 ctx.clearRect(playerX - 10, playerY - 30, 100, 100);
+                 if (scene == 3) {
+                     Campfire(500, 300);
+                 } else if (scene == 4) {
+                     FlowerBush(350, 100);
+                 }
+                 drawProtagonistFacingDown();
+             }
+             if (e.key == 'a' && playerX > borderA && movement === true || e.keyCode === 37 && playerX > borderA && movement === true) {
+                 if (playerX < borderA + 20 && scene !== 1 && scene !== 4) {
+                     scene--;
+                     checkMap();
+                 }
+                 if (scene == 3) {
+                     Campfire(500, 300);
+                 } else if (scene == 4) {
+                     FlowerBush(350, 100);
+                 }
+                 if (scene < 0) {
+                     scene++;
+                 }
+                 playerX -= playerSpeed;
+                 ctx.clearRect(playerX - 10, playerY - 5, 100, 100);
+                 drawProtagonistFacingLeft();
+             }
+
+             //A ton of code for selecting options, and there's more of it above.
+             if (e.keyCode == 38 && scene === "BATTLE!") {
+                 row--;
+                 if (row <= 0) {
+                     row = 3;
+                 }
+                 drawOptionRectangle();
+                 option();
+             } else if (e.keyCode == 40 && scene === "BATTLE!") {
+                 row++;
+                 if (row >= 4) {
+                     row = 1;
+                 }
+                 drawOptionRectangle();
+                 option();
+
+             } else if (e.keyCode == 39 && scene === "BATTLE!") {
+                 column++;
+                 if (column >= 3) {
+                     column = 1;
+                 }
+                 drawOptionRectangle();
+                 option();
+             } else if (e.keyCode == 37 && scene === "BATTLE!") {
+                 column--;
+                 if (column <= 0) {
+                     column = 2;
+                 }
+                 drawOptionRectangle();
+                 option();
+             }
+             
+             //If space is pressed, an option is selected if fighting
+             if(e.keyCode == 32 && scene === "BATTLE!"){
+              if(column === 1){
+                if(row === 1){
+                  attackNumber++;
+                  Attack();
+                }
+              } else if(column === 2){
+                
+              } 
+              
+             }
+
+
+         });
+     }
+     //Start the startscreen
+     function startScreen() {
+         onGame = false;
+         //function to literally start the game.
+         function startGame(event) {
+             var mouseX = event.clientX;
+             var mouseY = event.clientY;
+             if (mouseX > 50 && onGame === false) {
+                 onGame = false;
+                 game();
+             }
+             window.addEventListener('touchstart', function() {
+                 game();
+             });
+         }
+         //If you click then the game starts
+         setTimeout(function() {
+             document.addEventListener("mousedown", startGame);
+         }, 3000);
+
+         //Clears out thne screen on the start screen
+         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+         document.body.style.backgroundColor = "white";
+         var theNecromancer = new Image();
+         theNecromancer.onload = function() {
+             ctx.drawImage(theNecromancer, -100, 0);
+         };
+         theNecromancer.src = "Sprites/TheNecromancerLogo.png";
+         var startButton = new Image();
+         startButton.onload = function() {
+             ctx.drawImage(startButton, 40, 300);
+             var mouseX = event.clientX;
+             var mouseY = event.clientY;
+             if (mouseX > 0 && onGame === false) {
+                 onGame = false;
+                 game();
+             }
+         };
+         startButton.src = "Sprites/StartButton.png";
+         var loading = document.getElementById("loading");
+         loading.innerHTML = "loading";
+         setTimeout(function() {
+             loading.innerHTML = "";
+         }, 3000);
+     }
+     startScreen();
  };
