@@ -23,59 +23,6 @@
      var scene = 3;
      //Start the game  
      function game() {
-      
-               
-         
-         //All in-game objects
-         function tree(treeX, treeY) {
-             //The color of grass (And leaves in my opinion)
-             ctx.fillStyle = "#00a51b";
-             //Draws the leaves on the trees
-             ctx.fillRect(treeX, treeY, 30, 5);
-             ctx.fillRect(treeX, treeY, 30, 5);
-             ctx.fillRect(treeX - 5, treeY + 5, 40, 5);
-             ctx.fillRect(treeX - 10, treeY + 10, 50, 20);
-             ctx.fillRect(treeX - 5, treeY + 15, 40, 20);
-             //Draws the tree's trunk
-             ctx.fillStyle = "#916118";
-             ctx.fillRect(treeX + 6, treeY + 35, 15, 20);
-         }
-
-         function moon(moonX, moonY) {
-             ctx.fillStyle = "#e5e5e5";
-             ctx.fillRect(moonX, moonY, 75, 75);
-             ctx.fillStyle = "#8e8e8e";
-             ctx.fillRect(moonX, moonY, 5, 5);
-         }
-
-         function star(starX, starY) {
-             ctx.fillStyle = "white";
-             ctx.fillRect(starX, starY, 5, 5);
-         }
-
-         function Campfire(campfireX, campfireY) {
-             var campfire = new Image();
-             campfire.onload = function() {
-                 ctx.drawImage(campfire, campfireX, campfireY);
-             };
-             campfire.src = "Sprites/Campfire.png";
-         }
-
-         function FlowerBush(flowerBushX, flowerBushY) {
-             var flowerBush = new Image();
-             flowerBush.onload = function() {
-                 ctx.drawImage(flowerBush, flowerBushX, flowerBushY);
-             };
-             flowerBush.src = "Sprites/FlowerBush.png";
-         }
-         
-         function drawBullet(){
-           var bullet = new Image();
-           bullet.onload = function() {
-             ctx.drawImage(bullet, bulletX, bulletY);
-           };
-           bullet.src = "Sprites/Bullet.png";
-         }
          drawProtagonistFacingRight();
          onGame = true;
          document.body.style.backgroundColor = "black";
@@ -458,6 +405,58 @@
          }
          
          
+         //All in-game objects
+         function tree(treeX, treeY) {
+             //The color of grass (And leaves in my opinion)
+             ctx.fillStyle = "#00a51b";
+             //Draws the leaves on the trees
+             ctx.fillRect(treeX, treeY, 30, 5);
+             ctx.fillRect(treeX, treeY, 30, 5);
+             ctx.fillRect(treeX - 5, treeY + 5, 40, 5);
+             ctx.fillRect(treeX - 10, treeY + 10, 50, 20);
+             ctx.fillRect(treeX - 5, treeY + 15, 40, 20);
+             //Draws the tree's trunk
+             ctx.fillStyle = "#916118";
+             ctx.fillRect(treeX + 6, treeY + 35, 15, 20);
+         }
+
+         function moon(moonX, moonY) {
+             ctx.fillStyle = "#e5e5e5";
+             ctx.fillRect(moonX, moonY, 75, 75);
+             ctx.fillStyle = "#8e8e8e";
+             ctx.fillRect(moonX, moonY, 5, 5);
+         }
+
+         function star(starX, starY) {
+             ctx.fillStyle = "white";
+             ctx.fillRect(starX, starY, 5, 5);
+         }
+
+         function Campfire(campfireX, campfireY) {
+             var campfire = new Image();
+             campfire.onload = function() {
+                 ctx.drawImage(campfire, campfireX, campfireY);
+             };
+             campfire.src = "Sprites/Campfire.png";
+         }
+
+         function FlowerBush(flowerBushX, flowerBushY) {
+             var flowerBush = new Image();
+             flowerBush.onload = function() {
+                 ctx.drawImage(flowerBush, flowerBushX, flowerBushY);
+             };
+             flowerBush.src = "Sprites/FlowerBush.png";
+         }
+         
+         function drawBullet(){
+           var bullet = new Image();
+           bullet.onload = function() {
+             ctx.drawImage(bullet, bulletX, bulletY);
+           };
+           bullet.src = "Sprites/Bullet.png";
+         }
+         
+         
          //Draws a text box
          function Dialogue(text, timeUntilStart, timeUntilEnd) {
              var newText = document.createTextNode(text),
@@ -575,6 +574,8 @@
              banditY = 300;
              drawBanditFacingLeftWithArmRaised();
              FlowerBush(349, 100);
+             
+             drawBullet();
          }
 
          function option() {
@@ -651,10 +652,10 @@
            
            if(fighting === "Bandit"){
             if(attackNumber === 1){
-              setInterval(function(){
+              while(bulletX > 0){
                 bulletX--;
                 drawBullet(); 
-              } 10000 / 60);
+              }
             } 
            }
            
