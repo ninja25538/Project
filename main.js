@@ -485,159 +485,206 @@
  			ctx.fillStyle = "#00a51b";
  			ctx.fillRect(grassX, grassY, 25, 25);
  		}
- 		//Draws scene
- 		function drawMap1() {
- 			playerX = 300;
- 			ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
- 			document.body.style.backgroundColor = "#000714";
- 			moon(20, 20);
- 		}
-
- 		function drawMap2() {
- 			playerX = 300;
- 			ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
- 			document.body.style.backgroundColor = "#000714";
- 			for (var x = 0; x < borderD; x += Math.round(Math.random() * 45)) {
- 				for (var y = 0; y < borderW; y += Math.round(Math.random() * 45)) {
- 					star(x, y);
- 				}
- 			}
- 		}
-
- 		function drawMap3() {
- 			playerX = 300;
- 			playerY = 340;
- 			ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
- 			document.body.style.backgroundColor = "#000710";
- 			Campfire(500, 300);
- 			drawBanditFacingRight();
- 			movement = false;
- 			Dialogue("Bandit: Dear Audio Diary,", 500, 3000);
- 			Dialogue("It's been a long time since I've seen any...living people...", 3000.0001, 6500);
- 			Dialogue("Maybe the rest were eaten...", 6500.0001, 10000);
- 			Dialogue("...", 10000.0001, 13500);
- 			Dialogue("AWESOME!!!", 13500.0001, 17000.0001);
- 			Dialogue("I'll be on the front page of The Death Valley Times", 17000.0001, 20500);
- 			Dialogue("THE BANDIT SURVIVES ZOMBIE APOCALYPSE", 20500.0001, 24000);
- 			Dialogue("EVEN THE NECROMANCER CAN'T STOP HIM", 24000.0001, 27500);
- 			Dialogue("HE'S BEEN CROWNED KING OF UNIVERSE", 27500.0001, 30000);
- 			Dialogue("That'd be cool", 30000.0001, 33500);
- 			Dialogue("Whatever, I better get back on guard duty", 33500.0001, 37000);
- 			setTimeout(function() {
- 				ctx.clearRect(banditX, banditY, 100, 100);
- 				drawBanditFacingLeft();
- 				Dialogue("...", 2500, 4000);
- 				Dialogue("AHHH!!!", 4000.0001, 7500);
- 				setTimeout(function() {
- 					setInterval(function() {
- 						if (banditX < borderD && scene === 3) {
- 							banditX++;
- 							ctx.clearRect(banditX - 10, banditY, 510, 500);
- 							drawBanditFacingRight();
- 						} else if (banditX >= borderD) {
- 							ctx.clearRect(banditX, banditY, 200, 200);
- 						}
- 					}, 4000 / 60);
- 				}, 7500.0001);
- 				Dialogue("A Z-Z-ZOMBIE!!!", 7500.0001, 10000);
- 				Dialogue("NONONONONONONONONONONONONONO", 10000.0001, 13500);
- 				Dialogue("I DON'T WANNA DIE!!!", 13500.0001, 17000);
- 				setTimeout(function() {
- 					movement = true;
- 					ctx.clearRect(banditX, banditY, 500, 500);
- 					banditX = banditX + 50;
- 					ctx.clearRect(banditX, banditY, 500, 500);
- 				}, 17000.0001);
- 			}, 37500);
- 		}
-
- 		function drawMap4() {
- 			ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
- 			document.body.style.backgroundColor = "#001a3d";
- 			playerX = 200;
- 			playerY = 340;
- 			banditX = 600;
- 			banditY = 300;
- 			drawBanditFacingLeftWithArmRaised();
- 			FlowerBush(349, 100);
- 		}
- 		
- 		 					function option(){
- 					ctx.fillStyle = "white";
-          ctx.font = "25px Arial";
-          ctx.fillText("Attack", 1, 175);
-          ctx.fillText("Eat", 1, 275);
-          ctx.fillText("Threaten", 1, 375);
- 					}
- 		//Draws the map for fighting enemies
- 		function drawBattleMap() {
- 			function showBattleScreen(text, x, y, color, font) {
- 				ctx.fillStyle = color;
- 				ctx.font = font;
- 				ctx.fillText(text, x, y);
- 			}
- 			if (fighting == "Bandit") {
- 				ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
- 				document.body.style.backgroundColor = "black";
- 				drawBanditBattleBackground();
- 				var potato = document.getElementById("p1").innerHTML;
- 				potato = "loading";
- 			setTimeout(function() {
- 			  column = 1;
- 			  row = 1;
- 					showBattleScreen("", 100, 600, "black", "40px Arial");
- 					playerX = 200;
- 					playerY = 370;
- 					banditX = 600;
- 					banditY = 350;
- 					drawProtagonistFacingRight();
- 					drawBanditFacingLeftWithArmRaised();
- 					potato = "";
- 					
- 					ctx.strokeStyle = "white";
- 					ctx.fillStyle = "black";
- 					ctx.strokeRect(1, 100, 100,480);
- 					ctx.fillRect(1, 100, 100, 480);
- 					option();
- 				}, 550);
- 			}
- 		}
- 		//If the scene number is equal to a specific number, draw a specific map. 
- 		function checkMap() {
- 			if (scene == 1) {
- 				drawMap1();
- 			} else if (scene == 2) {
- 				drawMap2();
- 			} else if (scene == 3) {
- 				drawMap3();
- 			} else if (scene == 4) {
- 				drawMap4();
- 			} else if (scene === "BATTLE!") {
- 				drawBattleMap();
- 			}
- 		}
- 		
-                     function drawBullet(){
+         function drawBullet(){
            var bullet = new Image();
            bullet.onload = function() {
              ctx.drawImage(bullet, bulletX, bulletY);
            };
            bullet.src = "Sprites/Bullet.png";
          }
-                 //Attacks of all enemies                  
-         function Attack(){
-           
-           if(fighting === "Bandit"){
-            if(attackNumber === 1){
-              while(bulletX > 0){
-                bulletX--;
-                drawBullet(); 
-              }
-            } 
-           }
-           
+         
+         
+         //Draws a text box
+         function Dialogue(text, timeUntilStart, timeUntilEnd) {
+             var newText = document.createTextNode(text),
+                 dialogue = document.getElementById("p1");
+             dialogue.style.color = "white";
+             dialogue.style.backgroundColor = "black";
+             setTimeout(function() {
+                 dialogue.appendChild(newText);
+             }, timeUntilStart);
+             setTimeout(function() {
+                 dialogue.removeChild(newText);
+             }, timeUntilEnd);
          }
-        //Creates the rectangle on the selected option
+
+         function battleDialogue(text, timeUntilStart, timeUntilEnd) {
+             var newText = document.createTextNode(text),
+                 dialogue = document.getElementById("p1");
+             dialogue.style.color = "white";
+             dialogue.style.backgroundColor = "black";
+             setTimeout(function() {
+                 dialogue.appendChild(newText);
+             }, timeUntilStart);
+             setTimeout(function() {
+                 dialogue.removeChild(newText);
+                 drawBattleMap();
+                 scene = "BATTLE!";
+                 checkMap();
+             }, timeUntilEnd);
+         }
+         //backgrounds
+         function drawBanditBattleBackground() {
+             var bbb = new Image();
+             bbb.onload = function() {
+                 ctx.drawImage(bbb, 100, 100, window.outerWidth - 250, window.outerHeight - 200);
+             };
+             bbb.src = "Backgrounds/BanditBattleBackground.png";
+         }
+         //All in-game tiles WARNING: Put tiles before objects
+         function grass(grassX, grassY) {
+             ctx.fillStyle = "#00a51b";
+             ctx.fillRect(grassX, grassY, 25, 25);
+         }
+         //Draws scene
+         function drawMap1() {
+             playerX = 300;
+             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+             document.body.style.backgroundColor = "#000714";
+             moon(20, 20);
+         }
+
+         function drawMap2() {
+             playerX = 300;
+             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+             document.body.style.backgroundColor = "#000714";
+             for (var x = 0; x < borderD; x += Math.round(Math.random() * 45)) {
+                 for (var y = 0; y < borderW; y += Math.round(Math.random() * 45)) {
+                     star(x, y);
+                 }
+             }
+         }
+
+         function drawMap3() {
+             playerX = 300;
+             playerY = 340;
+             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+             document.body.style.backgroundColor = "#000710";
+             Campfire(500, 300);
+             drawBanditFacingRight();
+             movement = false;
+             Dialogue("Bandit: Dear Audio Diary,", 500, 3000);
+             Dialogue("It's been a long time since I've seen any...living people...", 3000.0001, 6500);
+             Dialogue("Maybe the rest were eaten...", 6500.0001, 10000);
+             Dialogue("...", 10000.0001, 13500);
+             Dialogue("AWESOME!!!", 13500.0001, 17000.0001);
+             Dialogue("I'll be on the front page of The Death Valley Times", 17000.0001, 20500);
+             Dialogue("THE BANDIT SURVIVES ZOMBIE APOCALYPSE", 20500.0001, 24000);
+             Dialogue("EVEN THE NECROMANCER CAN'T STOP HIM", 24000.0001, 27500);
+             Dialogue("HE'S BEEN CROWNED KING OF UNIVERSE", 27500.0001, 30000);
+             Dialogue("That'd be cool", 30000.0001, 33500);
+             Dialogue("Whatever, I better get back on guard duty", 33500.0001, 37000);
+             setTimeout(function() {
+                 ctx.clearRect(banditX, banditY, 100, 100);
+                 drawBanditFacingLeft();
+                 Dialogue("...", 2500, 4000);
+                 Dialogue("AHHH!!!", 4000.0001, 7500);
+                 setTimeout(function() {
+                     setInterval(function() {
+                         if (banditX < borderD && scene === 3) {
+                             banditX++;
+                             ctx.clearRect(banditX - 10, banditY, 510, 500);
+                             drawBanditFacingRight();
+                         } else if (banditX >= borderD) {
+                             ctx.clearRect(banditX, banditY, 200, 200);
+                         }
+                     }, 4000 / 60);
+                 }, 7500.0001);
+                 Dialogue("A Z-Z-ZOMBIE!!!", 7500.0001, 10000);
+                 Dialogue("NONONONONONONONONONONONONONO", 10000.0001, 13500);
+                 Dialogue("I DON'T WANNA DIE!!!", 13500.0001, 17000);
+                 setTimeout(function() {
+                     movement = true;
+                     ctx.clearRect(banditX, banditY, 500, 500);
+                     banditX = banditX + 50;
+                     ctx.clearRect(banditX, banditY, 500, 500);
+                 }, 17000.0001);
+             }, 37500);
+         }
+
+         function drawMap4() {
+             ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+             document.body.style.backgroundColor = "#001a3d";
+             playerX = 200;
+             playerY = 340;
+             banditX = 600;
+             banditY = 300;
+             drawBanditFacingLeftWithArmRaised();
+             FlowerBush(349, 100);
+             
+             drawBullet();
+         }
+
+         function option() {
+             ctx.fillStyle = "white";
+             ctx.font = "20px Arial";
+             ctx.fillText("Attack", 1, 175);
+             ctx.fillText("Eat", 1, 275);
+             ctx.fillText("Threaten", 1, 375);
+
+             ctx.fillText("Run Away", 1200, 175);
+             ctx.fillText("Talk", 1200, 275);
+             ctx.fillText("Memories", 1200, 375);
+
+         }
+         //Draws the map for fighting enemies
+         function drawBattleMap() {
+             function showBattleScreen(text, x, y, color, font) {
+                 ctx.fillStyle = color;
+                 ctx.font = font;
+                 ctx.fillText(text, x, y);
+             }
+             if (fighting == "Bandit") {
+                 ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                 document.body.style.backgroundColor = "black";
+                 drawBanditBattleBackground();
+                 var potato = document.getElementById("p1").innerHTML;
+                 potato = "loading";
+                 setTimeout(function() {
+                     column = 1;
+                     row = 1;
+                     showBattleScreen("", 100, 600, "black", "40px Arial");
+                     playerX = 200;
+                     playerY = 370;
+                     banditX = 600;
+                     banditY = 350;
+                     drawProtagonistFacingRight();
+                     drawBanditFacingLeftWithArmRaised();
+                     potato = "";
+
+                     ctx.strokeStyle = "white";
+                     ctx.fillStyle = "black";
+                     ctx.strokeRect(1, 100, 100, 517);
+                     ctx.fillRect(1, 100, 100, 517);
+
+                     ctx.strokeRect(1200, 100, 100, 517);
+                     ctx.fillRect(1200, 100, 100, 517);
+                     
+                     ctx.strokeRect(0, 0, 1300, 100);
+                      ctx.fillStyle = "white";
+                      ctx.font = "50px Arial";
+                     ctx.fillText("Player Health: " + playerHealth + "                  Bandit's Health: " + banditHealth, 100, 50);
+
+                     option();
+                 }, 550);
+             }
+         }
+         //If the scene number is equal to a specific number, draw a specific map. 
+         function checkMap() {
+             if (scene == 1) {
+                 drawMap1();
+             } else if (scene == 2) {
+                 drawMap2();
+             } else if (scene == 3) {
+                 drawMap3();
+             } else if (scene == 4) {
+                 drawMap4();
+             } else if (scene === "BATTLE!") {
+                 drawBattleMap();
+             }
+         }
+
+         //Creates the rectangle on the selected option
          function drawOptionRectangle() {
              ctx.strokeStyle = "white";
              if (column === 1) {
