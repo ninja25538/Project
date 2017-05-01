@@ -617,6 +617,26 @@
  			}
  		}
  		
+                     function drawBullet(){
+           var bullet = new Image();
+           bullet.onload = function() {
+             ctx.drawImage(bullet, bulletX, bulletY);
+           };
+           bullet.src = "Sprites/Bullet.png";
+         }
+                 //Attacks of all enemies                  
+         function Attack(){
+           
+           if(fighting === "Bandit"){
+            if(attackNumber === 1){
+              while(bulletX > 0){
+                bulletX--;
+                drawBullet(); 
+              }
+            } 
+           }
+           
+         }
         //Creates the rectangle on the selected option
          function drawOptionRectangle() {
              ctx.strokeStyle = "white";
