@@ -1,490 +1,453 @@
  //Hey! I'm really glad you got the game and I hope you like it!
  /*
- Have first show of battle screen
- -March 24, 2017
- */
+  Have first show of battle screen
+  -March 24, 2017
+  */
  //Shape shifter's name is Naberius
  //Eligor
  //Cow head
  //Revenant
- 
- 
  //Places
  //Panamint City
  window.onload = function() {
- 	var mouseX = event.clientX;
- 	var mouseY = event.clientY;
- 	//TODO Draw Map1 TODO
- 	var c = document.getElementById("canvas");
- 	var ctx = c.getContext("2d");
- 	ctx.canvas.width = window.innerWidth - 55;
- 	ctx.canvas.height = window.innerHeight - 150;
- 	ctx.fillStyle = "yellow";
- 	var onGame = false;
- 	//Which map to draw
- 	var scene = 3;
- 	//Start the game  
- 	function game() {
- 		drawProtagonistFacingRight();
- 		onGame = true;
- 		document.body.style.backgroundColor = "black";
- 		ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
- 		var cRight = document.getElementById("Copyright");
- 		cRight.innerHTML = "";
- 		//The borders that the player can walk
- 		var borderW = 300;
- 		var borderA = 10;
- 		var borderS = ctx.canvas.height - 50;
- 		var borderD = ctx.canvas.width - 30;
- 		//player's location
- 		var playerX = 250;
- 		var playerY = 340;
- 		//bandit's location
- 		var banditX = 620;
- 		var banditY = 320;
- 		//shape shifter's location
- 		var shapeShifterX = 200;
- 		var shapeShifterY = 400;
- 		//Player stats
- 		//player health
- 		var playerHealth = 20;
- 		//player's speed
- 		var playerSpeed = 15;
- 		//player's damage
- 		var playerDamage = 5;
- 		
- 		//Colum and row for fights
- 		var column = 0;
- 		var row = 0;
- 		function attack() {
- 			var trueDamage = Math.floor(Math.random() * playerDamage + 1);
- 		}
- 		//who is the player fighting
- 		var fighting = "";
- 		//Whether the Protagonist can move or not
- 		var movement = true;
- 		//Bandit's stats
- 		//bandit's health
- 		var banditHealth = 45;
- 		//bandit's attack chance
- 		var banditAttackChance = Math.floor((Math.random() * 2) + 1);
- 		//how much damage bandit's attacks do
- 		var banditAttackDamage = Math.floor((Math.random() * 3));
- 		//Draws the main character
- 		function drawProtagonistFacingRight() {
- 			//Draws the protagonist's hood
- 			ctx.fillStyle = "#270042";
- 			ctx.fillRect(playerX, playerY, 23, 5);
- 			ctx.fillRect(playerX - 3, playerY, 15, 25);
- 			ctx.fillRect(playerX, playerY + 20, 23, 5);
- 			ctx.fillRect(playerX + 22, playerY, 2, 25);
- 			//Draws the protagonist's cloak
- 			ctx.fillStyle = "#270042";
- 			ctx.fillRect(playerX, playerY + 15, 18, 35);
- 			//Draws the shadow that hides the protagonist's face 
- 			ctx.fillStyle = "#0a0a0a";
- 			ctx.fillRect(playerX + 11, playerY + 3, 12, 20);
- 		}
+     var mouseX = event.clientX;
+     var mouseY = event.clientY;
+     //TODO Draw Map1 TODO
+     var c = document.getElementById("canvas");
+     var ctx = c.getContext("2d");
+     ctx.canvas.width = window.innerWidth - 55;
+     ctx.canvas.height = window.innerHeight - 150;
+     ctx.fillStyle = "yellow";
+     var onGame = false;
+     //Which map to draw
+     var scene = 3;
+     //Start the game  
+     function game() {
+         drawProtagonistFacingRight();
+         onGame = true;
+         document.body.style.backgroundColor = "black";
+         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+         var cRight = document.getElementById("Copyright");
+         cRight.innerHTML = "";
+         //The borders that the player can walk
+         var borderW = 300;
+         var borderA = 10;
+         var borderS = ctx.canvas.height - 50;
+         var borderD = ctx.canvas.width - 30;
+         //player's location
+         var playerX = 250;
+         var playerY = 340;
+         //The bullet's position
+         var bulletX = 500;
+         var bulletY = 500;
+         //bandit's location
+         var banditX = 620;
+         var banditY = 320;
+         //shape shifter's location
+         var shapeShifterX = 200;
+         var shapeShifterY = 400;
+         //Player stats
+         //player health
+         var playerHealth = 20;
+         //player's speed
+         var playerSpeed = 15;
+         //player's damage
+         var playerDamage = 5;
 
- 		function drawProtagonistFacingLeft() {
- 			//Draws the protagonist's hood
- 			ctx.fillStyle = "#270042";
- 			ctx.fillRect(playerX, playerY, 23, 5);
- 			ctx.fillRect(playerX + 10, playerY, 15, 25);
- 			ctx.fillRect(playerX, playerY + 20, 23, 5);
- 			ctx.fillRect(playerX - 2, playerY, 2, 25);
- 			//Draws the protagonist's cloak
- 			ctx.fillStyle = "#270042";
- 			ctx.fillRect(playerX + 5, playerY + 15, 18, 35);
- 			//Draws the shadow that hides the protagonist's face 
- 			ctx.fillStyle = "#0a0a0a";
- 			ctx.fillRect(playerX, playerY + 3, 12, 20);
- 		}
+         //Colum and row for fights
+         var column = 0;
+         var row = 0;
+         //which attack is currently taking place
+         var attackNumber = 0;
+         //who is the player fighting
+         var fighting = "";
+         //Whether the Protagonist can move or not
+         var movement = true;
+         //Bandit's stats
+         //bandit's health
+         var banditHealth = 45;
+         //bandit's attack chance
+         var banditAttackChance = Math.floor((Math.random() * 2) + 1);
+         //how much damage bandit's attacks do
+         var banditAttackDamage = Math.floor((Math.random() * 3));
 
- 		function drawProtagonistFacingUp() {
- 			//Draws the protagonist's hood
- 			ctx.fillStyle = "#270042";
- 			ctx.fillRect(playerX, playerY + 2.5, 25, 25);
- 			//Draws the protagonist's cloak
- 			ctx.fillStyle = "#270042";
- 			ctx.fillRect(playerX + 5, playerY + 17.5, 15, 35);
- 		}
 
- 		function drawProtagonistFacingDown() {
- 			//Draws the protagonist's hood
- 			ctx.fillStyle = "#270042";
- 			ctx.fillRect(playerX - 1, playerY - 2, 25, 25);
- 			//Draws the protagonist's cloak
- 			ctx.fillStyle = "#270042";
- 			ctx.fillRect(playerX + 4.5, playerY + 15, 15, 35);
- 			//Draws the shadow that hides the protagonist's face
- 			ctx.fillStyle = "#0a0a0a";
- 			ctx.fillRect(playerX + 6, playerY + 3, 12, 18);
- 		}
- 		
- 		
- 		//Draws The Bandit
- 		function drawBanditFacingRight() {
- 			//His face
- 			ctx.fillStyle = "#FFDE7A";
- 			ctx.fillRect(banditX + 2, banditY, 20, 25);
- 			//His shirt
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 5, banditY + 25, 8, 25);
- 			ctx.fillStyle = "#FFDE7A";
- 			//His arm
- 			ctx.fillRect(banditX + 5, banditY + 24, 7, 25);
- 			//The shoulder of his shirt
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 5, banditY + 24, 7, 10);
- 			//His eye
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 14, banditY + 5, 5, 8);
- 			//His bandit thing on his mouth? I don't know what it's called
- 			ctx.fillStyle = "red";
- 			ctx.fillRect(banditX + 4, banditY + 15, 18, 10);
- 			//100 LINES!!!!
- 			//His pant leg
- 			ctx.fillStyle = "#11226B";
- 			ctx.fillRect(banditX + 5, banditY + 49, 8, 20);
- 			//his shoe
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 5, banditY + 68, 7.5, 5);
- 		}
+         //Draws the main character
+         function drawProtagonistFacingRight() {
+             //Draws the protagonist's hood
+             ctx.fillStyle = "#270042";
+             ctx.fillRect(playerX, playerY, 23, 5);
+             ctx.fillRect(playerX - 3, playerY, 15, 25);
+             ctx.fillRect(playerX, playerY + 20, 23, 5);
+             ctx.fillRect(playerX + 22, playerY, 2, 25);
+             //Draws the protagonist's cloak
+             ctx.fillStyle = "#270042";
+             ctx.fillRect(playerX, playerY + 15, 18, 35);
+             //Draws the shadow that hides the protagonist's face 
+             ctx.fillStyle = "#0a0a0a";
+             ctx.fillRect(playerX + 11, playerY + 3, 12, 20);
+         }
 
- 		function drawBanditFacingLeft() {
- 			//His face
- 			ctx.fillStyle = "#FFDE7A";
- 			ctx.fillRect(banditX - 6, banditY, 20, 25);
- 			//His shirt
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 2, banditY + 25, 8, 25);
- 			ctx.fillStyle = "#FFDE7A";
- 			//His arm
- 			ctx.fillRect(banditX + 6, banditY + 24, 7, 25);
- 			//The shoulder of his shirt
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 6, banditY + 24, 7, 10);
- 			//His eye
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX - 4, banditY + 5, 5, 8);
- 			//His bandit thing on his mouth? I don't know what it's called
- 			ctx.fillStyle = "red";
- 			ctx.fillRect(banditX - 6, banditY + 15, 15, 10);
- 			//His pant leg
- 			ctx.fillStyle = "#11226B";
- 			ctx.fillRect(banditX + 2, banditY + 49, 8, 25);
- 			//His shoe
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 2, banditY + 68, 8, 7);
- 		}
+         function drawProtagonistFacingLeft() {
+             //Draws the protagonist's hood
+             ctx.fillStyle = "#270042";
+             ctx.fillRect(playerX, playerY, 23, 5);
+             ctx.fillRect(playerX + 10, playerY, 15, 25);
+             ctx.fillRect(playerX, playerY + 20, 23, 5);
+             ctx.fillRect(playerX - 2, playerY, 2, 25);
+             //Draws the protagonist's cloak
+             ctx.fillStyle = "#270042";
+             ctx.fillRect(playerX + 5, playerY + 15, 18, 35);
+             //Draws the shadow that hides the protagonist's face 
+             ctx.fillStyle = "#0a0a0a";
+             ctx.fillRect(playerX, playerY + 3, 12, 20);
+         }
 
- 		function drawBanditFacingUp() {
- 			//His face
- 			ctx.fillStyle = "#FFDE7A";
- 			ctx.fillRect(banditX, banditY, 25, 25);
- 			//His shirt
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 5, banditY + 25, 16, 25);
- 			//His arms
- 			//His right arm (YOUR RIGHT!!!!)
- 			ctx.fillStyle = "#FFDE7A";
- 			ctx.fillRect(banditX + 21, banditY + 25, 8, 20);
- 			//His left arm (On your left side)
- 			ctx.fillRect(banditX - 3, banditY + 25, 8, 20);
- 			//His pants
- 			//His right pant leg (ur right)
- 			ctx.fillStyle = "#11226B";
- 			ctx.fillRect(banditX + 12, banditY + 49, 8, 20);
- 			ctx.fillRect(banditX + 5, banditY + 49, 8, 20);
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 11, banditY + 53, 3, 15);
- 			//his shoes
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 5, banditY + 68, 15, 5);
- 		}
+         function drawProtagonistFacingUp() {
+             //Draws the protagonist's hood
+             ctx.fillStyle = "#270042";
+             ctx.fillRect(playerX, playerY + 2.5, 25, 25);
+             //Draws the protagonist's cloak
+             ctx.fillStyle = "#270042";
+             ctx.fillRect(playerX + 5, playerY + 17.5, 15, 35);
+         }
 
- 		function drawBanditFacingDown() {
- 			//His face
- 			ctx.fillStyle = "#FFDE7A";
- 			ctx.fillRect(banditX, banditY, 25, 25);
- 			//His left eye (your left not his)
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 5, banditY + 5, 5, 8);
- 			//His right eye (again your right)
- 			ctx.fillRect(banditX + 15, banditY + 5, 5, 8);
- 			//His bandit thing on his mouth? I don't know what it's called
- 			ctx.fillStyle = "red";
- 			ctx.fillRect(banditX, banditY + 15, 25, 10);
- 			//His shirt
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 5, banditY + 25, 16, 25);
- 			//His arms
- 			//His right arm (YOUR RIGHT!!!!)
- 			ctx.fillStyle = "#FFDE7A";
- 			ctx.fillRect(banditX + 21, banditY + 25, 8, 20);
- 			//His left arm (On your left side)
- 			ctx.fillRect(banditX - 3, banditY + 25, 8, 20);
- 			//His pants
- 			//His right pant leg (ur right)
- 			ctx.fillStyle = "#11226B";
- 			ctx.fillRect(banditX + 12, banditY + 49, 8, 20);
- 			//his left pant leg
- 			ctx.fillRect(banditX + 5, banditY + 49, 8, 20);
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 11, banditY + 53, 3, 15);
- 			//his shoes
- 			//200 LINES!!!!!!
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 5, banditY + 68, 15, 5);
- 		}
+         function drawProtagonistFacingDown() {
+             //Draws the protagonist's hood
+             ctx.fillStyle = "#270042";
+             ctx.fillRect(playerX - 1, playerY - 2, 25, 25);
+             //Draws the protagonist's cloak
+             ctx.fillStyle = "#270042";
+             ctx.fillRect(playerX + 4.5, playerY + 15, 15, 35);
+             //Draws the shadow that hides the protagonist's face
+             ctx.fillStyle = "#0a0a0a";
+             ctx.fillRect(playerX + 6, playerY + 3, 12, 18);
+         }
 
- 		function drawBanditFacingLeftWithArmRaised() {
- 			//His face
- 			ctx.fillStyle = "#FFDE7A";
- 			ctx.fillRect(banditX - 6, banditY, 20, 25);
- 			//His shirt
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 2, banditY + 25, 8, 25);
- 			ctx.fillStyle = "#FFDE7A";
- 			//His arm
- 			ctx.fillRect(banditX - 15, banditY + 27, 25, 7);
- 			//The shoulder of his shirt
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 6, banditY + 24, 7, 10);
- 			//His eye
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX - 4, banditY + 5, 5, 8);
- 			//His bandit thing on his mouth? I don't know what it's called
- 			ctx.fillStyle = "red";
- 			ctx.fillRect(banditX - 6, banditY + 15, 15, 10);
- 			//His pant leg
- 			ctx.fillStyle = "#11226B";
- 			ctx.fillRect(banditX + 2, banditY + 49, 8, 25);
- 			//His shoe
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(banditX + 2, banditY + 68, 8, 7);
- 			//The Gun
- 			ctx.fillStyle = "#606060";
- 			ctx.fillRect(banditX - 30, banditY + 25, 10, 5);
- 			ctx.fillRect(banditX - 20, banditY + 25, 5, 10);
- 		}
- 		
- 		
- 		//Draws The Shape Shifter
- 		function drawShapeShifterFacingRight() {
- 			ctx.fillStyle = "#125C00";
- 			//his fleshy face
- 			ctx.fillRect(shapeShifterX + 1, shapeShifterY, 20, 25);
- 			//his blood red eyes
- 			ctx.fillStyle = "#ff0000";
- 			//his I (EYE)
- 			ctx.fillRect(shapeShifterX + 15, shapeShifterY + 5, 5, 10);
- 			//his blood soaked mouth
- 			ctx.fillStyle = "#d30000";
- 			ctx.fillRect(shapeShifterX + 13, shapeShifterY + 18, 8, 3);
- 			//his EEEEVIL SHIRT!!!
- 			ctx.fillStyle = "#012b49";
- 			ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 10, 25);
- 			//his jeans
- 			//his PANT LEG
- 			ctx.fillStyle = "#840000";
- 			ctx.fillRect(shapeShifterX + 4, shapeShifterY + 47, 10, 26);
- 			//his murderous arms
- 			ctx.fillStyle = "#125C00";
- 			//his AAAAARRRMM
- 			ctx.fillRect(shapeShifterX + 5, shapeShifterY + 24, 7, 27);
- 			//his eeeeeeevil shooooooeeessss
- 			ctx.fillStyle = "#000000";
- 			//Da shoe 
- 			ctx.fillRect(shapeShifterX + 4, shapeShifterY + 71, 15, 5);
- 		}
 
- 		function drawShapeShifterFacingLeft() {
- 			ctx.fillStyle = "#125C00";
- 			//his fleshy face
- 			ctx.fillRect(shapeShifterX - 3, shapeShifterY, 20, 25);
- 			//his blood red eyes
- 			ctx.fillStyle = "#ff0000";
- 			//his I (EYE)
- 			ctx.fillRect(shapeShifterX + 1, shapeShifterY + 5, 5, 10);
- 			//his blood soaked mouth
- 			ctx.fillStyle = "#d30000";
- 			ctx.fillRect(shapeShifterX - 1, shapeShifterY + 18, 8, 3);
- 			//his EEEEVIL SHIRT!!!
- 			ctx.fillStyle = "#012b49";
- 			ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 10, 25);
- 			//his jeans
- 			//his PANT LEG
- 			ctx.fillStyle = "#840000";
- 			ctx.fillRect(shapeShifterX + 4, shapeShifterY + 47, 10, 26);
- 			//his murderous arms
- 			ctx.fillStyle = "#125C00";
- 			//his AAAAARRRMM
- 			ctx.fillRect(shapeShifterX + 5, shapeShifterY + 24, 7, 27);
- 			//his eeeeeeevil shooooooeeessss
- 			ctx.fillStyle = "#000000";
- 			//Da shoe (OF EEEEEEVIIL
- 			ctx.fillRect(shapeShifterX - 1, shapeShifterY + 71, 15, 5);
- 		}
+         //Draws The Bandit
+         function drawBanditFacingRight() {
+             //His face
+             ctx.fillStyle = "#FFDE7A";
+             ctx.fillRect(banditX + 2, banditY, 20, 25);
+             //His shirt
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 5, banditY + 25, 8, 25);
+             ctx.fillStyle = "#FFDE7A";
+             //His arm
+             ctx.fillRect(banditX + 5, banditY + 24, 7, 25);
+             //The shoulder of his shirt
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 5, banditY + 24, 7, 10);
+             //His eye
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 14, banditY + 5, 5, 8);
+             //His bandit thing on his mouth? I don't know what it's called
+             ctx.fillStyle = "red";
+             ctx.fillRect(banditX + 4, banditY + 15, 18, 10);
+             //100 LINES!!!!
+             //His pant leg
+             ctx.fillStyle = "#11226B";
+             ctx.fillRect(banditX + 5, banditY + 49, 8, 20);
+             //his shoe
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 5, banditY + 68, 7.5, 5);
+         }
 
- 		function drawShapeShifterFacingUp() {
- 			ctx.fillStyle = "#125C00";
- 			//his fleshy face
- 			ctx.fillRect(shapeShifterX, shapeShifterY, 25, 25);
- 			//his blood red eyes
- 			ctx.fillStyle = "#ff0000";
- 			//his leeeeeftttt eeyeeeeee (your left bro)
- 			ctx.fillRect(shapeShifterX + 5, shapeShifterY + 5, 5, 10);
- 			//his RIGHT EYE (YOUR RIGHT MAN!!!!)
- 			ctx.fillRect(shapeShifterX + 15, shapeShifterY + 5, 5, 10);
- 			//his blood soaked mouth
- 			ctx.fillStyle = "#d30000";
- 			ctx.fillRect(shapeShifterX + 6, shapeShifterY + 17, 12, 3);
- 			//his EEEEVIL SHIRT!!!
- 			ctx.fillStyle = "#012b49";
- 			ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 17, 25);
- 			//the skull on his shirt
- 			ctx.fillStyle = "white";
- 			ctx.fillRect(shapeShifterX + 8.5, shapeShifterY + 30, 8, 9);
- 			ctx.fillStyle = "white";
- 			ctx.fillRect(shapeShifterX + 11.5, shapeShifterY + 27, 2, 5);
- 			ctx.fillRect(shapeShifterX + 8, shapeShifterY + 37, 3, 3);
- 			ctx.fillRect(shapeShifterX + 14.5, shapeShifterY + 37, 3, 3);
- 			//his jeans
- 			//his left pant leg (YOUR LEFT)
- 			ctx.fillStyle = "#840000";
- 			ctx.fillRect(shapeShifterX + 4, shapeShifterY + 47, 10, 26);
- 			//his riiiiiight pant leg (Ur right)
- 			ctx.fillRect(shapeShifterX + 11, shapeShifterY + 47, 10, 26);
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(shapeShifterX + 11.5, shapeShifterY + 54, 2, 18);
- 			//his murderous arms
- 			ctx.fillStyle = "#125C00";
- 			//his lefty army (YOur left man, your left, don't get again!)
- 			ctx.fillRect(shapeShifterX - 3, shapeShifterY + 24, 7, 27);
- 			//his righty tighty arm (your right, never forget)
- 			ctx.fillRect(shapeShifterX + 21, shapeShifterY + 24, 7, 27);
- 			//his eeeeeeevil shooooooeeessss
- 			ctx.fillStyle = "#000000";
- 			//Da shoe on YOUR left side
- 			ctx.fillRect(shapeShifterX + 4, shapeShifterY + 71, 8, 5);
- 			//DAAA ShOOEEEE ONNN YOOOUURR RIIIIGGGHTTT SIIIDDEEE
- 			ctx.fillRect(shapeShifterX + 13, shapeShifterY + 71, 8, 5);
- 		}
+         function drawBanditFacingLeft() {
+             //His face
+             ctx.fillStyle = "#FFDE7A";
+             ctx.fillRect(banditX - 6, banditY, 20, 25);
+             //His shirt
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 2, banditY + 25, 8, 25);
+             ctx.fillStyle = "#FFDE7A";
+             //His arm
+             ctx.fillRect(banditX + 6, banditY + 24, 7, 25);
+             //The shoulder of his shirt
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 6, banditY + 24, 7, 10);
+             //His eye
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX - 4, banditY + 5, 5, 8);
+             //His bandit thing on his mouth? I don't know what it's called
+             ctx.fillStyle = "red";
+             ctx.fillRect(banditX - 6, banditY + 15, 15, 10);
+             //His pant leg
+             ctx.fillStyle = "#11226B";
+             ctx.fillRect(banditX + 2, banditY + 49, 8, 25);
+             //His shoe
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 2, banditY + 68, 8, 7);
+         }
 
- 		function drawShapeShifterFacingDown() {
- 			ctx.fillStyle = "#125C00";
- 			//his fleshy face
- 			ctx.fillRect(shapeShifterX, shapeShifterY, 25, 25);
- 			//his EEEEVIL SHIRT!!!
- 			ctx.fillStyle = "#012b49";
- 			ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 17, 25);
- 			//his jeans
- 			//his left pant leg (YOUR LEEEEFFFTTTTTTT)
- 			ctx.fillStyle = "#840000";
- 			ctx.fillRect(shapeShifterX + 4, shapeShifterY + 47, 10, 26);
- 			//his riiiiiight pant leg (Yoooouuuurrrr riiiiggghhtt)
- 			ctx.fillRect(shapeShifterX + 11, shapeShifterY + 47, 10, 26);
- 			ctx.fillStyle = "black";
- 			ctx.fillRect(shapeShifterX + 11.5, shapeShifterY + 52, 2, 18);
- 			//his murderous arms
- 			ctx.fillStyle = "#125C00";
- 			//his lefty army (YOur left man, your left, don't forget again!)f
- 			ctx.fillRect(shapeShifterX - 3, shapeShifterY + 24, 7, 27);
- 			//his righty tighty arm (your right, never forget)
- 			ctx.fillRect(shapeShifterX + 21, shapeShifterY + 24, 7, 27);
- 			//his eeeeeeevil shooooooeeessss
- 			ctx.fillStyle = "#000000";
- 			//Da shoe on YOUR left side
- 			ctx.fillRect(shapeShifterX + 4, shapeShifterY + 71, 8, 5);
- 			//DAAA ShOOEEEE ONNN YOOOUURR RIIIIGGGHTTT SIIIDDEEE
- 			ctx.fillRect(shapeShifterX + 13, shapeShifterY + 71, 8, 5);
- 		}
- 		//All in-game objects
- 		function tree(treeX, treeY) {
- 			//The color of grass (And leaves in my opinion)
- 			ctx.fillStyle = "#00a51b";
- 			//Draws the leaves on the trees
- 			ctx.fillRect(treeX, treeY, 30, 5);
- 			ctx.fillRect(treeX, treeY, 30, 5);
- 			ctx.fillRect(treeX - 5, treeY + 5, 40, 5);
- 			ctx.fillRect(treeX - 10, treeY + 10, 50, 20);
- 			ctx.fillRect(treeX - 5, treeY + 15, 40, 20);
- 			//Draws the tree's trunk
- 			ctx.fillStyle = "#916118";
- 			ctx.fillRect(treeX + 6, treeY + 35, 15, 20);
- 		}
+         function drawBanditFacingUp() {
+             //His face
+             ctx.fillStyle = "#FFDE7A";
+             ctx.fillRect(banditX, banditY, 25, 25);
+             //His shirt
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 5, banditY + 25, 16, 25);
+             //His arms
+             //His right arm (YOUR RIGHT!!!!)
+             ctx.fillStyle = "#FFDE7A";
+             ctx.fillRect(banditX + 21, banditY + 25, 8, 20);
+             //His left arm (On your left side)
+             ctx.fillRect(banditX - 3, banditY + 25, 8, 20);
+             //His pants
+             //His right pant leg (ur right)
+             ctx.fillStyle = "#11226B";
+             ctx.fillRect(banditX + 12, banditY + 49, 8, 20);
+             ctx.fillRect(banditX + 5, banditY + 49, 8, 20);
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 11, banditY + 53, 3, 15);
+             //his shoes
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 5, banditY + 68, 15, 5);
+         }
 
- 		function moon(moonX, moonY) {
- 			ctx.fillStyle = "#e5e5e5";
- 			ctx.fillRect(moonX, moonY, 75, 75);
- 			ctx.fillStyle = "#8e8e8e";
- 			ctx.fillRect(moonX, moonY, 5, 5);
- 		}
+         function drawBanditFacingDown() {
+             //His face
+             ctx.fillStyle = "#FFDE7A";
+             ctx.fillRect(banditX, banditY, 25, 25);
+             //His left eye (your left not his)
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 5, banditY + 5, 5, 8);
+             //His right eye (again your right)
+             ctx.fillRect(banditX + 15, banditY + 5, 5, 8);
+             //His bandit thing on his mouth? I don't know what it's called
+             ctx.fillStyle = "red";
+             ctx.fillRect(banditX, banditY + 15, 25, 10);
+             //His shirt
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 5, banditY + 25, 16, 25);
+             //His arms
+             //His right arm (YOUR RIGHT!!!!)
+             ctx.fillStyle = "#FFDE7A";
+             ctx.fillRect(banditX + 21, banditY + 25, 8, 20);
+             //His left arm (On your left side)
+             ctx.fillRect(banditX - 3, banditY + 25, 8, 20);
+             //His pants
+             //His right pant leg (ur right)
+             ctx.fillStyle = "#11226B";
+             ctx.fillRect(banditX + 12, banditY + 49, 8, 20);
+             //his left pant leg
+             ctx.fillRect(banditX + 5, banditY + 49, 8, 20);
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 11, banditY + 53, 3, 15);
+             //his shoes
+             //200 LINES!!!!!!
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 5, banditY + 68, 15, 5);
+         }
 
- 		function star(starX, starY) {
- 			ctx.fillStyle = "white";
- 			ctx.fillRect(starX, starY, 5, 5);
- 		}
+         function drawBanditFacingLeftWithArmRaised() {
+             //His face
+             ctx.fillStyle = "#FFDE7A";
+             ctx.fillRect(banditX - 6, banditY, 20, 25);
+             //His shirt
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 2, banditY + 25, 8, 25);
+             ctx.fillStyle = "#FFDE7A";
+             //His arm
+             ctx.fillRect(banditX - 15, banditY + 27, 25, 7);
+             //The shoulder of his shirt
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 6, banditY + 24, 7, 10);
+             //His eye
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX - 4, banditY + 5, 5, 8);
+             //His bandit thing on his mouth? I don't know what it's called
+             ctx.fillStyle = "red";
+             ctx.fillRect(banditX - 6, banditY + 15, 15, 10);
+             //His pant leg
+             ctx.fillStyle = "#11226B";
+             ctx.fillRect(banditX + 2, banditY + 49, 8, 25);
+             //His shoe
+             ctx.fillStyle = "black";
+             ctx.fillRect(banditX + 2, banditY + 68, 8, 7);
+             //The Gun
+             ctx.fillStyle = "#606060";
+             ctx.fillRect(banditX - 30, banditY + 25, 10, 5);
+             ctx.fillRect(banditX - 20, banditY + 25, 5, 10);
+         }
 
- 		function Campfire(campfireX, campfireY) {
- 			var campfire = new Image();
- 			campfire.onload = function() {
- 				ctx.drawImage(campfire, campfireX, campfireY);
- 			};
- 			campfire.src = "Sprites/Campfire.png";
- 		}
 
- 		function FlowerBush(flowerBushX, flowerBushY) {
- 			var flowerBush = new Image();
- 			flowerBush.onload = function() {
- 				ctx.drawImage(flowerBush, flowerBushX, flowerBushY);
- 			};
- 			flowerBush.src = "Sprites/FlowerBush.png";
- 		}
- 		//Draws a text box
- 		function Dialogue(text, timeUntilStart, timeUntilEnd) {
- 			var newText = document.createTextNode(text),
- 				dialogue = document.getElementById("p1");
- 			dialogue.style.color = "white";
- 			dialogue.style.backgroundColor = "black";
- 			setTimeout(function() {
- 				dialogue.appendChild(newText);
- 			}, timeUntilStart);
- 			setTimeout(function() {
- 				dialogue.removeChild(newText);
- 			}, timeUntilEnd);
- 		}
+         //Draws The Shape Shifter
+         function drawShapeShifterFacingRight() {
+             ctx.fillStyle = "#125C00";
+             //his fleshy face
+             ctx.fillRect(shapeShifterX + 1, shapeShifterY, 20, 25);
+             //his blood red eyes
+             ctx.fillStyle = "#ff0000";
+             //his I (EYE)
+             ctx.fillRect(shapeShifterX + 15, shapeShifterY + 5, 5, 10);
+             //his blood soaked mouth
+             ctx.fillStyle = "#d30000";
+             ctx.fillRect(shapeShifterX + 13, shapeShifterY + 18, 8, 3);
+             //his EEEEVIL SHIRT!!!
+             ctx.fillStyle = "#012b49";
+             ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 10, 25);
+             //his jeans
+             //his PANT LEG
+             ctx.fillStyle = "#840000";
+             ctx.fillRect(shapeShifterX + 4, shapeShifterY + 47, 10, 26);
+             //his murderous arms
+             ctx.fillStyle = "#125C00";
+             //his AAAAARRRMM
+             ctx.fillRect(shapeShifterX + 5, shapeShifterY + 24, 7, 27);
+             //his eeeeeeevil shooooooeeessss
+             ctx.fillStyle = "#000000";
+             //Da shoe 
+             ctx.fillRect(shapeShifterX + 4, shapeShifterY + 71, 15, 5);
+         }
 
- 		function battleDialogue(text, timeUntilStart, timeUntilEnd) {
- 			var newText = document.createTextNode(text),
- 				dialogue = document.getElementById("p1");
- 			dialogue.style.color = "white";
- 			dialogue.style.backgroundColor = "black";
- 			setTimeout(function() {
- 				dialogue.appendChild(newText);
- 			}, timeUntilStart);
- 			setTimeout(function() {
- 				dialogue.removeChild(newText);
- 				drawBattleMap();
- 				scene = "BATTLE!";
- 				checkMap();
- 			}, timeUntilEnd);
- 		}
- 		//backgrounds
- 		function drawBanditBattleBackground() {
- 			var bbb = new Image();
- 			bbb.onload = function() {
- 				ctx.drawImage(bbb, 100, 100, window.outerWidth - 250, window.outerHeight - 200);
- 			};
- 			bbb.src = "Backgrounds/BanditBattleBackground.png";
- 		}
- 		//All in-game tiles WARNING: Put tiles before objects
- 		function grass(grassX, grassY) {
- 			ctx.fillStyle = "#00a51b";
- 			ctx.fillRect(grassX, grassY, 25, 25);
- 		}
+         function drawShapeShifterFacingLeft() {
+             ctx.fillStyle = "#125C00";
+             //his fleshy face
+             ctx.fillRect(shapeShifterX - 3, shapeShifterY, 20, 25);
+             //his blood red eyes
+             ctx.fillStyle = "#ff0000";
+             //his I (EYE)
+             ctx.fillRect(shapeShifterX + 1, shapeShifterY + 5, 5, 10);
+             //his blood soaked mouth
+             ctx.fillStyle = "#d30000";
+             ctx.fillRect(shapeShifterX - 1, shapeShifterY + 18, 8, 3);
+             //his EEEEVIL SHIRT!!!
+             ctx.fillStyle = "#012b49";
+             ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 10, 25);
+             //his jeans
+             //his PANT LEG
+             ctx.fillStyle = "#840000";
+             ctx.fillRect(shapeShifterX + 4, shapeShifterY + 47, 10, 26);
+             //his murderous arms
+             ctx.fillStyle = "#125C00";
+             //his AAAAARRRMM
+             ctx.fillRect(shapeShifterX + 5, shapeShifterY + 24, 7, 27);
+             //his eeeeeeevil shooooooeeessss
+             ctx.fillStyle = "#000000";
+             //Da shoe (OF EEEEEEVIIL
+             ctx.fillRect(shapeShifterX - 1, shapeShifterY + 71, 15, 5);
+         }
+
+         function drawShapeShifterFacingUp() {
+             ctx.fillStyle = "#125C00";
+             //his fleshy face
+             ctx.fillRect(shapeShifterX, shapeShifterY, 25, 25);
+             //his blood red eyes
+             ctx.fillStyle = "#ff0000";
+             //his leeeeeftttt eeyeeeeee (your left bro)
+             ctx.fillRect(shapeShifterX + 5, shapeShifterY + 5, 5, 10);
+             //his RIGHT EYE (YOUR RIGHT MAN!!!!)
+             ctx.fillRect(shapeShifterX + 15, shapeShifterY + 5, 5, 10);
+             //his blood soaked mouth
+             ctx.fillStyle = "#d30000";
+             ctx.fillRect(shapeShifterX + 6, shapeShifterY + 17, 12, 3);
+             //his EEEEVIL SHIRT!!!
+             ctx.fillStyle = "#012b49";
+             ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 17, 25);
+             //the skull on his shirt
+             ctx.fillStyle = "white";
+             ctx.fillRect(shapeShifterX + 8.5, shapeShifterY + 30, 8, 9);
+             ctx.fillStyle = "white";
+             ctx.fillRect(shapeShifterX + 11.5, shapeShifterY + 27, 2, 5);
+             ctx.fillRect(shapeShifterX + 8, shapeShifterY + 37, 3, 3);
+             ctx.fillRect(shapeShifterX + 14.5, shapeShifterY + 37, 3, 3);
+             //his jeans
+             //his left pant leg (YOUR LEFT)
+             ctx.fillStyle = "#840000";
+             ctx.fillRect(shapeShifterX + 4, shapeShifterY + 47, 10, 26);
+             //his riiiiiight pant leg (Ur right)
+             ctx.fillRect(shapeShifterX + 11, shapeShifterY + 47, 10, 26);
+             ctx.fillStyle = "black";
+             ctx.fillRect(shapeShifterX + 11.5, shapeShifterY + 54, 2, 18);
+             //his murderous arms
+             ctx.fillStyle = "#125C00";
+             //his lefty army (YOur left man, your left, don't get again!)
+             ctx.fillRect(shapeShifterX - 3, shapeShifterY + 24, 7, 27);
+             //his righty tighty arm (your right, never forget)
+             ctx.fillRect(shapeShifterX + 21, shapeShifterY + 24, 7, 27);
+             //his eeeeeeevil shooooooeeessss
+             ctx.fillStyle = "#000000";
+             //Da shoe on YOUR left side
+             ctx.fillRect(shapeShifterX + 4, shapeShifterY + 71, 8, 5);
+             //DAAA ShOOEEEE ONNN YOOOUURR RIIIIGGGHTTT SIIIDDEEE
+             ctx.fillRect(shapeShifterX + 13, shapeShifterY + 71, 8, 5);
+         }
+
+         function drawShapeShifterFacingDown() {
+             ctx.fillStyle = "#125C00";
+             //his fleshy face
+             ctx.fillRect(shapeShifterX, shapeShifterY, 25, 25);
+             //his EEEEVIL SHIRT!!!
+             ctx.fillStyle = "#012b49";
+             ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 17, 25);
+             //his jeans
+             //his left pant leg (YOUR LEEEEFFFTTTTTTT)
+             ctx.fillStyle = "#840000";
+             ctx.fillRect(shapeShifterX + 4, shapeShifterY + 47, 10, 26);
+             //his riiiiiight pant leg (Yoooouuuurrrr riiiiggghhtt)
+             ctx.fillRect(shapeShifterX + 11, shapeShifterY + 47, 10, 26);
+             ctx.fillStyle = "black";
+             ctx.fillRect(shapeShifterX + 11.5, shapeShifterY + 52, 2, 18);
+             //his murderous arms
+             ctx.fillStyle = "#125C00";
+             //his lefty army (YOur left man, your left, don't forget again!)f
+             ctx.fillRect(shapeShifterX - 3, shapeShifterY + 24, 7, 27);
+             //his righty tighty arm (your right, never forget)
+             ctx.fillRect(shapeShifterX + 21, shapeShifterY + 24, 7, 27);
+             //his eeeeeeevil shooooooeeessss
+             ctx.fillStyle = "#000000";
+             //Da shoe on YOUR left side
+             ctx.fillRect(shapeShifterX + 4, shapeShifterY + 71, 8, 5);
+             //DAAA ShOOEEEE ONNN YOOOUURR RIIIIGGGHTTT SIIIDDEEE
+             ctx.fillRect(shapeShifterX + 13, shapeShifterY + 71, 8, 5);
+         }
+         
+         
+         //All in-game objects
+         function tree(treeX, treeY) {
+             //The color of grass (And leaves in my opinion)
+             ctx.fillStyle = "#00a51b";
+             //Draws the leaves on the trees
+             ctx.fillRect(treeX, treeY, 30, 5);
+             ctx.fillRect(treeX, treeY, 30, 5);
+             ctx.fillRect(treeX - 5, treeY + 5, 40, 5);
+             ctx.fillRect(treeX - 10, treeY + 10, 50, 20);
+             ctx.fillRect(treeX - 5, treeY + 15, 40, 20);
+             //Draws the tree's trunk
+             ctx.fillStyle = "#916118";
+             ctx.fillRect(treeX + 6, treeY + 35, 15, 20);
+         }
+
+         function moon(moonX, moonY) {
+             ctx.fillStyle = "#e5e5e5";
+             ctx.fillRect(moonX, moonY, 75, 75);
+             ctx.fillStyle = "#8e8e8e";
+             ctx.fillRect(moonX, moonY, 5, 5);
+         }
+
+         function star(starX, starY) {
+             ctx.fillStyle = "white";
+             ctx.fillRect(starX, starY, 5, 5);
+         }
+
+         function Campfire(campfireX, campfireY) {
+             var campfire = new Image();
+             campfire.onload = function() {
+                 ctx.drawImage(campfire, campfireX, campfireY);
+             };
+             campfire.src = "Sprites/Campfire.png";
+         }
+
+         function FlowerBush(flowerBushX, flowerBushY) {
+             var flowerBush = new Image();
+             flowerBush.onload = function() {
+                 ctx.drawImage(flowerBush, flowerBushX, flowerBushY);
+             };
+             flowerBush.src = "Sprites/FlowerBush.png";
+         }
+         
          function drawBullet(){
            var bullet = new Image();
            bullet.onload = function() {
