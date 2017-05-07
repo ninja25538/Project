@@ -66,8 +66,6 @@
          //Bandit's stats
          //bandit's health
          var banditHealth = 45;
-         //bandit's attack chance
-         var banditAttackChance = Math.floor((Math.random() * 2) + 1);
          //how much damage bandit's attacks do
          var banditAttackDamage = Math.floor((Math.random() * 3));
 
@@ -93,15 +91,16 @@
              ctx.fillStyle = "black";
              Dialogue("You're one of us now", 0, 2050);
              Dialogue('If you want, you can just exit the "game"', 2051, 7050);
-             Dialogue("You'll be happy as one of my most powerful zombies", 7051, 11000);
-             Dialogue("Or, you can try again to stop me", 11001, 14000);
-             Dialogue("And again, and again, and again", 14001, 19000);
-             Dialogue("But please remember that the hero of one story is the villan of another", 19001, 25000);
+             Dialogue("You'll be happy as one of my most powerful zombies", 7051, 12000);
+             Dialogue("Or, you can try again to stop me", 12001, 16000);
+             Dialogue("But please remember that the hero of one story is the villan of another", 20001, 26000);
              setTimeout(function(){
              playerHealth = 20;
              scene = "BATTLE!";
-             checkMap();
-             }, 25001);
+             attackNumber = 0;
+             banditHealth = 45;
+             drawBattleMap();
+             }, 26001);
              
              
            }
@@ -670,6 +669,7 @@
           //Attacks of all enemies                  
          function Attack(){
            selected = 0;
+           option();
            banditHealth -= playerDamage;
            ctx.clearRect(1, 1, 1250, 75);
            ctx.font = "50px Arial";
