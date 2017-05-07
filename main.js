@@ -74,6 +74,7 @@
 
          //Draws the main character
          function drawProtagonistFacingRight() {
+           if(playerHealth > 0){
              //Draws the protagonist's hood
              ctx.fillStyle = "#270042";
              ctx.fillRect(playerX, playerY, 23, 5);
@@ -86,6 +87,24 @@
              //Draws the shadow that hides the protagonist's face 
              ctx.fillStyle = "#0a0a0a";
              ctx.fillRect(playerX + 11, playerY + 3, 12, 20);
+           } else if(playerHealth <= 0){
+             ctx.fillStyle = "black";
+             ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+             ctx.fillStyle = "black";
+             Dialogue("You're one of us now", 0, 2050);
+             Dialogue('If you want, you can just exit the "game"', 2051, 7050);
+             Dialogue("You'll be happy as one of my most powerful zombies", 7051, 11000);
+             Dialogue("Or, you can try again to stop me", 11001, 14000);
+             Dialogue("And again, and again, and again", 14001, 19000);
+             Dialogue("But please remember that the hero of one story is the villan of another", 19001, 25000);
+             setTimeout(function(){
+             playerHealth = 20;
+             scene = "BATTLE!";
+             checkMap();
+             }, 25001);
+             
+             
+           }
          }
 
          function drawProtagonistFacingLeft() {
@@ -459,6 +478,7 @@
          
          //Draws a text box
          function Dialogue(text, timeUntilStart, timeUntilEnd) {
+           selected = 0;
              var newText = document.createTextNode(text),
                  dialogue = document.getElementById("p1");
              dialogue.style.color = "white";
@@ -468,6 +488,7 @@
              }, timeUntilStart);
              setTimeout(function() {
                  dialogue.removeChild(newText);
+                 selected = 1;
              }, timeUntilEnd);
          }
 
@@ -483,6 +504,7 @@
                  dialogue.removeChild(newText);
                  drawBattleMap();
                  scene = "BATTLE!";
+                 selected = 1;
                  checkMap();
              }, timeUntilEnd);
          }
@@ -647,15 +669,16 @@
          
           //Attacks of all enemies                  
          function Attack(){
-           
+           selected = 0;
            banditHealth -= playerDamage;
            ctx.clearRect(1, 1, 1250, 75);
+           ctx.font = "50px Arial";
            ctx.fillText("Player Health: " +  playerHealth + "                 Bandit's Health: " + banditHealth, 100, 50); 
            
            if(fighting === "Bandit"){
             if(attackNumber === 1){
-               ctx.font = "50px Arial";
-              ctx.fillText("Player Health: " + playerHealth + "                  Bandit's Health: " + banditHealth, 100, 50);
+              ctx.font = "20px Arial";
+              Dialogue("Prepare to die, evil zombie", 0, 4000);
               setTimeout(function(){
                 
               setInterval(function() {
@@ -663,10 +686,31 @@
                          ctx.clearRect(bulletX + 8 , bulletY, 40, 16);
                            drawProtagonistFacingRight();
                          drawBullet();
-                     }, 100 / 60);
+                     }, 100 / 65);
+                     Dialogue("Danget, I missed the zombie!", 5000, 8000);
+                     Dialogue("And I broke the fight screen!", 8001, 11000);
+                    
+                    Dialogue("Thank God the zombie isn't threatening me", 11001, 14750);
+                    Dialogue("That would be terrifying!", 14751, 16750);
+                    
               }, 4001);
-            } 
+            } else if(attackNumber === 2){
+              ctx.font = "20px Arial";
+              bulletX--;
+             ctx.clearRect(bulletX + 8 , bulletY, 40, 16);
+               drawBullet();
+              Dialogue("Go back to your master and tell him that Bandit's never going to help him", 0, 5000);
+              setTimeout(function(){
+              playerHealth = 0;
+              drawProtagonistFacingRight();
+              }, 5001);
+            }
            }
+           
+         }
+         
+         //Threats of all the enemies
+         function Threaten(){
            
          }
 
