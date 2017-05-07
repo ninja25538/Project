@@ -39,7 +39,7 @@
          var playerY = 340;
          //The bullet's position
          var bulletX = 500;
-         var bulletY = 500;
+         var bulletY = 375;
          //bandit's location
          var banditX = 620;
          var banditY = 320;
@@ -551,7 +551,7 @@
                          } else if (banditX >= borderD) {
                              ctx.clearRect(banditX, banditY, 200, 200);
                          }
-                     }, 4000 / 60);
+                     }, 3000 / 60);
                  }, 7500.0001);
                  Dialogue("A Z-Z-ZOMBIE!!!", 7500.0001, 10000);
                  Dialogue("NONONONONONONONONONONONONONO", 10000.0001, 13500);
@@ -574,8 +574,6 @@
              banditY = 300;
              drawBanditFacingLeftWithArmRaised();
              FlowerBush(349, 100);
-             
-             drawBullet();
          }
 
          function option() {
@@ -632,7 +630,7 @@
                  }, 550);
              }
          }
-         //If the scene number is equal to a specific number, draw a specific map. 
+         //If the scene number is equal to a specific number, draw a specific map.
          function checkMap() {
              if (scene == 1) {
                  drawMap1();
@@ -647,15 +645,26 @@
              }
          }
          
-                 //Attacks of all enemies                  
+          //Attacks of all enemies                  
          function Attack(){
+           
+           banditHealth -= playerDamage;
+           ctx.clearRect(1, 1, 1250, 75);
+           ctx.fillText("Player Health: " +  playerHealth + "                 Bandit's Health: " + banditHealth, 100, 50); 
            
            if(fighting === "Bandit"){
             if(attackNumber === 1){
-              while(bulletX > 0){
-                bulletX--;
-                drawBullet(); 
-              }
+               ctx.font = "50px Arial";
+              ctx.fillText("Player Health: " + playerHealth + "                  Bandit's Health: " + banditHealth, 100, 50);
+              setTimeout(function(){
+                
+              setInterval(function() {
+                         bulletX--;
+                         ctx.clearRect(bulletX + 8 , bulletY, 40, 16);
+                           drawProtagonistFacingRight();
+                         drawBullet();
+                     }, 100 / 60);
+              }, 4001);
             } 
            }
            
