@@ -4,7 +4,7 @@
   -March 24, 2017
   */
  //Shape shifter's name is Naberius
- //Eligor
+ //Eligor (silly goose)
  //Cow head
  //Revenant
  //Places
@@ -57,8 +57,10 @@
          //Colum and row for fights
          var column = 0;
          var row = 0;
-         //which attack is currently taking place
+         //which action is currently taking place
          var attackNumber = 0;
+         var threatNumber = 0;
+         var talkNumber = 0;
          //who is the player fighting
          var fighting = "";
          //Whether the Protagonist can move or not
@@ -68,6 +70,16 @@
          var banditHealth = 45;
          //how much damage bandit's attacks do
          var banditAttackDamage = Math.floor((Math.random() * 3));
+         //The food you have
+         var foodItems = [];
+         
+         function addFoodItem(item){
+           foodItems.push(item);
+         }
+         
+        function deleteFoodItem(){
+          foodItems.splice(0, 1);
+        }
 
 
          //Draws the main character
@@ -89,11 +101,11 @@
              ctx.fillStyle = "black";
              ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
              ctx.fillStyle = "black";
-             Dialogue("You're one of us now", 0, 2050);
-             Dialogue('If you want, you can just exit the "game"', 2051, 7050);
-             Dialogue("You'll be happy as one of my most powerful zombies", 7051, 12000);
-             Dialogue("Or, you can try again to stop me", 12001, 16000);
-             Dialogue("But please remember that the hero of one story is the villan of another", 20001, 26000);
+             Dialogue("The Necromancer: You're one of us now", 0, 2050, "red");
+             Dialogue('If you want, you can just exit the "game"', 2051, 7050 , "red");
+             Dialogue("You'll be happy as one of my most powerful zombies", 7051, 12000, "red");
+             Dialogue("Or, you can try again to stop me", 12001, 16000, "red");
+             Dialogue("But please remember that the hero of one story is the villan of another", 20001, 26000, "red");
              setTimeout(function(){
              playerHealth = 20;
              scene = "BATTLE!";
@@ -364,13 +376,6 @@
              //his EEEEVIL SHIRT!!!
              ctx.fillStyle = "#012b49";
              ctx.fillRect(shapeShifterX + 4, shapeShifterY + 24, 17, 25);
-             //the skull on his shirt
-             ctx.fillStyle = "white";
-             ctx.fillRect(shapeShifterX + 8.5, shapeShifterY + 30, 8, 9);
-             ctx.fillStyle = "white";
-             ctx.fillRect(shapeShifterX + 11.5, shapeShifterY + 27, 2, 5);
-             ctx.fillRect(shapeShifterX + 8, shapeShifterY + 37, 3, 3);
-             ctx.fillRect(shapeShifterX + 14.5, shapeShifterY + 37, 3, 3);
              //his jeans
              //his left pant leg (YOUR LEFT)
              ctx.fillStyle = "#840000";
@@ -476,25 +481,23 @@
          
          
          //Draws a text box
-         function Dialogue(text, timeUntilStart, timeUntilEnd) {
-           selected = 0;
+         function Dialogue(text, timeUntilStart, timeUntilEnd, color) {
              var newText = document.createTextNode(text),
                  dialogue = document.getElementById("p1");
-             dialogue.style.color = "white";
+             dialogue.style.color = color;
              dialogue.style.backgroundColor = "black";
              setTimeout(function() {
                  dialogue.appendChild(newText);
              }, timeUntilStart);
              setTimeout(function() {
                  dialogue.removeChild(newText);
-                 selected = 1;
              }, timeUntilEnd);
          }
 
-         function battleDialogue(text, timeUntilStart, timeUntilEnd) {
+         function battleDialogue(text, timeUntilStart, timeUntilEnd, color) {
              var newText = document.createTextNode(text),
                  dialogue = document.getElementById("p1");
-             dialogue.style.color = "white";
+             dialogue.style.color = color;
              dialogue.style.backgroundColor = "black";
              setTimeout(function() {
                  dialogue.appendChild(newText);
@@ -503,7 +506,6 @@
                  dialogue.removeChild(newText);
                  drawBattleMap();
                  scene = "BATTLE!";
-                 selected = 1;
                  checkMap();
              }, timeUntilEnd);
          }
@@ -547,24 +549,32 @@
              Campfire(500, 300);
              drawBanditFacingRight();
              movement = false;
-             Dialogue("Bandit: Dear Audio Diary,", 500, 3000);
-             Dialogue("It's been a long time since I've seen any...living people...", 3000.0001, 6500);
-             Dialogue("Maybe the rest were eaten...", 6500.0001, 10000);
-             Dialogue("...", 10000.0001, 13500);
+             Dialogue("Bandit: Dear Audio Diary,", 500, 3000, "blue");
+             Dialogue("It's been a long time since I've seen any...living people...", 3000.0001, 6500, "blue");
+             Dialogue("Maybe the rest were eaten...", 6500.0001, 10000, "blue");
+             Dialogue("...", 10000.0001, 13500, "white");
              Dialogue("AWESOME!!!", 13500.0001, 17000.0001);
-             Dialogue("I'll be on the front page of The Death Valley Times", 17000.0001, 20500);
-             Dialogue("THE BANDIT SURVIVES ZOMBIE APOCALYPSE", 20500.0001, 24000);
-             Dialogue("EVEN THE NECROMANCER CAN'T STOP HIM", 24000.0001, 27500);
-             Dialogue("HE'S BEEN CROWNED KING OF UNIVERSE", 27500.0001, 30000);
+             Dialogue("I'll be on the front page of The Death Valley Times", 17000.0001, 20500, "blue");
+             Dialogue("THE BANDIT SURVIVES ZOMBIE APOCALYPSE", 20500.0001, 24000, "blue");
+             Dialogue("EVEN THE NECROMANCER CAN'T STOP HIM", 24000.0001, 27500, "blue");
+             Dialogue("HE'S BEEN CROWNED KING OF UNIVERSE", 27500.0001, 30000, "blue");
              Dialogue("That'd be cool", 30000.0001, 33500);
-             Dialogue("Whatever, I better get back on guard duty", 33500.0001, 37000);
+             Dialogue("Whatever, I better get back on guard duty", 33500.0001, 37000, "blue");
              setTimeout(function() {
                  ctx.clearRect(banditX, banditY, 100, 100);
                  drawBanditFacingLeft();
-                 Dialogue("...", 2500, 4000);
-                 Dialogue("AHHH!!!", 4000.0001, 7500);
+                 Dialogue("...", 2500, 4000, "blue");
+                 Dialogue("AHHH!!!", 4000.0001, 7500, "blue");
+                 
                  setTimeout(function() {
-                     setInterval(function() {
+                    var runAway = setInterval(function() {
+            setTimeout(function() {
+                     clearInterval(runAway);
+                     movement = true;
+                     ctx.clearRect(banditX, banditY, 500, 500);
+                     banditX = banditX + 50;
+                     ctx.clearRect(banditX, banditY, 500, 500);
+                 }, 17000.0001);
                          if (banditX < borderD && scene === 3) {
                              banditX++;
                              ctx.clearRect(banditX - 10, banditY, 510, 500);
@@ -574,15 +584,11 @@
                          }
                      }, 3000 / 60);
                  }, 7500.0001);
-                 Dialogue("A Z-Z-ZOMBIE!!!", 7500.0001, 10000);
-                 Dialogue("NONONONONONONONONONONONONONO", 10000.0001, 13500);
-                 Dialogue("I DON'T WANNA DIE!!!", 13500.0001, 17000);
-                 setTimeout(function() {
-                     movement = true;
-                     ctx.clearRect(banditX, banditY, 500, 500);
-                     banditX = banditX + 50;
-                     ctx.clearRect(banditX, banditY, 500, 500);
-                 }, 17000.0001);
+                 
+                 Dialogue("A Z-Z-ZOMBIE!!!", 7500.0001, 10000, "blue");
+                 Dialogue("NONONONONONONONONONONONONONO", 10000.0001, 13500, "blue");
+                 Dialogue("I DON'T WANNA DIE!!!", 13500.0001, 17000, "blue");
+  
              }, 37500);
          }
 
@@ -594,7 +600,20 @@
              banditX = 600;
              banditY = 300;
              drawBanditFacingLeftWithArmRaised();
-             FlowerBush(349, 100);
+             FlowerBush(350, 100);
+         }
+         
+         function drawMap5() {
+           ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+             document.body.style.backgroundColor = "#001a3d";
+             playerX = 200;
+             playerY = 340;
+             banditX = 600;
+             banditY = 320;
+             drawProtagonistFacingRight();
+             drawBanditFacingLeft();
+             ctx.fillStyle = "#A17300";
+             ctx.fillRect(0, 390, ctx.canvas.width, 700);
          }
 
          function option() {
@@ -607,7 +626,6 @@
              ctx.fillText("Run Away", 1200, 175);
              ctx.fillText("Talk", 1200, 275);
              ctx.fillText("Memories", 1200, 375);
-
          }
          //Draws the map for fighting enemies
          function drawBattleMap() {
@@ -661,14 +679,17 @@
                  drawMap3();
              } else if (scene == 4) {
                  drawMap4();
-             } else if (scene === "BATTLE!") {
+             } else if (scene == 5){
+               drawMap5();
+             }
+             
+             if (scene === "BATTLE!") {
                  drawBattleMap();
              }
          }
          
-          //Attacks of all enemies                  
+          //Attacks of you and zee enemies               
          function Attack(){
-           selected = 0;
            option();
            banditHealth -= playerDamage;
            ctx.clearRect(1, 1, 1250, 75);
@@ -678,7 +699,7 @@
            if(fighting === "Bandit"){
             if(attackNumber === 1){
               ctx.font = "20px Arial";
-              Dialogue("Prepare to die, evil zombie", 0, 4000);
+              Dialogue("Prepare to die, evil zombie", 0, 4000, "blue");
               setTimeout(function(){
                 
               setInterval(function() {
@@ -687,11 +708,11 @@
                            drawProtagonistFacingRight();
                          drawBullet();
                      }, 100 / 65);
-                     Dialogue("Danget, I missed the zombie!", 5000, 8000);
-                     Dialogue("And I broke the fight screen!", 8001, 11000);
+                     Dialogue("Danget, I missed the zombie!", 5000, 8000, "blue");
+                     Dialogue("And I broke the fight screen!", 8001, 11000, "blue");
                     
-                    Dialogue("Thank God the zombie isn't threatening me", 11001, 14750);
-                    Dialogue("That would be terrifying!", 14751, 16750);
+                    Dialogue("Thank God the zombie isn't threatening me", 11001, 14750, "blue");
+                    Dialogue("That would be terrifying!", 14751, 16750, "blue");
                     
               }, 4001);
             } else if(attackNumber === 2){
@@ -699,7 +720,7 @@
               bulletX--;
              ctx.clearRect(bulletX + 8 , bulletY, 40, 16);
                drawBullet();
-              Dialogue("Go back to your master and tell him that Bandit's never going to help him", 0, 5000);
+              Dialogue("Go back to your master and tell him that Bandit's never going to help him", 0, 5000, "blue");
               setTimeout(function(){
               playerHealth = 0;
               drawProtagonistFacingRight();
@@ -709,8 +730,58 @@
            
          }
          
-         //Threats of all the enemies
+         //Eat some deliecious yummy F00D
+         function Eat(){
+           if(fighting == "Bandit"){
+             Dialogue("Mysterious Voice: Hey it's me again",0, 3450, "purple");
+             Dialogue("So I have to talk in stupid text because talking to you with a voice was really hard the first time, I had to put a lot of effort into it", 3450.00001, 13450, "purple");
+             Dialogue("So anyways you don't have anything to eat, so you can't eat", 13450.0001, 17500, "purple");
+             Dialogue("By the way I'll be here to help you out as much as I can", 17500.0001, 20000, "purple");
+             Dialogue("Look for my dialogue color, it will always be purple", 20000.0001, 24500, "purple");
+             Dialogue("Don't judge me, all the good dialogue colors were taken", 24500.0001, 28500, "purple");
+           }
+         }
+         
+         //Threaten the enemy
          function Threaten(){
+           if(fighting === "Bandit"){
+             if(threatNumber === 1){
+               Dialogue("You: Boo!", 0, 1750, "white");
+               Dialogue("Bandit: AAAAH!", 1751, 3750, "blue");
+               
+               setTimeout(function(){
+               fighting = "";
+               scene = 5;
+               checkMap();
+               }, 3750);
+             } else if(threatNumber === 2){
+               Dialogue("You: Boo!", 0, 1750, "white");
+               Dialogue("Bandit: AAAAH!", 1751, 3750, "blue");
+               
+               setTimeout(function(){
+               fighting = "";
+               scene = 5;
+               checkMap();
+               }, 3750);
+             }
+           }
+         }
+         
+         //Run away from the enemy
+         function RunAway(){
+          if(fighting === "Bandit"){
+            Dialogue("Mysterious Voice: You can't flee from bosses", 0, 3000, "purple");
+            Dialogue("You might be mad you're fighitng a boss for you first fight, but he shouldn't be too hard to beat, he's terrified of you!", 3000.0001, 5350, "purple");
+          } 
+         }
+         
+         //Try to reason /talk to the enemy
+         function Talk(){
+           
+         }
+        
+         //Check what you remember
+         function Memories(){
            
          }
 
@@ -796,10 +867,10 @@
                      if (playerX > banditX - 135) {
                          movement = false;
                          if (playerX > banditX - 135) {
-                             Dialogue("Bandit: Oh no it's YOU!!!", 0, 2000);
-                             Dialogue("I WON'T LET YOU END THE WORLD", 2000.0001, 4670);
-                             Dialogue("YOU EVIL DEAD SCUM!!!", 4670.0001, 6670);
-                             battleDialogue("FIGHT MEEEEEEE!!", 6670.0001, 10370);
+                             Dialogue("Bandit: Oh no it's YOU!!!", 0, 2000, "blue");
+                             Dialogue("I WON'T LET YOU END THE WORLD", 2000.0001, 4670, "blue");
+                             Dialogue("YOU EVIL DEAD SCUM!!!", 4670.0001, 6670, "blue");
+                             battleDialogue("FIGHT MEEEEEEE!!", 6670.0001, 10370, "blue");
                              fighting = "Bandit";
                          }
                      }
@@ -869,16 +940,28 @@
              }
              
              //If space is pressed, an option is selected if fighting
-             if(e.keyCode == 32 && scene === "BATTLE!"){
-              if(column === 1){
-                if(row === 1){
-                  attackNumber++;
-                  Attack();
-                }
-              } else if(column === 2){
-                
-              } 
-              
+             if(e.keyCode == 32 && scene === "BATTLE!"){             
+               if (column === 1) {
+                 if (row === 1) {
+                   attackNumber++;
+                   Attack();
+                 } else if (row === 2) {
+                   Eat();
+                 } else if (row === 3) {
+                    threatNumber++;
+                   Threaten();
+                 }
+
+             } else if (column === 2) {
+                 if (row === 1) {
+                   RunAway();
+                 } else if (row === 2) {
+                   talkNumber++;
+                   Talk();
+                 } else if (row === 3) {
+                   Memories();
+                 }
+             }
              }
 
 
@@ -922,6 +1005,7 @@
                  game();
              }
          };
+         
          startButton.src = "Sprites/StartButton.png";
          var loading = document.getElementById("loading");
          loading.innerHTML = "loading";
