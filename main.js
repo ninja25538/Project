@@ -1,6 +1,6 @@
  //Hey! I'm really glad you got the game and I hope you like it!
  /*
-  Have first show of battle screen
+  Finish first fight with Bandit by June
   -March 24, 2017
   */
  //Shape shifter's name is Naberius
@@ -9,6 +9,8 @@
  //Revenant
  //Places
  //Panamint City
+ 
+ //I realize now how many functions I had lol
  window.onload = function() {
      var mouseX = event.clientX;
      var mouseY = event.clientY;
@@ -20,7 +22,7 @@
      ctx.fillStyle = "yellow";
      var onGame = false;
      //Which map to draw
-     var scene = 3;
+     var scene = 0;
      //Start the game  
      function game() {
          drawProtagonistFacingRight();
@@ -58,9 +60,15 @@
          var column = 0;
          var row = 0;
          //which action is currently taking place
+         //Some of these are only used for specific battles
          var attackNumber = 0;
          var threatNumber = 0;
          var talkNumber = 0;
+         var runNum = 0;
+         var eatNumber = 0;
+         var memoryNumber = 0;
+         //What you have learned so far
+         var memories = [];
          //who is the player fighting
          var fighting = "";
          //Whether the Protagonist can move or not
@@ -77,8 +85,12 @@
            foodItems.push(item);
          }
          
-        function deleteFoodItem(){
+        function eatFoodItem(){
           foodItems.splice(0, 1);
+        }
+        
+        function addAMemory(memory){
+          memories.push(memory);
         }
 
 
@@ -106,6 +118,9 @@
              Dialogue("You'll be happy as one of my most powerful zombies", 7051, 12000, "red");
              Dialogue("Or, you can try again to stop me", 12001, 16000, "red");
              Dialogue("But please remember that the hero of one story is the villan of another", 20001, 26000, "red");
+             addAMemory("Bandit said that he won't help your master");
+             addAMemory("The Necromancer said that you could be happy as one of his most powerful zombies");
+             addAMemory("The Necromancer said that he's the villain of your story, the hero of another");
              setTimeout(function(){
              playerHealth = 20;
              scene = "BATTLE!";
@@ -542,6 +557,9 @@
          }
 
          function drawMap3() {
+             addAMemory("The Bandit said something about the zombie apocalypse");
+             addAMemory("The Bandit ran away from thinking you were a zombie");
+             addAMemory("The Bandit said he was on guard do");
              playerX = 300;
              playerY = 340;
              ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
@@ -567,20 +585,14 @@
                  Dialogue("AHHH!!!", 4000.0001, 7500, "blue");
                  
                  setTimeout(function() {
-                    var runAway = setInterval(function() {
-            setTimeout(function() {
-                     clearInterval(runAway);
-                     movement = true;
-                     ctx.clearRect(banditX, banditY, 500, 500);
-                     banditX = banditX + 50;
-                     ctx.clearRect(banditX, banditY, 500, 500);
-                 }, 17000.0001);
-                         if (banditX < borderD && scene === 3) {
+                    setInterval(function() {
+                         if (banditX < ctx.canvas.width-ctx.canvas.width/4 && scene === 3) {
                              banditX++;
                              ctx.clearRect(banditX - 10, banditY, 510, 500);
                              drawBanditFacingRight();
-                         } else if (banditX >= borderD) {
+                         } else if (banditX >= ctx.canvas.width-ctx.canvas.width/4) {
                              ctx.clearRect(banditX, banditY, 200, 200);
+                             movement = true;
                          }
                      }, 3000 / 60);
                  }, 7500.0001);
@@ -710,7 +722,7 @@
                      }, 100 / 65);
                      Dialogue("Danget, I missed the zombie!", 5000, 8000, "blue");
                      Dialogue("And I broke the fight screen!", 8001, 11000, "blue");
-                    
+                    addAMemory("Bandit can break the 4th wall");
                     Dialogue("Thank God the zombie isn't threatening me", 11001, 14750, "blue");
                     Dialogue("That would be terrifying!", 14751, 16750, "blue");
                     
@@ -733,12 +745,17 @@
          //Eat some deliecious yummy F00D
          function Eat(){
            if(fighting == "Bandit"){
+             if(eatNumber === 1){
              Dialogue("Mysterious Voice: Hey it's me again",0, 3450, "purple");
              Dialogue("So I have to talk in stupid text because talking to you with a voice was really hard the first time, I had to put a lot of effort into it", 3450.00001, 13450, "purple");
              Dialogue("So anyways you don't have anything to eat, so you can't eat", 13450.0001, 17500, "purple");
              Dialogue("By the way I'll be here to help you out as much as I can", 17500.0001, 20000, "purple");
              Dialogue("Look for my dialogue color, it will always be purple", 20000.0001, 24500, "purple");
              Dialogue("Don't judge me, all the good dialogue colors were taken", 24500.0001, 28500, "purple");
+             addAMemory("The Mysterious Voice can break the 4th wall");
+             } else {
+               Dialogue("Mysterious Voice:You don't have any food to eat!", 0, 2800, "purple");
+             }
            }
          }
          
@@ -770,19 +787,31 @@
          //Run away from the enemy
          function RunAway(){
           if(fighting === "Bandit"){
+            if(runNum === 1){
             Dialogue("Mysterious Voice: You can't flee from bosses", 0, 3000, "purple");
+            addAMemory("You can't flee from bosses");
             Dialogue("You might be mad you're fighitng a boss for you first fight, but he shouldn't be too hard to beat, he's terrified of you!", 3000.0001, 5350, "purple");
+            } else {
+              Dialogue("Mysterious Voice: You can't flee from bosses, silly!", 0, 4250, "purple");
+            }
           } 
          }
          
-         //Try to reason /talk to the enemy
+         //Try to reason/talk to the enemy
          function Talk(){
-           
+           if(fighting == "Bandit"){
+             Dialogue("You: I'm not a zombie", 0, 2850, "white");
+             Dialogue("Bandit: AAAH, THE ZOMBIE CAN TALK!!!", 2850.0001, 5850, "purple");
+           }
          }
         
          //Check what you remember
          function Memories(){
-           
+            if(memoryNumber === 1){
+              Dialogue("This is everything that you have learned so far, if you didn't have enough time to read it, press memories again " + memories, 0, 10000, "purple");
+           } else {
+             Dialogue("What you know so far: " + memories, 0, 5000, "white");
+           }
          }
 
          //Creates the rectangle on the selected option
@@ -946,6 +975,7 @@
                    attackNumber++;
                    Attack();
                  } else if (row === 2) {
+                   eatNumber++;
                    Eat();
                  } else if (row === 3) {
                     threatNumber++;
@@ -954,11 +984,14 @@
 
              } else if (column === 2) {
                  if (row === 1) {
+                   //I think the variable name for this was clever
+                   runNum++;
                    RunAway();
                  } else if (row === 2) {
                    talkNumber++;
                    Talk();
                  } else if (row === 3) {
+                   memoryNumber++;
                    Memories();
                  }
              }
