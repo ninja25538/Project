@@ -1,3 +1,4 @@
+
  //Hey! I'm really glad you got the game and I hope you like it!
  /*
   Finish first fight with Bandit by June
@@ -22,7 +23,7 @@
      ctx.fillStyle = "yellow";
      var onGame = false;
      //Which map to draw
-     var scene = 0;
+     var scene = 3;
      //Start the game  
      function game() {
          drawProtagonistFacingRight();
@@ -119,8 +120,8 @@
              Dialogue("Or, you can try again to stop me", 12001, 16000, "red");
              Dialogue("But please remember that the hero of one story is the villan of another", 20001, 26000, "red");
              addAMemory("Bandit said that he won't help your master");
-             addAMemory("The Necromancer said that you could be happy as one of his most powerful zombies");
-             addAMemory("The Necromancer said that he's the villain of your story, the hero of another");
+             addAMemory("The Necromancer is trying to get you to join his side");
+             addAMemory("The Necromancer said you are the villain of his story");
              setTimeout(function(){
              playerHealth = 20;
              scene = "BATTLE!";
@@ -653,6 +654,49 @@
                  var potato = document.getElementById("p1").innerHTML;
                  potato = "loading";
                  setTimeout(function() {
+                   potato = "";
+             Dialogue("Mysterious Voice: Hey it's me again",0, 3450, "purple");
+             Dialogue("So I have to talk in stupid text because talking to you with a voice was really hard the first time, I had to put a lot of effort into it", 3450.00001, 13450, "purple");
+               Dialogue("I'll be here to help you out as much as I can", 17500.0001, 20000, "purple");
+             Dialogue("Look for my dialogue color, it will always be purple", 20000.0001, 24500, "purple");
+             Dialogue("Don't judge me, all the good dialogue colors were taken", 24500.0001, 28500, "purple");
+             addAMemory("The Mysterious Voice can break the 4th wall");
+             Dialogue("Any how I'll send a prompt to ask if you want me to expalin how to fight", 28500.0001, 31300, "purple");
+             setTimeout(function(){
+               var wannaKnowHowToFight = prompt("Would you like a tutorial on how to fight");
+             if(wannaKnowHowToFight.toLowerCase() === "yes"){
+               Dialogue("Mysterious Voice: Alrighty then!", 0, 2000, "purple");
+               Dialogue("First, let me explain what the fight options all mean", 2000.0001, 5000, "purple");
+               Dialogue("Attack is self explanatory, do damage to the enemy", 5000.0001, 9000, "purple");
+               Dialogue("You don't know how to dodge attacks yet so just be careful when attacking, the enemy can attack too!, 9000.0001, 15000", "purple");
+               Dialogue("Next is eat, you can eat food when you have any to heal and get power ups", 15000.0001, 20000, "purple");
+               Dialogue("If you threaten the enemy, you might scare them into giving up, but it could also enrage them so make sure you know a lot about the enemy", 20000.0001,11000);
+               Dialogue("Running away doesn't always work, and you might even trip and take damage!", 11000.0001, 11450, "purple");
+               Dialogue("If you talk, you try to reason with the enemy, and talk your way out of the fight", 11450.0001, 11950, "purple");
+               Dialogue("Finally and in my opinion most importantly, memories", 11950.0001, 12200, "purple");
+               Dialogue("This is everything you have learned, and I'm not talking about instructions on how to move and stuff", 12200.0001, 12800, "purple");
+               Dialogue("It's everything that's happened, what people think of you, who is your friend and who's your enemy, etc. what you can remember", 12800.0001, 13300, "purple");
+               Dialogue("It's a way to rebuild your mmemory, beause of your amnesia and all", 13300.0001, 13750, "purple");
+               Dialogue("Ok, let's begin the battle!", 13750.0001, 14050, "purple");
+             } else if(wannaKnowHowToFight.toLowerCase() === "no"){
+               Dialogue("If you insist, take on Bandit!", 0, 3000);
+             } else {
+               Dialogue("You didn't type in yes or no, so I'll just explain the rules anyway", 0, 2000);
+               Dialogue("First, let me explain what the fight options all mean", 2000.0001, 5000, "purple");
+               Dialogue("Attack is self explanatory, do damage to the enemy", 5000.0001, 9000, "purple");
+               Dialogue("You don't know how to dodge attacks yet so just be careful when attacking, the enemy can attack too!, 9000.0001, 15000", "purple");
+               Dialogue("Next is eat, you can eat food when you have any to heal and get small power ups");
+               Dialogue("If you threaten the enemy, you might scare them into giving up, but it could also enrage them so make sure you know a lot about the enemy");
+               Dialogue("Running away doesn't alwas work, and you might even trip and take damage!");
+               Dialogue("If you talk, you try to reasonwith the enemy, and talk your way out of the fight");
+               Dialogue("Finally and in my opinion most importantly, memories");
+               Dialogue("This is everything you have learned, and I'm not talking about instructions on how to move and stuff");
+               Dialogue("It's everything that's happened, what people think of you, who is your friend and who's your enemy, etc. what you can remember");
+               Dialogue("It's a way to rebuild your mmemory, beause of your amnesia and all");
+               Dialogue("Ok, let's begin the battle!");
+             }
+             }, 31300.001);
+
                      column = 1;
                      row = 1;
                      showBattleScreen("", 100, 600, "black", "40px Arial");
@@ -720,10 +764,10 @@
                            drawProtagonistFacingRight();
                          drawBullet();
                      }, 100 / 65);
-                     Dialogue("Danget, I missed the zombie!", 5000, 8000, "blue");
+                     Dialogue("Bandit: Danget, I missed the zombie!", 5000, 8000, "blue");
                      Dialogue("And I broke the fight screen!", 8001, 11000, "blue");
                     addAMemory("Bandit can break the 4th wall");
-                    Dialogue("Thank God the zombie isn't threatening me", 11001, 14750, "blue");
+                    Dialogue("Well, I won't miss again, if that thing in front of me attacks again, I'll kil it instantly", 11000.0001, 14750, "blue");
                     Dialogue("That would be terrifying!", 14751, 16750, "blue");
                     
               }, 4001);
@@ -732,7 +776,8 @@
               bulletX--;
              ctx.clearRect(bulletX + 8 , bulletY, 40, 16);
                drawBullet();
-              Dialogue("Go back to your master and tell him that Bandit's never going to help him", 0, 5000, "blue");
+              Dialogue("DIE EVIL ZOMBIE!!!", 0, 2000, "blue");
+              Dialogue("Bandit shot you", 2000.0001, 4000, "blue");
               setTimeout(function(){
               playerHealth = 0;
               drawProtagonistFacingRight();
@@ -746,17 +791,9 @@
          function Eat(){
            if(fighting == "Bandit"){
              if(eatNumber === 1){
-             Dialogue("Mysterious Voice: Hey it's me again",0, 3450, "purple");
-             Dialogue("So I have to talk in stupid text because talking to you with a voice was really hard the first time, I had to put a lot of effort into it", 3450.00001, 13450, "purple");
-             Dialogue("So anyways you don't have anything to eat, so you can't eat", 13450.0001, 17500, "purple");
-             Dialogue("By the way I'll be here to help you out as much as I can", 17500.0001, 20000, "purple");
-             Dialogue("Look for my dialogue color, it will always be purple", 20000.0001, 24500, "purple");
-             Dialogue("Don't judge me, all the good dialogue colors were taken", 24500.0001, 28500, "purple");
-             addAMemory("The Mysterious Voice can break the 4th wall");
-             } else {
                Dialogue("Mysterious Voice:You don't have any food to eat!", 0, 2800, "purple");
-             }
-           }
+         }
+         }
          }
          
          //Threaten the enemy
@@ -765,6 +802,7 @@
              if(threatNumber === 1){
                Dialogue("You: Boo!", 0, 1750, "white");
                Dialogue("Bandit: AAAAH!", 1751, 3750, "blue");
+               Dialogue("You have won the battle by scaring him");
                
                setTimeout(function(){
                fighting = "";
@@ -801,7 +839,7 @@
          function Talk(){
            if(fighting == "Bandit"){
              Dialogue("You: I'm not a zombie", 0, 2850, "white");
-             Dialogue("Bandit: AAAH, THE ZOMBIE CAN TALK!!!", 2850.0001, 5850, "purple");
+             Dialogue("Bandit: AAAH, THE ZOMBIE ATE A BRAIN AND CAN TALK NOW!!!", 2850.0001, 5850, "purple");
            }
          }
         
@@ -1008,12 +1046,15 @@
              var mouseX = event.clientX;
              var mouseY = event.clientY;
              if (mouseX > 50 && onGame === false) {
-                 onGame = false;
+                 onGame = true;
                  game();
              }
              window.addEventListener('touchstart', function() {
+               if(onGame === true){
                  game();
+               }
              });
+             
          }
          //If you click then the game starts
          setTimeout(function() {
