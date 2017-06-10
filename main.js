@@ -23,7 +23,7 @@
      ctx.fillStyle = "yellow";
      var onGame = false;
      //Which map to draw
-     var scene = 3;
+     var scene = 0;
      //Start the game  
      function game() {
          drawProtagonistFacingRight();
