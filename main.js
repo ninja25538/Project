@@ -23,7 +23,7 @@
      ctx.fillStyle = "yellow";
      var onGame = false;
      //Which map to draw
-     var scene = 0;
+     var scene = 3;
      //Start the game  
      function game() {
          drawProtagonistFacingRight();
@@ -56,6 +56,8 @@
          var playerSpeed = 15;
          //player's damage
          var playerDamage = 5;
+         //how many times you've died
+         var deaths = 0;
 
          //Colum and row for fights
          var column = 0;
@@ -72,15 +74,17 @@
          var memories = [];
          //who is the player fighting
          var fighting = "";
+         var canAttack = false;
          //Whether the Protagonist can move or not
          var movement = true;
          //Bandit's stats
          //bandit's health
          var banditHealth = 45;
-         //how much damage bandit's attacks do
-         var banditAttackDamage = Math.floor((Math.random() * 3));
          //The food you have
          var foodItems = [];
+         
+         ///option options for the fights
+         var talkOptionBanditFight;
          
          function addFoodItem(item){
            foodItems.push(item);
@@ -111,6 +115,8 @@
              ctx.fillStyle = "#0a0a0a";
              ctx.fillRect(playerX + 11, playerY + 3, 12, 20);
            } else if(playerHealth <= 0){
+             if(deaths === 0){
+             deaths++;
              ctx.fillStyle = "black";
              ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
              ctx.fillStyle = "black";
@@ -124,14 +130,21 @@
              addAMemory("The Necromancer said you are the villain of his story");
              setTimeout(function(){
              playerHealth = 20;
-             scene = "BATTLE!";
              attackNumber = 0;
              banditHealth = 45;
+             column = 0;
+             row = 0;
+             attackNumber = 0;
+             threatNumber = 0;
+             talkNumber = 0;
+             runNum = 0;
+             eatNumber = 0;
+             memoryNumber = 0;
              drawBattleMap();
              }, 26001);
-             
-             
+             }
            }
+             
          }
 
          function drawProtagonistFacingLeft() {
@@ -472,7 +485,7 @@
          }
 
          function Campfire(campfireX, campfireY) {
-             var campfire = new Image();
+               var campfire = new Image();
              campfire.onload = function() {
                  ctx.drawImage(campfire, campfireX, campfireY);
              };
@@ -520,9 +533,8 @@
              }, timeUntilStart);
              setTimeout(function() {
                  dialogue.removeChild(newText);
+                 fighting = "Bandit";
                  drawBattleMap();
-                 scene = "BATTLE!";
-                 checkMap();
              }, timeUntilEnd);
          }
          //backgrounds
@@ -657,43 +669,51 @@
                    potato = "";
              Dialogue("Mysterious Voice: Hey it's me again",0, 3450, "purple");
              Dialogue("So I have to talk in stupid text because talking to you with a voice was really hard the first time, I had to put a lot of effort into it", 3450.00001, 13450, "purple");
-               Dialogue("I'll be here to help you out as much as I can", 17500.0001, 20000, "purple");
+               Dialogue("I'll be here to help you out as much as I can", 13500.0001, 20000, "purple");
              Dialogue("Look for my dialogue color, it will always be purple", 20000.0001, 24500, "purple");
              Dialogue("Don't judge me, all the good dialogue colors were taken", 24500.0001, 28500, "purple");
              addAMemory("The Mysterious Voice can break the 4th wall");
-             Dialogue("Any how I'll send a prompt to ask if you want me to expalin how to fight", 28500.0001, 31300, "purple");
+             Dialogue("Any how I'll send a prompt to ask if you want me to explain how to fight", 28500.0001, 31300, "purple");
              setTimeout(function(){
                var wannaKnowHowToFight = prompt("Would you like a tutorial on how to fight");
              if(wannaKnowHowToFight.toLowerCase() === "yes"){
                Dialogue("Mysterious Voice: Alrighty then!", 0, 2000, "purple");
                Dialogue("First, let me explain what the fight options all mean", 2000.0001, 5000, "purple");
                Dialogue("Attack is self explanatory, do damage to the enemy", 5000.0001, 9000, "purple");
-               Dialogue("You don't know how to dodge attacks yet so just be careful when attacking, the enemy can attack too!, 9000.0001, 15000", "purple");
+               Dialogue("You don't know how to dodge attacks yet so just be careful when attacking, the enemy can attack too!", 9000.0001, 15000, "purple");
                Dialogue("Next is eat, you can eat food when you have any to heal and get power ups", 15000.0001, 20000, "purple");
-               Dialogue("If you threaten the enemy, you might scare them into giving up, but it could also enrage them so make sure you know a lot about the enemy", 20000.0001,11000);
-               Dialogue("Running away doesn't always work, and you might even trip and take damage!", 11000.0001, 11450, "purple");
-               Dialogue("If you talk, you try to reason with the enemy, and talk your way out of the fight", 11450.0001, 11950, "purple");
-               Dialogue("Finally and in my opinion most importantly, memories", 11950.0001, 12200, "purple");
-               Dialogue("This is everything you have learned, and I'm not talking about instructions on how to move and stuff", 12200.0001, 12800, "purple");
-               Dialogue("It's everything that's happened, what people think of you, who is your friend and who's your enemy, etc. what you can remember", 12800.0001, 13300, "purple");
-               Dialogue("It's a way to rebuild your mmemory, beause of your amnesia and all", 13300.0001, 13750, "purple");
-               Dialogue("Ok, let's begin the battle!", 13750.0001, 14050, "purple");
+               Dialogue("If you threaten the enemy, you might scare them into giving up, but it could also enrage them so make sure you know a lot about the enemy", 20000.0001, 30000, "purple");
+               Dialogue("Running away doesn't always work, and you might even trip and take damage!", 30000.0001, 37000, "purple");
+               Dialogue("If you talk, you try to reason with the enemy, and talk your way out of the fight", 37000.0001, 42000, "purple");
+               Dialogue("Finally and in my opinion most importantly, memories", 42000.0001, 46000, "purple");
+               Dialogue("This is everything you have learned, and I'm not talking about instructions on how to move and stuff", 46000.0001, 55500, "purple");
+               Dialogue("It's everything that's happened, what people think of you, who is your friend and who's your enemy, etc. what you can remember", 55500.0001, 62500, "purple");
+               Dialogue("It's a way to rebuild your memory, beause of your amnesia and all", 62500.0001, 66500, "purple");
+               Dialogue("Ok, let's begin the battle!", 66500.0001, 69500, "purple");
+               setTimeout(function(){
+                 canAttack = true;
+               }, 69500);
              } else if(wannaKnowHowToFight.toLowerCase() === "no"){
                Dialogue("If you insist, take on Bandit!", 0, 3000);
+               setTimeout(function(){
+                 canAttack = true;
+               }, 3000);
              } else {
                Dialogue("You didn't type in yes or no, so I'll just explain the rules anyway", 0, 2000);
                Dialogue("First, let me explain what the fight options all mean", 2000.0001, 5000, "purple");
                Dialogue("Attack is self explanatory, do damage to the enemy", 5000.0001, 9000, "purple");
-               Dialogue("You don't know how to dodge attacks yet so just be careful when attacking, the enemy can attack too!, 9000.0001, 15000", "purple");
-               Dialogue("Next is eat, you can eat food when you have any to heal and get small power ups");
-               Dialogue("If you threaten the enemy, you might scare them into giving up, but it could also enrage them so make sure you know a lot about the enemy");
-               Dialogue("Running away doesn't alwas work, and you might even trip and take damage!");
-               Dialogue("If you talk, you try to reasonwith the enemy, and talk your way out of the fight");
-               Dialogue("Finally and in my opinion most importantly, memories");
-               Dialogue("This is everything you have learned, and I'm not talking about instructions on how to move and stuff");
-               Dialogue("It's everything that's happened, what people think of you, who is your friend and who's your enemy, etc. what you can remember");
-               Dialogue("It's a way to rebuild your mmemory, beause of your amnesia and all");
-               Dialogue("Ok, let's begin the battle!");
+               Dialogue("You don't know how to dodge attacks yet so just be careful when attacking, the enemy can attack too!", 9000.0001, 15000, "purple");
+               Dialogue("Next is eat, you can eat food when you have any to heal and get power ups", 15000.0001, 20000, "purple");
+               Dialogue("If you threaten the enemy, you might scare them into giving up, but it could also enrage them so make sure you know a lot about the enemy", 20000.0001, 30000, "purple");
+               Dialogue("Running away doesn't always work, and you might even trip and take damage!", 30000.0001, 37000, "purple");
+               Dialogue("If you talk, you try to reason with the enemy, and talk your way out of the fight", 37000.0001, 42000, "purple");
+               Dialogue("Finally and in my opinion most importantly, memories", 42000.0001, 46000, "purple");
+               Dialogue("This is everything you have learned, and I'm not talking about instructions on how to move and stuff", 46000.0001, 55500, "purple");
+               Dialogue("It's everything that's happened, what people think of you, who is your friend and who's your enemy, etc. what you can remember", 55500.0001, 62500, "purple");
+               Dialogue("It's a way to rebuild your mmemory, beause of your amnesia and all", 62500.0001, 66500, "purple");
+               setTimeout(function(){
+                 canAttack = true;
+               }, 66500);
              }
              }, 31300.001);
 
@@ -739,9 +759,6 @@
                drawMap5();
              }
              
-             if (scene === "BATTLE!") {
-                 drawBattleMap();
-             }
          }
          
           //Attacks of you and zee enemies               
@@ -767,8 +784,8 @@
                      Dialogue("Bandit: Danget, I missed the zombie!", 5000, 8000, "blue");
                      Dialogue("And I broke the fight screen!", 8001, 11000, "blue");
                     addAMemory("Bandit can break the 4th wall");
-                    Dialogue("Well, I won't miss again, if that thing in front of me attacks again, I'll kil it instantly", 11000.0001, 14750, "blue");
                     Dialogue("That would be terrifying!", 14751, 16750, "blue");
+                    Dialogue("Well, I won't miss again, if that thing in front of me attacks again, I'll kil it instantly", 11000.0001, 14750, "blue");
                     
               }, 4001);
             } else if(attackNumber === 2){
@@ -790,35 +807,22 @@
          //Eat some deliecious yummy F00D
          function Eat(){
            if(fighting == "Bandit"){
-             if(eatNumber === 1){
                Dialogue("Mysterious Voice:You don't have any food to eat!", 0, 2800, "purple");
-         }
          }
          }
          
          //Threaten the enemy
          function Threaten(){
            if(fighting === "Bandit"){
-             if(threatNumber === 1){
                Dialogue("You: Boo!", 0, 1750, "white");
                Dialogue("Bandit: AAAAH!", 1751, 3750, "blue");
-               Dialogue("You have won the battle by scaring him");
+               Dialogue("You have won the battle by scaring Bandit!", 3750.0001, 7750, "purple");
                
                setTimeout(function(){
                fighting = "";
                scene = 5;
                checkMap();
                }, 3750);
-             } else if(threatNumber === 2){
-               Dialogue("You: Boo!", 0, 1750, "white");
-               Dialogue("Bandit: AAAAH!", 1751, 3750, "blue");
-               
-               setTimeout(function(){
-               fighting = "";
-               scene = 5;
-               checkMap();
-               }, 3750);
-             }
            }
          }
          
@@ -830,7 +834,7 @@
             addAMemory("You can't flee from bosses");
             Dialogue("You might be mad you're fighitng a boss for you first fight, but he shouldn't be too hard to beat, he's terrified of you!", 3000.0001, 5350, "purple");
             } else {
-              Dialogue("Mysterious Voice: You can't flee from bosses, silly!", 0, 4250, "purple");
+              Dialogue("Mysterious Voice: You still can't flee from bosses, silly!", 0, 4250, "purple");
             }
           } 
          }
@@ -838,10 +842,107 @@
          //Try to reason/talk to the enemy
          function Talk(){
            if(fighting == "Bandit"){
+             if(talkNumber === 1){
+               canAttack = false;
              Dialogue("You: I'm not a zombie", 0, 2850, "white");
-             Dialogue("Bandit: AAAH, THE ZOMBIE ATE A BRAIN AND CAN TALK NOW!!!", 2850.0001, 5850, "purple");
+             Dialogue("Bandit: AAAH, THE ZOMBIE ATE A BRAIN AND CAN TALK NOW!!!", 2850.0001, 5850, "blue");
+             setTimeout(function(){
+               canAttack = true;
+             }, 5850);
+           } else if(talkNumber === 2){
+             canAttack = false;
+             Dialogue("You: LISTEN TO ME!", 0, 1800, "white");
+             Dialogue("Bandit: Well I'm gonna die anyway, what do you have to say strange smart zombie?", 1800.0001, 5800, "blue");
+             setTimeout(function(){
+               canAttack = true;
+             }, 5800);
+             
+           } else if(talkNumber === 3){
+             canAttack = false;
+             Dialogue("Option 1: I'm not a zombie Option 2: Why do you keep running away from me? Option 3: Don't worry, I'm not here to kill you", 0, 6000, "white");
+             Dialogue("Mysterious Voice: Type in 1, 2, or 3, type anything else and I'll just pick a random option for you", 6000.0001, 10000, "purple");
+             setTimeout(function(){
+               talkOptionBanditFight = prompt("Which option do you choose?");
+              var talkOptionBanditFightOption = talkOptionBanditFight.toLowerCase().replace(".", "").replace(" ", "").replace("'", "").replace("?", "").replace(".", "");
+             if(talkOptionBanditFightOption == 1 || talkOptionBanditFightOption == "one" || talkOptionBanditFightOption == "option1" || talkOptionBanditFightOption == "imnotazombie"){
+               talkOptionBanditFight = 1;
+               Dialogue("You: I'm not a zombie", 0, 3000, "white");
+               Dialogue("Bandit: I really do want to believe you, but it's been so long since I've seen a human, prove it", 3000, 9000, "blue");
+               setTimeout(function(){
+                 canAttack = true;
+               }, 9000);
+             } else if(talkOptionBanditFightOption == 2 || talkOptionBanditFightOption == "two" || talkOptionBanditFightOption == "option2" || talkOptionBanditFightOption == "whydoyoukeeprunningawayfromme"){
+               talkOptionBanditFight = 2;
+               Dialogue("You: Why do you keep running away from me", 0, 4000, "white");
+               Dialogue("Bandit: Why are you following me?", 4000.0001, 7000, "blue");
+               setTimeout(function(){
+                 canAttack = true;
+               }, 7000);
+             } else if(talkOptionBanditFightOption == 3 || talkOptionBanditFightOption == "three" || talkOptionBanditFightOption == "option3" || talkOptionBanditFightOption == "dontworryimnotheretokillyou"){
+               talkOptionBanditFight = 3;
+               Dialogue("You: Don't worry, I'm not here to kill you", 0, 2500, "white");
+               Dialogue("Bandit: You're not here to kill me...", 2500.0001, 5000, "blue");
+               Dialogue("YOUR HERE TO TURN ME INTO ONE OF YOU!!!", 5000.0001, 7500, "blue");
+               Dialogue("NEEEEEEVEEEEEER!!!!!", 7500.0001, 10000.0001, "blue");
+               Dialogue("Bandit killed you", 10000, 12000, "purple");
+               playerHealth = 0;
+               drawProtagonistFacingRight();
+             }  else {
+               var randomNumber = Math.floor((Math.random() * 3) + 1);
+               if(randomNumber === 1){
+               talkOptionBanditFight = 1;
+               Dialogue("You: I'm not a zombie", 0, 3000, "white");
+               Dialogue("Bandit: I really do want to believe you, but it's been so long since I've seen a human, prove it", 3000, 9000, "blue");
+               setTimeout(function(){
+                 canAttack = true;
+               }, 9000);
+             } else if(randomNumber === 2){
+               talkOptionBanditFight = 2;
+               Dialogue("You: Why do you keep running away from me", 0, 4000, "white");
+               Dialogue("Bandit: Why are you following me?", 4000.0001, 7000, "blue");
+               setTimeout(function(){
+                 canAttack = true;
+               }, 7000);
+             } else if(randomNumber === 3){
+               talkOptionBanditFight = 3;
+               Dialogue("You: Don't worry, I'm not here to kill you", 0, 2500, "white");
+               Dialogue("Bandit: You're not here to kill me...", 2500.0001, 5000, "blue");
+               Dialogue("YOUR HERE TO TURN ME INTO ONE OF YOU!!!", 5000.0001, 7500, "blue");
+               Dialogue("NEEEEEEVEEEEEER!!!!!", 7500.0001, 10000.0001, "blue");
+               Dialogue("Bandit killed you", 10000, 12000, "purple");
+               playerHealth = 0;
+               drawProtagonistFacingRight();
+             } 
+             }
+               }, 10000);
+         } else if(talkNumber === 4){
+           if(talkOptionBanditFight === 1){
+             Dialogue("You: How?", 0, 1200, "white");
+             Dialogue("Bandit: With...", 1200.0001, 2900, "blue");
+             Dialogue("A...", 2900.0001, 4900, "blue");
+             Dialogue("DANCE BAAAAAAAAAAATTLLLLLE!!!", 4900.001, 9900, "blue");
+           } else if(talkOptionBanditFight === 2){
+             Dialogue("You: I don't remmeber anything and you were the first person I bumped into", 0, 4100, "white");
+             Dialogue("Bandit: So I'm like your brother now?", 4100.0001, 7000, "blue");
            }
+         } else if(talkNumber === 5){
+           if(talkOptionBanditFight === 1){
+             Dialogue("Mysterious Voice: Wut", 0, 2900, "purple");
+             Dialogue("You: Wut", 2900.0001, 3200, "white");
+           } else if(talkOptionBanditFight === 2){
+            Dialogue("Mysterious Voice: Talk Options: 1. YAAAS 2. Nope", 0, 5000);
+            var bros = prompt("Are we bros?");
+            bros = bros.toLowerCase();
+            if(bros == 1 || bros == "1." || bros == "yes" || bros== "yeah" || bros == "yas" || bros == "yaas" || bros == "yaaas" || bros == "yaaaas" || bros == "yaaaaas"){
+             Dialogue("Awesome! After my real brother disapeered I always wante", 0, 3200, "blue");
+             Dialogue("Never mind that's a story for another day", 3200.0001, "blue");
+             
+            }
+           }
+          
          }
+           }
+        }
         
          //Check what you remember
          function Memories(){
@@ -938,7 +1039,6 @@
                              Dialogue("I WON'T LET YOU END THE WORLD", 2000.0001, 4670, "blue");
                              Dialogue("YOU EVIL DEAD SCUM!!!", 4670.0001, 6670, "blue");
                              battleDialogue("FIGHT MEEEEEEE!!", 6670.0001, 10370, "blue");
-                             fighting = "Bandit";
                          }
                      }
                  }
@@ -975,14 +1075,14 @@
              }
 
              //A ton of code for selecting options, and there's more of it above.
-             if (e.keyCode == 38 && scene === "BATTLE!") {
+             if (e.keyCode == 38 && fighting !== "") {
                  row--;
                  if (row <= 0) {
                      row = 3;
                  }
                  drawOptionRectangle();
                  option();
-             } else if (e.keyCode == 40 && scene === "BATTLE!") {
+             } else if (e.keyCode == 40 && fighting !== "" && canAttack === true) {
                  row++;
                  if (row >= 4) {
                      row = 1;
@@ -990,14 +1090,14 @@
                  drawOptionRectangle();
                  option();
 
-             } else if (e.keyCode == 39 && scene === "BATTLE!") {
+             } else if (e.keyCode == 39 && fighting !== "" && canAttack === true) {
                  column++;
                  if (column >= 3) {
                      column = 1;
                  }
                  drawOptionRectangle();
                  option();
-             } else if (e.keyCode == 37 && scene === "BATTLE!") {
+             } else if (e.keyCode == 37 && fighting !== "" && canAttack === true) {
                  column--;
                  if (column <= 0) {
                      column = 2;
@@ -1007,7 +1107,7 @@
              }
              
              //If space is pressed, an option is selected if fighting
-             if(e.keyCode == 32 && scene === "BATTLE!"){             
+             if(e.keyCode == 32 && fighting !== "" && canAttack === true){             
                if (column === 1) {
                  if (row === 1) {
                    attackNumber++;
@@ -1050,7 +1150,7 @@
                  game();
              }
              window.addEventListener('touchstart', function() {
-               if(onGame === true){
+               if(onGame === false){
                  game();
                }
              });
