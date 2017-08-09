@@ -933,8 +933,8 @@ setInterval(imgflood, 10);
            }
          } else if(talkNumber === 5){
            if(talkOptionBanditFight === 1){
-             Dialogue("Mysterious Voice: Wut", 0, 2900, "purple");
-             Dialogue("You: Wut", 2900.0001, 3200, "white");
+            Dialogue("Mysterious Voice: Wut", 0, 2000, "purple");
+            Dialogue("You: Wut", 2000.0001, 3500, "white");
            } else if(talkOptionBanditFight === 2){
             Dialogue("Mysterious Voice: Talk Options: 1. YAAAS 2. Nope", 0, 5000);
             var bros = prompt("Are we bros?");
