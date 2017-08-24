@@ -860,16 +860,15 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
          
          //Try to reason/talk to the enemy
          function Talk(){
+          canAttack = false;
            if(fighting == "Bandit"){
              if(talkNumber === 1){
-               canAttack = false;
              Dialogue("You: I'm not a zombie", 0, 2850, "white");
              Dialogue("Bandit: AAAH, THE ZOMBIE ATE A BRAIN AND CAN TALK NOW!!!", 2850.0001, 5850, "blue");
              setTimeout(function(){
                canAttack = true;
              }, 5850);
            } else if(talkNumber === 2){
-             canAttack = false;
              Dialogue("You: LISTEN TO ME!", 0, 1800, "white");
              Dialogue("Bandit: Well I'm gonna die anyway, what do you have to say strange smart zombie?", 1800.0001, 5800, "blue");
              setTimeout(function(){
@@ -877,7 +876,6 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
              }, 5800);
              
            } else if(talkNumber === 3){
-             canAttack = false;
              Dialogue("Option 1: I'm not a zombie Option 2: Why do you keep running away from me? Option 3: Don't worry, I'm not here to kill you", 0, 6000, "white");
              Dialogue("Mysterious Voice: Type in 1, 2, or 3, type anything else and I'll just pick a random option for you", 6000.0001, 10000, "purple");
              setTimeout(function(){
@@ -931,6 +929,9 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
                Dialogue("Bandit killed you", 10000, 12000, "purple");
                playerHealth = 0;
                drawProtagonistFacingRight();
+              setTimeout(function(){
+               canAttack = true;
+              }, 12000);
              } 
              }
                }, 10000);
@@ -940,22 +941,36 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
              Dialogue("Bandit: With...", 1200.0001, 2900, "blue");
              Dialogue("A...", 2900.0001, 4900, "blue");
              Dialogue("DANCE BAAAAAAAAAAATTLLLLLE!!!", 4900.001, 9900, "blue");
+              setTimeout(function(){
+               canAttack = true;
+              }, 9900);
            } else if(talkOptionBanditFight === 2){
              Dialogue("You: I don't remmeber anything and you were the first person I bumped into", 0, 4100, "white");
              Dialogue("Bandit: So I'm like your brother now?", 4100.0001, 7000, "blue");
+              setTimeout(function(){
+               canAttack = true;
+              }, 7000);
            }
          } else if(talkNumber === 5){
            if(talkOptionBanditFight === 1){
             Dialogue("Mysterious Voice: Wut", 0, 2000, "purple");
             Dialogue("You: Wut", 2000.0001, 3500, "white");
+              setTimeout(function(){
+               canAttack = true;
+              }, 3500);
            } else if(talkOptionBanditFight === 2){
             Dialogue("Mysterious Voice: Talk Options: 1. YAAAS 2. Nope", 0, 5000);
             var bros = prompt("Are we bros?");
+              setTimeout(function(){
+               canAttack = true;
+              }, 5000);
             bros = bros.toLowerCase();
             if(bros == 1 || bros == "1." || bros == "yes" || bros== "yeah" || bros == "yas" || bros == "yaas" || bros == "yaaas" || bros == "yaaaas" || bros == "yaaaaas"){
              Dialogue("Awesome! After my real brother disapeered I always wante", 0, 3200, "blue");
              Dialogue("Never mind that's a story for another day", 3200.0001, "blue");
-             
+              setTimeout(function(){
+               canAttack = true;
+              }, 3200);
             }
            }
           
