@@ -783,12 +783,13 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
                      }, 100 / 65);
                      Dialogue("Bandit: Danget, I missed the zombie!", 5000, 8000, "blue");
                      Dialogue("And I broke the fight screen!", 8001, 11000, "blue");
+                     Dialogue("Thank God he's not threatening me", 11000.0001, 14750);
                     addAMemory("Bandit can break the 4th wall");
-                    Dialogue("That would be terrifying!", 14751, 16750, "blue");
-                    Dialogue("Well, I won't miss again, if that thing in front of me attacks again, I'll kil it instantly", 11000.0001, 14750, "blue");
+                    Dialogue("That would be terrifying!", 14750.0001, 16750, "blue");
+                    Dialogue("Well, I won't miss again, if that thing in front of me attacks again, I'll kil it instantly", 14750.0001, 19000, "blue");
              setTimeout(function(){
               canAttack = true;
-              }, 14750);
+              }, 19000);
                
               }, 4001);
             } else if(attackNumber === 2){
