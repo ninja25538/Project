@@ -812,13 +812,18 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
          
          //Eat some deliecious yummy F00D
          function Eat(){
+          canAttack = false;
            if(fighting == "Bandit"){
                Dialogue("Mysterious Voice:You don't have any food to eat!", 0, 2800, "purple");
+            setTimeout(function(){
+             canAttack = true;
+            }, 2800);
          }
          }
          
          //Threaten the enemy
          function Threaten(){
+          canAttack = false;
            if(fighting === "Bandit"){
                Dialogue("You: Boo!", 0, 1750, "white");
                Dialogue("Bandit: AAAAH!", 1751, 3750, "blue");
@@ -827,6 +832,7 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
                setTimeout(function(){
                fighting = "";
                scene = 5;
+               canAttack = true;
                checkMap();
                }, 3750);
            }
@@ -834,13 +840,20 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
          
          //Run away from the enemy
          function RunAway(){
+          canAttack = false;
           if(fighting === "Bandit"){
             if(runNum === 1){
             Dialogue("Mysterious Voice: You can't flee from bosses", 0, 3000, "purple");
             addAMemory("You can't flee from bosses");
             Dialogue("You might be mad you're fighitng a boss for you first fight, but he shouldn't be too hard to beat, he's terrified of you!", 3000.0001, 5350, "purple");
+            setTimeout(function(){
+             canAttack = true;
+            }, 5350);
             } else {
               Dialogue("Mysterious Voice: You still can't flee from bosses, silly!", 0, 4250, "purple");
+            setTimeout(function(){
+             canAttack = true;
+            }, 4250);
             }
           } 
          }
@@ -952,10 +965,17 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
         
          //Check what you remember
          function Memories(){
+          canAttack = false;
             if(memoryNumber === 1){
-              Dialogue("This is everything that you have learned so far, if you didn't have enough time to read it, press memories again " + memories, 0, 10000, "purple");
+              Dialogue("This is everything that you have learned so far, if you didn't have enough time to read it, press memories again: " + memories, 0, 10000, "purple");
+             setTimeout(function(){
+              canAttack = true;
+             }, 10000);
            } else {
              Dialogue("What you know so far: " + memories, 0, 5000, "white");
+            setTimeout(function(){
+             canAttack = true;
+            }, 5000);
            }
          }
 
