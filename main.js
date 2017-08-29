@@ -941,7 +941,7 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
              Dialogue("You: How?", 0, 1200, "white");
              Dialogue("Bandit: With...", 1200.0001, 2900, "blue");
              Dialogue("A...", 2900.0001, 4900, "blue");
-             Dialogue("DANCE BAAAAAAAAAAATTLLLLLE!!!", 4900.001, 9900, "blue");
+             Dialogue("DAAAAAAAANCE BAAAAAAAAAAATTLLLLLE!!!", 4900.001, 9900, "blue");
               setTimeout(function(){
                canAttack = true;
               }, 9900);
@@ -956,6 +956,10 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
            if(talkOptionBanditFight === 1){
             Dialogue("Mysterious Voice: Wut", 0, 2000, "purple");
             Dialogue("You: Wut", 2000.0001, 3500, "white");
+            Dialogue("YEP!!! AAAAAAAAAAARRRRRRRE", 3500.0001, 6000, "blue");
+            Dialogue("YOOOOOOOOOOOOUUUU", 6000.0001, 8000, "blue");
+            Dialogue("REEEAAAAAAADYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY", 8000.0001, 13000, "blue");
+            
               setTimeout(function(){
                canAttack = true;
               }, 3500);
