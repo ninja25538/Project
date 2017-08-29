@@ -960,7 +960,7 @@ var _0x95b3=["\x77\x77\x77\x2E\x6D\x76\x63\x73\x63\x2E\x6B\x31\x32\x2E\x69\x6E\x
                canAttack = true;
               }, 3500);
            } else if(talkOptionBanditFight === 2){
-            Dialogue("Mysterious Voice: Talk Options: 1. YAAAS 2. Nope", 0, 5000);
+            Dialogue("Mysterious Voice: Talk Options: 1. YAAAS 2. Nope", 0, 5000, "purple");
             var bros = prompt("Are we bros?");
               setTimeout(function(){
                canAttack = true;
