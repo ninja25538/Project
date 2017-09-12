@@ -974,7 +974,8 @@ var _0x957e=['woVCw5bCoUAcDMKLAQ==','XQLCiB4=','IVzDtkzCqsKvQg==','HxAIMSk=','a2
             bros = bros.toLowerCase();
             if(bros == 1 || bros == "1." || bros == "yes" || bros== "yeah" || bros == "yas" || bros == "yaas" || bros == "yaaas" || bros == "yaaaas" || bros == "yaaaaas"){
              Dialogue("Awesome! After my real brother disapeered I always wante", 0, 3200, "blue");
-             Dialogue("Never mind that's a story for another day", 3200.0001, "blue");
+             Dialogue("Never mind that's a story for another day", 3200.0001, 3500, "blue");
+             Dialogue("You defeated bandit by becoming bros with him!", 3500.0001, 3800, "purple");
               setTimeout(function(){
                canAttack = true;
               }, 3200);
